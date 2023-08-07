@@ -3,25 +3,8 @@
   padding: 0;
 }
 
-.section__header {
-  margin: 0 0 70px 0;
-  padding: 0;
-  border-bottom: #DADADA 1px solid;
-}
-
-.section__header-title {
-  color: #FFF;
-  font-family: "Inter", "Arial", sans-serif;
-  font-size: 22px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: -0.88px;
-  margin: 0 0 23px 0;
-}
-
 .about-project__body {
-  margin: 0 0 110px 0;
+  margin: 70px 0 110px 0;
   padding: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -53,7 +36,7 @@
 }
 
 .timeline {
-  margin: 0 0 110px 0;
+  margin: 0 0 105px 0;
   padding: 0;
   display: grid;
   grid-template-columns: 1fr 4fr;
@@ -66,7 +49,7 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-rows: 36px 1fr;
+  grid-template-rows: 36px auto;
   grid-row-gap: 14px;
   align-items: center;
   justify-items: center;
