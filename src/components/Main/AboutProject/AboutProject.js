@@ -28,9 +28,6 @@ function AboutProject() {
           <p className="timeline__about timeline__about_short">Front-end</p>
         </div>
       </div>
-      <div>
-        TEEEEEEEST
-      </div>
     </section>
   );
 }
