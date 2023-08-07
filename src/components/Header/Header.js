@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
+
 import Navigation from '../Navigation/Navigation';
 
 function Header() {
@@ -12,6 +13,15 @@ function Header() {
           alt="лого"
           src={logo}
         />
+      </Link>
+      <div className="header__title header__title_disabled">
+        <p className="header__title-name">Фильмы</p>
+        <p className="header__title-description">Сохранённые фильмы</p>
+      </div>
+      <Link to="/" className="header__button-link header__button-link_disabled">
+        <button type="button" className="header__button hover" name="accountButton">
+          Аккаунт
+        </button>
       </Link>
       <Navigation />
     </header>

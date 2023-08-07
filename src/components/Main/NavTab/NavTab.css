@@ -1,0 +1,36 @@
+.nav-tab {
+  margin: 0;
+  padding: 0;
+  grid-column: 2/3;
+  grid-row: 3/4;
+}
+
+.nav-tab__list {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
+  grid-column-gap: 10px;
+}
+
+.nav-tab__item {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.nav-tab__button {
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  background-color: #303030;
+  color: #FFF;
+  min-width: 96px;
+  min-height: 36px;
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.33;
+}

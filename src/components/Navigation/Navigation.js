@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 
 function Navigation() {
   return (
-    <menu className="header__menu menu">
+    // у нав есть menu__disabled
+    <nav className="header__menu menu">
       <ul className="menu__list list">
         <li className="list__elemet element">
           <Link className="element element__registration hover" to="/signup">
@@ -16,7 +17,7 @@ function Navigation() {
           </Link>
         </li>
       </ul>
-    </menu>
+    </nav>
   );
 }
 

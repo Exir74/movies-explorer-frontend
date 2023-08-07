@@ -3,19 +3,7 @@
 @import url(./components/Header/Header.css);
 @import url(./blocks/hover.css);
 @import url(./components/Navigation/Navigation.css);
-
-@font-face {
-  font-family: 'Inter Medium';
-  src: url('./utils/fonts/Inter-Medium.woff');
-}
-
-@font-face {
-  font-family: 'Inter Regular';
-  src: url('./utils/fonts/Inter-Regular.woff');
-}
-
-@font-face {
-  font-family: 'Suisse Intl Regular';
-  src: url('./utils/fonts/SuisseIntl-Regular.woff');
-}
-
+@import url(./utils/fonts/font.css);
+@import url(./components/Main/Promo/Promo.css);
+@import url(./components/Main/NavTab/NavTab.css);
+@import url(./components/Main/AboutProject/AboutProject.css);

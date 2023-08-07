@@ -6,8 +6,8 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
-  background-color: rgb(32, 32, 32);
+  background-color: #202020;
   color: #fff;
   min-height: 100vh;
-  display: grid;
+  /*display: grid;*/
 }

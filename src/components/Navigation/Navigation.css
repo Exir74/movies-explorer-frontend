@@ -1,6 +1,14 @@
 .menu {
-  margin: 0 0 0 0;
+  margin: 21px 0 21px 0;
   padding: 0 0 0 0;
+  display: block;
+  grid-column: 2/4;
+  grid-row: 1/2;
+  justify-self: end;
+}
+
+.menu_disabled {
+  display: none;
 }
 
 .list {
@@ -23,9 +31,10 @@
   margin: 0 30px 0 0;
   padding: 0;
   color: #FFF;
-  text-align: right;
-  font-family: "Inter Medium", serif;
+  font-family: "Inter", "Arial", sans-serif;
   font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
   line-height: 1.33;
 }
 
@@ -38,7 +47,9 @@
   min-width: 76px;
   min-height: 32px;
   color: #000;
-  font-family: "Inter Medium", serif;
+  font-family: "Inter", "Arial", sans-serif;
   font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
   line-height: 1.33;
 }

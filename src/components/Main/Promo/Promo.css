@@ -1,0 +1,28 @@
+.promo {
+  margin: 20px 40px 0 40px;
+  padding: 0;
+  display: grid;
+  min-height: 493px;
+  border-radius: 10px;
+  background: #272727;
+  grid-template-rows: 9px auto 66px;
+  grid-template-columns: 235px auto 235px;
+
+}
+
+.promo__title {
+  grid-row: 2/3;
+  grid-column: 2/3;
+  align-self: center;
+  margin: 0;
+  padding: 0;
+  /*min-height: 180px;*/
+  color: #FFF;
+  text-align: center;
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -2px;
+}
