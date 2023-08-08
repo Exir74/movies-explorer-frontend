@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Navigation() {
   return (
-    // у нав есть menu__disabled
+    // у нав есть menu_disabled
     <nav className="header__menu menu">
       <ul className="menu__list list">
         <li className="list__elemet element">
