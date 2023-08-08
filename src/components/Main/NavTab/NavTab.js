@@ -5,31 +5,31 @@ function NavTab() {
     <nav className="nav-tab">
       <ul className="nav-tab__list">
         <li className="nav-tab__item">
-          <button
-            type="button"
+          <a
+            href="#about-project"
             name="navTabAboutProject"
-            className="nav-tab__button hover"
+            className="nav-tab__link hover"
           >
             О проекте
-          </button>
+          </a>
         </li>
         <li className="nav-tab__item">
-          <button
-            type="button"
-            name="navTabTechs"
-            className="nav-tab__button hover"
+          <a
+            href="#techs"
+            name="navTabAboutProject"
+            className="nav-tab__link hover"
           >
             Технологии
-          </button>
+          </a>
         </li>
         <li className="nav-tab__item">
-          <button
-            type="button"
-            name="navTabAboutMe"
-            className="nav-tab__button hover"
+          <a
+            href="#about-me"
+            name="navTabAboutProject"
+            className="nav-tab__link hover"
           >
             Студент
-          </button>
+          </a>
         </li>
       </ul>
     </nav>

@@ -34,6 +34,10 @@
 
 .header__nav-element {
   grid-row: 1/2;
+  list-style-type: none;
+}
+
+.header__nav-link {
   color: #FFF;
   text-align: right;
   font-family: "Inter", "Arial", sans-serif;
@@ -43,7 +47,7 @@
   line-height: 1.38;
   margin: 0 38px 0 0;
   padding: 0;
-  list-style-type: none;
+  text-decoration: none;
 }
 
 .header__nav-element_selected {

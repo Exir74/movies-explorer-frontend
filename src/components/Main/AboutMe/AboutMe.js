@@ -6,7 +6,7 @@ import { myGithub } from '../../../utils/constants';
 
 function AboutMe() {
   return (
-    <section className="about-me">
+    <section id="about-me" className="about-me">
       <div className="about-me__wrapper">
         <div className="section-header">
           <h2 className="section-header__title">Студент</h2>
