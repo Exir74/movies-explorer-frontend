@@ -15,11 +15,12 @@ function Header() {
             src={logo}
           />
         </Link>
-        <div className="header__title header__title_disabled">
-          <p className="header__title-name">Фильмы</p>
-          <p className="header__title-description">Сохранённые фильмы</p>
-        </div>
-        <Link to="/" className="header__button-link header__button-link_disabled">
+        <nav className="header__nav header__nav_disabled1">
+          {/* У ли есть сфойсто header__nav-element_selected */}
+          <li className="header__nav-element">Фильмы</li>
+          <li className="header__nav-element">Сохранённые фильмы</li>
+        </nav>
+        <Link to="/" className="header__button-link header__button-link_disabled1">
           <button type="button" className="header__button hover" name="accountButton">
             Аккаунт
           </button>
