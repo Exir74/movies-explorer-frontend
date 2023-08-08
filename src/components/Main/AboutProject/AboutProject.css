@@ -92,3 +92,28 @@
   font-weight: 500;
   line-height: 1.21;
 }
+
+@media screen and (max-width: 769px) {
+  .about-project {
+    margin: 90px 50px 0 50px;
+    padding: 0;
+  }
+
+  .about-project__body {
+    margin: 70px 0 93px 0;
+    grid-row-gap: 22px;
+    grid-column-gap: 30px;
+  }
+
+  .timeline {
+    margin: 0 0 85px 0;
+    grid-template-columns: 1fr 3.77fr;
+
+  }
+
+  .about-project__paragraph {
+    font-size: 12px;
+    line-height: 1.5;
+
+  }
+}

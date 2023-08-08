@@ -70,3 +70,13 @@
   line-height: normal;
   text-decoration: none;
 }
+
+@media screen and (max-width: 769px) {
+  .footer {
+    grid-template-columns: 1fr minmax(360px, 769px) 1fr;
+  }
+
+  .footer__wrapper {
+    margin: 0 30px 0 30px;
+  }
+}

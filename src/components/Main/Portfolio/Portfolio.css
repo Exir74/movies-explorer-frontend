@@ -74,3 +74,25 @@
   grid-column: 2/3;
 
 }
+
+@media screen and (max-width: 769px) {
+  .portfolio {
+    margin-bottom: 90px;
+  }
+
+  .portfolio__wrapper {
+    margin: 0 50px 0 50px;
+  }
+
+  .portfolio__nav-link {
+    font-size: 28px;
+    line-height: 1.78;
+    letter-spacing: -1.12px;
+  }
+
+  .portfolio__nav-arrow {
+    font-size: 28px;
+    line-height: 2.14;
+    letter-spacing: -1.12px;
+  }
+}
