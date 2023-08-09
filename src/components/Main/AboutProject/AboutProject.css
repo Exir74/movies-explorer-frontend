@@ -150,6 +150,7 @@
   }
 
   .timeline {
+    margin: 0 0 70px 0;
     grid-template-columns: 1fr 1.84fr;
     grid-template-rows: 36px 36px;
   }

@@ -73,7 +73,7 @@
 
 @media screen and (max-width: 769px) {
   .footer {
-    grid-template-columns: 1fr minmax(360px, 769px) 1fr;
+    grid-template-columns: 1fr minmax(320px, 769px) 1fr;
   }
 
   .footer__wrapper {
