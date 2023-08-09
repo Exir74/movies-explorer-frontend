@@ -148,4 +148,25 @@
     font-size: 11px;
     line-height: 1.45;
   }
+
+  .timeline {
+    grid-template-columns: 1fr 1.84fr;
+    grid-template-rows: 36px 36px;
+  }
+
+  .timeline__block {
+    grid-row-gap: 10px;
+  }
+
+  .timeline__header {
+    font-size: 11px;
+  }
+
+  .timeline__about {
+    color: #A0A0A0;
+    font-family: "Suisse Intl", "Arial", "sans-serif";
+    font-size: 11px;
+    font-weight: 400;
+    line-height: normal;
+  }
 }
