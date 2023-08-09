@@ -40,3 +40,18 @@
     letter-spacing: -1.6px;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .promo {
+    grid-template-rows: 9px auto 43px;
+    grid-template-columns: 0 100% 0;
+    margin: 14px 14px 0 14px;
+    min-height: 586px;
+  }
+
+  .promo__title {
+    font-size: 29px;
+    line-height: 1.27;
+    letter-spacing: -1.16px;
+  }
+}

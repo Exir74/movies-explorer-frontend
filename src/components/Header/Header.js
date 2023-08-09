@@ -16,7 +16,7 @@ function Header() {
           />
         </Link>
         <nav className="header__nav header__nav_disabled">
-          {/* У ли есть сфойсто header__nav-element_selected */}
+          {/* У ли есть свойсто header__nav-element_selected */}
           <li className="header__nav-element">
             <Link className="header__nav-link" to="/films">Фильмы</Link>
           </li>
