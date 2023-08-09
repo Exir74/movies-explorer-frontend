@@ -164,7 +164,10 @@
 
   .about-me__github {
     grid-row: 5/6;
+  }
 
+  .about-me__github {
+    margin: 40px auto 70px 0;
   }
 
   .about-me__avatar-container {
