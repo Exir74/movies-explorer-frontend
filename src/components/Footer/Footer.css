@@ -1,6 +1,6 @@
 .footer {
   display: grid;
-  grid-template-columns: 1fr minmax(769px, 1280px) 1fr;
+  grid-template-columns: 1fr minmax(320px, 1280px) 1fr;
 
 }
 
@@ -82,15 +82,13 @@
 }
 
 @media screen and (max-width: 600px) {
-  .footer {
-
-  }
 
   .footer__wrapper {
     margin: 0 10px 0 10px;
   }
 
   .footer__text {
+    width: 100%;
     font-size: 12px;
     grid-row: 1/2;
     grid-column: 1/3;
