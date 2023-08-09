@@ -8,11 +8,11 @@ function AboutProject() {
       </div>
       <div className="about-project__body">
         <p className="about-project__fact">Дипломный проект включал 5 этапов</p>
-        <p className="about-project__fact">На выполнение диплома ушло 5 недель</p>
         <p className="about-project__paragraph">
           Составление плана, работу над бэкендом, вёрстку,
           добавление функциональности и финальные доработки.
         </p>
+        <p className="about-project__fact">На выполнение диплома ушло 5 недель</p>
         <p className="about-project__paragraph">
           У каждого этапа был мягкий и жёсткий дедлайн, которые
           нужно было соблюдать, чтобы успешно защититься.
