@@ -96,3 +96,40 @@
     letter-spacing: -1.12px;
   }
 }
+
+@media screen and (max-width: 769px) {
+  .portfolio {
+    margin-bottom: 70px;
+  }
+
+  .portfolio__wrapper {
+    margin: 0 14px 0 14px;
+  }
+
+  .portfolio__nav {
+    margin: 41px 0 0 0;
+
+  }
+
+  .portfolio__text {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42;
+  }
+
+  .portfolio__nav-link {
+    font-size: 18px;
+    line-height: 1.55;
+    letter-spacing: -0.72px;
+  }
+
+  .portfolio__nav-arrow {
+    font-size: 18px;
+    line-height: 1.55;
+    letter-spacing: -0.72px;
+  }
+
+  .portfolio__nav-element {
+    border-bottom: 1px #E6E6E6 solid;
+  }
+}
