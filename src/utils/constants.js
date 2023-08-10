@@ -2,6 +2,7 @@ import logo from '../images/logo.svg';
 import findButton from '../images/findButton.svg';
 import smallTumbOn from '../images/smallTumbOn.svg';
 import smallTumbOff from '../images/smallTumbOff.svg';
+import saveIcons from '../images/saveIcon.svg';
 
 const myGithub = 'https://github.com/Exir74/';
 const howToLearn = 'https://github.com/Exir74/how-to-learn';
@@ -19,4 +20,5 @@ export {
   findButton,
   smallTumbOn,
   smallTumbOff,
+  saveIcons,
 };

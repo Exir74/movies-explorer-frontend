@@ -1,5 +1,7 @@
 import React from 'react';
 import testCardImg from '../../../images/card33Slova.jpeg';
+import SaveMovie from './CardActions/SaveMovie/SaveMovie';
+import SavedMovie from './CardActions/SavedMovie/SavedMovie';
 
 function MoviesCard() {
   return (
@@ -19,12 +21,7 @@ function MoviesCard() {
           />
         </a>
         <div className="moviesCard__action-block">
-          <button
-            className="moviesCard__action hover"
-            type="button"
-          >
-            Сохранить
-          </button>
+          <SaveMovie />
         </div>
         <h3 className="moviesCard__title">
           33 слова о дизайне
@@ -48,12 +45,7 @@ function MoviesCard() {
           />
         </a>
         <div className="moviesCard__action-block">
-          <button
-            className="moviesCard__action hover"
-            type="button"
-          >
-            Сохранить
-          </button>
+          <SavedMovie />
         </div>
         <h3 className="moviesCard__title">
           33 слова о дизайне
