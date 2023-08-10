@@ -168,17 +168,18 @@
   .techs__cards-list {
     margin: 0 51px;
     display: flex;
-    /*flex-direction: column;*/
     flex-wrap: wrap;
-    max-width: max-content;
     min-height: 200px;
     grid-row-gap: 10px;
+    max-width: 182px;
   }
 
   .techs__cards-items {
     min-width: 83px;
     min-height: 55px;
+
   }
+
 
   .techs__cards-text {
     font-size: 12px;
