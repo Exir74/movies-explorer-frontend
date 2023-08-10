@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../images/logo.svg';
 
 import Navigation from '../Navigation/Navigation';
+import { logo } from '../../utils/constants';
 
 function Header() {
   return (
@@ -15,16 +15,16 @@ function Header() {
             src={logo}
           />
         </Link>
-        <nav className="header__nav header__nav_disabled">
+        <nav className="header__nav header__nav_disabled1">
           {/* У ли есть свойсто header__nav-element_selected */}
           <li className="header__nav-element">
-            <Link className="header__nav-link" to="/films">Фильмы</Link>
+            <Link className="header__nav-link" to="/movies">Фильмы</Link>
           </li>
           <li className="header__nav-element">
             <Link className="header__nav-link" to="/films">Сохранённые фильмы</Link>
           </li>
         </nav>
-        <Link to="/" className="header__button-link header__button-link_disabled">
+        <Link to="/" className="header__button-link header__button-link_disabled1">
           <button type="button" className="header__button hover" name="accountButton">
             Аккаунт
           </button>

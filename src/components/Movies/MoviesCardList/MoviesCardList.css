@@ -1,0 +1,5 @@
+.moviesCardList {
+  display: grid;
+  margin: 39px 70px 0 70px;
+  grid-template-columns: 1fr minmax(320px, 1140px) 1fr;
+}
