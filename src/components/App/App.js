@@ -49,7 +49,7 @@ function App() {
             <SavedMovies
               isMyShortMovie={isMyShortMovie}
               isMyShortMovieHandler={isMyShortMovieHandler}
-              setCurrnetUrl={setCurrentUrl}
+              setCurrentUrl={setCurrentUrl}
             />
           )}
         />

@@ -3,8 +3,8 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
-function SavedMovies({ isMyShortMovieHandler, isMyShortMovie, setCurrnetUrl }) {
-  setCurrnetUrl(window.location.href);
+function SavedMovies({ isMyShortMovieHandler, isMyShortMovie, setCurrentUrl }) {
+  setCurrentUrl(window.location.href);
 
   return (
     <div className="SavedMovies">
