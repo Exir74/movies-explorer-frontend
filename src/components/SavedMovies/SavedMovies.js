@@ -3,14 +3,14 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
-function SavedMovies({ isShortMovie, isShortMovieHandler, setCurrnetUrl }) {
+function SavedMovies({ isMyShortMovieHandler, isMyShortMovie, setCurrnetUrl }) {
   setCurrnetUrl(window.location.href);
 
   return (
     <div className="SavedMovies">
       <SearchForm
-        isShortMovie={isShortMovie}
-        isShortMovieHandler={isShortMovieHandler}
+        isShortMovie={isMyShortMovie}
+        isShortMovieHandler={isMyShortMovieHandler}
       />
       <MoviesCardList />
       <Preloader />

@@ -8,11 +8,15 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 
 function App() {
   const [isShortMovie, setIsShortMovie] = useState(true);
+  const [isMyShortMovie, setIsMyShortMovie] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [currentUrl, setCurrentUrl] = useState('');
   // const checkCurrentUrl = (currentUrl) => currentUrl === window.location.href;
   const isLoggedInHandler = () => {
     setIsLoggedIn(!isLoggedIn);
+  };
+  const isMyShortMovieHandler = () => {
+    setIsMyShortMovie(!isMyShortMovie);
   };
   const isShortMovieHandler = () => {
     setIsShortMovie(!isShortMovie);
@@ -43,8 +47,8 @@ function App() {
           path="/saved-movies"
           element={(
             <SavedMovies
-              isShortMovie={isShortMovie}
-              isShortMovieHandler={isShortMovieHandler}
+              isMyShortMovie={isMyShortMovie}
+              isMyShortMovieHandler={isMyShortMovieHandler}
               setCurrnetUrl={setCurrentUrl}
             />
           )}
