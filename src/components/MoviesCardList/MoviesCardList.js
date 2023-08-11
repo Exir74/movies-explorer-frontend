@@ -4,11 +4,24 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 function MoviesCardList() {
   return (
-    <section className="moviesCardList">
-      <MoviesCard />
+    <section className="cards">
+      <div className="cards__items">
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+      </div>
       <button
         type="button"
-        className="moviesCard__button hover"
+        className="cards__button hover"
       >
         Ещё
       </button>
