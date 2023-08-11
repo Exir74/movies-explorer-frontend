@@ -8,7 +8,6 @@
 
 .cards__items {
   grid-column: 2/3;
-
   margin: 0;
   padding: 0;
   display: grid;
@@ -29,6 +28,7 @@
   min-width: 320px;
   min-height: 36px;
   border: 1px #424242 solid;
+  border-radius: 8px;
   background-color: transparent;
   color: #FFF;
   text-align: center;
@@ -37,4 +37,21 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+}
+
+@media screen and (max-width: 1000px) {
+  .cards {
+    margin: 70px 30px 0 30px;
+  }
+
+  .cards__items {
+    grid-template-columns: repeat(auto-fit, 339px);
+    grid-column-gap: 30px;
+    grid-row-gap: 47px;
+  }
+
+  .cards__button {
+    margin: 55px auto 119px auto;
+
+  }
 }

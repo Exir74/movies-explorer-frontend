@@ -62,3 +62,13 @@
   max-width: 100%;
   border: 1px solid #424242;
 }
+
+@media screen and (max-width: 1000px) {
+  .search-form__main {
+    margin: 80px 30px 40px 30px;
+  }
+
+  .search-form__line {
+    margin: 39px 30px 0 30px;
+  }
+}

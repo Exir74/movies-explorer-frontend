@@ -14,10 +14,10 @@ function MoviesCardList() {
         <MoviesCard />
         <MoviesCard />
         <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
+        {/* <MoviesCard /> */}
+        {/* <MoviesCard /> */}
+        {/* <MoviesCard /> */}
+        {/* <MoviesCard /> */}
       </div>
       <button
         type="button"
