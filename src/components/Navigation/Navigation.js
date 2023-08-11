@@ -1,10 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Navigation() {
+function Navigation({ isLoggedIn }) {
+  const menuClassName = (`header__menu menu ${isLoggedIn && 'menu_disabled'}`);
+
+  // const cardLikeButtonClassName = (
+  //   `card__like ${isLiked && 'card__like_active'}`
+  // );
+
   return (
-    // у нав есть menu_disabled
-    <nav className="header__menu menu menu_disabled">
+    <nav className={menuClassName}>
       <ul className="menu__list list">
         <li className="list__elemet element">
           <Link className="element element__registration hover" to="/signup">

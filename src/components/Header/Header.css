@@ -53,15 +53,16 @@
   text-decoration: none;
 }
 
-.header__nav-element_selected {
+.header__nav-link_selected {
   color: #fff;
   font-family: "Inter", "Arial", "sans-serif";
   font-size: 13px;
   font-style: normal;
   font-weight: 500;
   line-height: 1.38;
-  margin: 0 16px 0 0;
+  /*margin: 0 16px 0 0;*/
   padding: 0;
+
 }
 
 .header__button-link {

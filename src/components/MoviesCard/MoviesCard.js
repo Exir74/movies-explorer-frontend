@@ -1,8 +1,6 @@
 import React from 'react';
 import testCardImg from '../../images/card33Slova.jpeg';
 import SaveMyMovieIcon from './CardActions/SaveMyMovieIcon/SaveMyMovieIcon';
-// import SavedMovie from './CardActions/SavedIcon/SavedIcon';
-// import DeleteMovieIcon from './CardActions/deleteMovieIcon/deleteMovieIcon';
 
 function MoviesCard() {
   return (

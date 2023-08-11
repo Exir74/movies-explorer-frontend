@@ -8,12 +8,22 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 
 function App() {
   const [isShortMovie, setIsShortMovie] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [currentUrl, setCurrentUrl] = useState('');
+  // const checkCurrentUrl = (currentUrl) => currentUrl === window.location.href;
+  const isLoggedInHandler = () => {
+    setIsLoggedIn(!isLoggedIn);
+  };
   const isShortMovieHandler = () => {
     setIsShortMovie(!isShortMovie);
   };
   return (
     <div className="App">
-      <Header />
+      <Header
+        isLoggedInHandler={isLoggedInHandler}
+        isLoggedIn={isLoggedIn}
+        currentUrl={currentUrl}
+      />
       <Routes>
         <Route
           path="/"
@@ -25,13 +35,18 @@ function App() {
             <Movies
               isShortMovie={isShortMovie}
               isShortMovieHandler={isShortMovieHandler}
+              setCurrnetUrl={setCurrentUrl}
             />
           )}
         />
         <Route
           path="/saved-movies"
           element={(
-            <SavedMovies />
+            <SavedMovies
+              isShortMovie={isShortMovie}
+              isShortMovieHandler={isShortMovieHandler}
+              setCurrnetUrl={setCurrentUrl}
+            />
           )}
         />
       </Routes>
