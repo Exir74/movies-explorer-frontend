@@ -21,7 +21,7 @@ function Header() {
             <Link className="header__nav-link hover" to="/movies">Фильмы</Link>
           </li>
           <li className="header__nav-element">
-            <Link className="header__nav-link hover" to="/films">Сохранённые фильмы</Link>
+            <Link className="header__nav-link hover" to="/saved-movies">Сохранённые фильмы</Link>
           </li>
         </nav>
         <Link to="/" className="header__button-link header__button-link_disabled1">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { findButton } from '../../../utils/constants';
+import { findButton } from '../../utils/constants';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function SearchForm({ isShortMovieHandler, isShortMovie }) {

@@ -4,6 +4,7 @@ import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
 
 function App() {
   const [isShortMovie, setIsShortMovie] = useState(true);
@@ -25,6 +26,12 @@ function App() {
               isShortMovie={isShortMovie}
               isShortMovieHandler={isShortMovieHandler}
             />
+          )}
+        />
+        <Route
+          path="/saved-movies"
+          element={(
+            <SavedMovies />
           )}
         />
       </Routes>

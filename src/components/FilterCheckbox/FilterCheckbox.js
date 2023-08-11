@@ -1,5 +1,5 @@
 import React from 'react';
-import { smallTumbOff, smallTumbOn } from '../../../utils/constants';
+import { smallTumbOff, smallTumbOn } from '../../utils/constants';
 
 function FilterCheckbox({ isShortMovie, isShortMovieHandler }) {
   return (

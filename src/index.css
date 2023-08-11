@@ -14,9 +14,11 @@
 @import url(./components/Main/Portfolio/Portfolio.css);
 @import url(./components/Footer/Footer.css);
 @import url(./components/Movies/Movies.css);
-@import url(./components/Movies/SearchForm/SearchForm.css);
-@import url(./components/Movies/FilterCheckbox/FilterCheckbox.css);
-@import url(./components/Movies/MoviesCardList/MoviesCardList.css);
-@import url(./components/Movies/MoviesCard/MoviesCard.css);
-@import url(./components/Movies/MoviesCard/CardActions/SaveMovie/SaveMovie.css);
-@import url(./components/Movies/MoviesCard/CardActions/SavedMovie/SavedMovie.css);
+@import url(./components/SearchForm/SearchForm.css);
+@import url(./components/FilterCheckbox/FilterCheckbox.css);
+@import url(./components/MoviesCardList/MoviesCardList.css);
+@import url(./components/MoviesCard/MoviesCard.css);
+@import url(./components/MoviesCard/CardActions/SavedIcon/SavedIcon.css);
+@import url(./components/MoviesCard/CardActions/SaveMyMovieIcon/SaveMovieIcon.css);
+@import url(./components/SavedMovies/SavedMovies.css);
+@import url(./components/MoviesCard/CardActions/deleteMovieIcon/deleteMovieIcon.css);

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function SaveMovie() {
+function SaveMyMovieIcon() {
   return (
     <button
       className="save-movie hover"
@@ -11,4 +11,4 @@ function SaveMovie() {
   );
 }
 
-export default SaveMovie;
+export default SaveMyMovieIcon;
