@@ -4,10 +4,10 @@ import MoviesCardList from './MoviesCardList/MoviesCardList';
 
 import Preloader from '../Preloader/Preloader';
 
-function Movies() {
+function Movies({ isShortMovie, isShortMovieHandler }) {
   return (
     <div className="movies">
-      <SearchForm />
+      <SearchForm isShortMovie={isShortMovie} isShortMovieHandler={isShortMovieHandler} />
       <MoviesCardList />
       <Preloader />
     </div>

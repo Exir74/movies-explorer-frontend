@@ -2,7 +2,7 @@ import React from 'react';
 import { findButton } from '../../../utils/constants';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm() {
+function SearchForm({ isShortMovieHandler, isShortMovie }) {
   return (
     <section className="search-form">
       <form
@@ -28,7 +28,10 @@ function SearchForm() {
           />
         </button>
       </form>
-      <FilterCheckbox />
+      <FilterCheckbox
+        isShortMovie={isShortMovie}
+        isShortMovieHandler={isShortMovieHandler}
+      />
       <hr className="search-form__line" />
     </section>
   );
