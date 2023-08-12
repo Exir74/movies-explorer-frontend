@@ -20,7 +20,7 @@ function MoviesCard({
   // const [savedIconClassName, setSavedIconClassName] = useState('');
   // const [myFilmBtnClassName, setMyFilmBtnClassName] = useState('');
   // const [deleteIconClassName, setDeleteIconClassName] = useState('');
-  const [isMouseEnter, setIsMouseEnter] = useState('');
+  const [mouseEnter, setMouseEnter] = useState('');
 
   // useEffect(() => {
   //   if (currentUrl.includes('/movies')) {
@@ -40,10 +40,10 @@ function MoviesCard({
   //   }
   // }, [currentUrl]);
   const onMouseEnterHandler = () => {
-    setIsMouseEnter('card__save-btn_enable');
+    setMouseEnter('_enable');
   };
   const onMouseLeaveHandler = () => {
-    setIsMouseEnter('');
+    setMouseEnter('');
   };
   return (
     <div
@@ -67,7 +67,7 @@ function MoviesCard({
         </a>
         <div className="card__action-block">
           <button
-            className={(!isFilmUrl && isMy) ? 'card__delete-btn' : 'card__delete-btn_disabled'}
+            className={(!isFilmUrl && isMy) ? `card__delete-btn card__delete-btn${mouseEnter}` : 'card__delete-btn_disabled'}
             type="button"
             name="deleteMovie"
           >
@@ -78,7 +78,7 @@ function MoviesCard({
             />
           </button>
           <button
-            className={(isFilmUrl && !isMy) ? `card__save-btn ${isMouseEnter}` : 'card__save-btn_disabled'}
+            className={(isFilmUrl && !isMy) ? `card__save-btn card__save-btn${mouseEnter}` : 'card__save-btn_disabled'}
             type="button"
             name="save-movie"
           >

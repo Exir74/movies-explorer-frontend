@@ -53,6 +53,13 @@
   width: 21px;
   height: 21px;
   background: transparent;
+  opacity: 0;
+  transition: 0.7s opacity ease;
+}
+
+.card__delete-btn_enable {
+  opacity: 1;
+  transition: 0.7s opacity ease;
 }
 
 .card__delete-img {
