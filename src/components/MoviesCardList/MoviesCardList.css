@@ -3,7 +3,7 @@
   display: grid;
   /*flex-direction: column;*/
   margin: 70px 70px 118px 70px;
-  grid-template-columns: 1fr minmax(320px, 1140px) 1fr;
+  grid-template-columns: 1fr minmax(300px, 1140px) 1fr;
 }
 
 .cards__items {
@@ -52,6 +52,26 @@
 
   .cards__button {
     margin: 55px auto 119px auto;
+
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .cards {
+    margin: 40px 10px 0 10px;
+  }
+
+  .cards__items {
+    grid-template-columns: repeat(auto-fit, 300px);
+    grid-template-rows: repeat(auto-fit, 202px);
+    /*grid-column-gap: 30px;*/
+    grid-row-gap: 35px;
+
+  }
+
+  .cards__button {
+    min-width: 240px;
+    margin: 62px auto 119px auto;
 
   }
 }

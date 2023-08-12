@@ -106,3 +106,33 @@
     margin: 0;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .card__main {
+    grid-row-gap: 16px;
+  }
+
+  .card__link {
+    width: 300px;
+    height: 168px;
+  }
+
+  .card__img {
+    width: 300px;
+    height: 168px;
+  }
+
+  .card__action-block {
+    margin: 10px 10px 0 0;
+  }
+
+  .card__title {
+    margin: 0;
+    font-size: 12px;
+
+  }
+
+  .card__duration {
+    margin: 0;
+  }
+}
