@@ -39,7 +39,7 @@ function App() {
             <Movies
               isShortMovie={isShortMovie}
               isShortMovieHandler={isShortMovieHandler}
-              setCurrnetUrl={setCurrentUrl}
+              setCurrentUrl={setCurrentUrl}
             />
           )}
         />

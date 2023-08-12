@@ -82,10 +82,11 @@
   background: #313131;
   cursor: pointer;
   opacity: 0;
+  transition: 0.7s opacity ease;
 
 }
 
-.card__save-btn:hover {
+.card__save-btn_enable {
   opacity: 1;
   transition: 0.7s opacity ease;
 }

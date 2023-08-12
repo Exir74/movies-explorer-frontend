@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { deleteIcon, saveIcons } from '../../utils/constants';
 // import SavedIcon from './CardActions/SavedIcon/SavedIcon';
 // import SaveMyMovieIcon from './CardActions/SaveMyMovieIcon/SaveMyMovieIcon';
@@ -13,31 +13,44 @@ import { deleteIcon, saveIcons } from '../../utils/constants';
 function MoviesCard({
   nameRu, duration, link, img, isMy,
 }) {
-  const currentUrl = window.location.href;
-  const durationInHours = (`${Math.trunc(duration / 60)}ч ${duration - 60 * Math.trunc(duration / 60)}`);
-  const [savedIconClassName, setSavedIconClassName] = useState('');
-  const [myFilmBtnClassName, setMyFilmBtnClassName] = useState('');
-  const [deleteIconClassName, setDeleteIconClassName] = useState('');
+  // const currentUrl = window.location.href;
+  const isFilmUrl = window.location.href.includes('/movies');
 
-  useEffect(() => {
-    if (currentUrl.includes('/movies')) {
-      if (isMy) {
-        setSavedIconClassName('card__saved-img');
-        setMyFilmBtnClassName('card__save-btn_disabled');
-        setDeleteIconClassName('card__delete-btn_disabled');
-      } else {
-        setSavedIconClassName('card__saved-img_disabled');
-        setMyFilmBtnClassName('card__save-btn hover');
-        setDeleteIconClassName('card__delete-btn_disabled');
-      }
-    } else {
-      setSavedIconClassName('card__saved-img_disabled');
-      setMyFilmBtnClassName('card__save-btn_disabled');
-      setDeleteIconClassName('card__delete-btn hover');
-    }
-  }, [currentUrl]);
+  const durationInHours = (`${Math.trunc(duration / 60)}ч ${duration - 60 * Math.trunc(duration / 60)}`);
+  // const [savedIconClassName, setSavedIconClassName] = useState('');
+  // const [myFilmBtnClassName, setMyFilmBtnClassName] = useState('');
+  // const [deleteIconClassName, setDeleteIconClassName] = useState('');
+  const [isMouseEnter, setIsMouseEnter] = useState('');
+
+  // useEffect(() => {
+  //   if (currentUrl.includes('/movies')) {
+  //     if (isMy) {
+  //       setSavedIconClassName('card__saved-img');
+  //       setMyFilmBtnClassName('card__save-btn_disabled');
+  //       setDeleteIconClassName('card__delete-btn_disabled');
+  //     } else {
+  //       setSavedIconClassName('card__saved-img_disabled');
+  //       setMyFilmBtnClassName('card__save-btn hover');
+  //       setDeleteIconClassName('card__delete-btn_disabled');
+  //     }
+  //   } else {
+  //     setSavedIconClassName('card__saved-img_disabled');
+  //     setMyFilmBtnClassName('card__save-btn_disabled');
+  //     setDeleteIconClassName('card__delete-btn hover');
+  //   }
+  // }, [currentUrl]);
+  const onMouseEnterHandler = () => {
+    setIsMouseEnter('card__save-btn_enable');
+  };
+  const onMouseLeaveHandler = () => {
+    setIsMouseEnter('');
+  };
   return (
-    <div className="card">
+    <div
+      className="card"
+      onMouseEnter={onMouseEnterHandler}
+      onMouseLeave={onMouseLeaveHandler}
+    >
       <div className="card__main">
         <a
           href={link}
@@ -54,7 +67,7 @@ function MoviesCard({
         </a>
         <div className="card__action-block">
           <button
-            className={deleteIconClassName}
+            className={(!isFilmUrl && isMy) ? 'card__delete-btn' : 'card__delete-btn_disabled'}
             type="button"
             name="deleteMovie"
           >
@@ -65,14 +78,14 @@ function MoviesCard({
             />
           </button>
           <button
-            className={myFilmBtnClassName}
+            className={(isFilmUrl && !isMy) ? `card__save-btn ${isMouseEnter}` : 'card__save-btn_disabled'}
             type="button"
             name="save-movie"
           >
             Сохранить
           </button>
           <img
-            className={savedIconClassName}
+            className={(isFilmUrl && isMy) ? 'card__saved-img' : 'card__saved-img_disabled'}
             alt="Сохранен"
             src={saveIcons}
           />
