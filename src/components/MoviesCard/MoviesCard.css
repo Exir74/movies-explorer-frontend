@@ -93,6 +93,11 @@
 
 }
 
+.card__save-btn_mobile {
+  opacity: 1;
+}
+
+
 .card__save-btn_enable {
   opacity: 1;
   transition: 0.7s opacity ease;
@@ -193,6 +198,14 @@
 
   .card__action-block {
     margin: 10px 10px 0 0;
+  }
+
+  .card__delete-btn {
+    opacity: 1;
+  }
+
+  .card__save-btn {
+    opacity: 1;
   }
 
   .card__title {

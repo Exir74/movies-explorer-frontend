@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -7,11 +7,16 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 
 function App() {
+  const width = window.innerWidth;
   const [isShortMovie, setIsShortMovie] = useState(true);
   const [isMyShortMovie, setIsMyShortMovie] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [currentUrl, setCurrentUrl] = useState('');
+  const [currentWidth, setCurrentWidth] = useState('');
   // const checkCurrentUrl = (currentUrl) => currentUrl === window.location.href;
+  useEffect(() => {
+    setCurrentWidth(width);
+  }, [width]);
   const isLoggedInHandler = () => {
     setIsLoggedIn(!isLoggedIn);
   };
@@ -40,6 +45,7 @@ function App() {
               isShortMovie={isShortMovie}
               isShortMovieHandler={isShortMovieHandler}
               setCurrentUrl={setCurrentUrl}
+              currentWidth={currentWidth}
             />
           )}
         />
@@ -50,6 +56,7 @@ function App() {
               isMyShortMovie={isMyShortMovie}
               isMyShortMovieHandler={isMyShortMovieHandler}
               setCurrentUrl={setCurrentUrl}
+              currentWidth={currentWidth}
             />
           )}
         />

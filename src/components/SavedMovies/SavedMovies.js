@@ -3,7 +3,9 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
-function SavedMovies({ isMyShortMovieHandler, isMyShortMovie, setCurrentUrl }) {
+function SavedMovies({
+  isMyShortMovieHandler, isMyShortMovie, setCurrentUrl, currentWidth,
+}) {
   useEffect(() => {
     setCurrentUrl(window.location.href);
   }, []);
@@ -14,7 +16,9 @@ function SavedMovies({ isMyShortMovieHandler, isMyShortMovie, setCurrentUrl }) {
         isShortMovie={isMyShortMovie}
         isShortMovieHandler={isMyShortMovieHandler}
       />
-      <MoviesCardList />
+      <MoviesCardList
+        currentWidth={currentWidth}
+      />
       <Preloader />
     </div>
   );
