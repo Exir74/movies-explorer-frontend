@@ -44,6 +44,67 @@
 }
 
 
+.card__delete-btn {
+  display: block;
+  border: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  width: 21px;
+  height: 21px;
+  background: transparent;
+}
+
+.card__delete-img {
+  margin: 0;
+  padding: 0;
+  width: 21px;
+  height: 21px;
+}
+
+.card__delete-btn_disabled {
+  display: none;
+}
+
+.card__save-btn {
+  display: block;
+  border: none;
+  color: #FFF;
+  text-align: center;
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 0.9;
+  width: 72px;
+  height: 21px;
+  border-radius: 30px;
+  background: #313131;
+  cursor: pointer;
+  opacity: 0;
+
+}
+
+.card__save-btn:hover {
+  opacity: 1;
+  transition: 0.7s opacity ease;
+}
+
+.card__save-btn_disabled {
+  display: none;
+}
+
+.card__saved-img {
+  display: block;
+  width: 21px;
+  height: 21px;
+}
+
+.card__saved-img_disabled {
+  display: none;
+}
+
+
 .card__title {
   margin: 0 0 0 14px;
   padding: 0;

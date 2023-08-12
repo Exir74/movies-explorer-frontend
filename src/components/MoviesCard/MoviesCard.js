@@ -1,32 +1,87 @@
-import React from 'react';
-import testCardImg from '../../images/card33Slova.jpeg';
-import SaveMyMovieIcon from './CardActions/SaveMyMovieIcon/SaveMyMovieIcon';
+import React, { useEffect, useState } from 'react';
+import { deleteIcon, saveIcons } from '../../utils/constants';
+// import SavedIcon from './CardActions/SavedIcon/SavedIcon';
+// import SaveMyMovieIcon from './CardActions/SaveMyMovieIcon/SaveMyMovieIcon';
+// import SavedIcon from './CardActions/SavedIcon/SavedIcon';
 
-function MoviesCard() {
+// import DeleteMovieIcon from './CardActions/deleteMovieIcon/deleteMovieIcon';
+
+// const cardLikeButtonClassName =  (
+//   `card__like ${isLiked && 'card__like_active'}`
+// )
+
+function MoviesCard({
+  nameRu, duration, link, img, isMy,
+}) {
+  const currentUrl = window.location.href;
+  const durationInHours = (`${Math.trunc(duration / 60)}ч ${duration - 60 * Math.trunc(duration / 60)}`);
+  const [savedIconClassName, setSavedIconClassName] = useState('');
+  const [myFilmBtnClassName, setMyFilmBtnClassName] = useState('');
+  const [deleteIconClassName, setDeleteIconClassName] = useState('');
+
+  useEffect(() => {
+    if (currentUrl.includes('/movies')) {
+      if (isMy) {
+        setSavedIconClassName('card__saved-img');
+        setMyFilmBtnClassName('card__save-btn_disabled');
+        setDeleteIconClassName('card__delete-btn_disabled');
+      } else {
+        setSavedIconClassName('card__saved-img_disabled');
+        setMyFilmBtnClassName('card__save-btn hover');
+        setDeleteIconClassName('card__delete-btn_disabled');
+      }
+    } else {
+      setSavedIconClassName('card__saved-img_disabled');
+      setMyFilmBtnClassName('card__save-btn_disabled');
+      setDeleteIconClassName('card__delete-btn hover');
+    }
+  }, [currentUrl]);
   return (
     <div className="card">
       <div className="card__main">
         <a
-          href="https://ya.ru"
+          href={link}
           className="card__link"
           target="_blank"
           rel="noreferrer"
         >
           <img
             className="card__img"
-            alt="33 слова о дизайне"
-            src={testCardImg}
+            alt={nameRu}
+            src={img}
             id="cardImage"
           />
         </a>
         <div className="card__action-block">
-          <SaveMyMovieIcon />
+          <button
+            className={deleteIconClassName}
+            type="button"
+            name="deleteMovie"
+          >
+            <img
+              className="card__delete-img"
+              alt="удалить"
+              src={deleteIcon}
+            />
+          </button>
+          <button
+            className={myFilmBtnClassName}
+            type="button"
+            name="save-movie"
+          >
+            Сохранить
+          </button>
+          <img
+            className={savedIconClassName}
+            alt="Сохранен"
+            src={saveIcons}
+          />
         </div>
         <h3 className="card__title">
-          33 слова о дизайне
+          {nameRu}
         </h3>
         <div className="card__duration">
-          <h3 className="card__time">1ч 17м</h3>
+          <h3 className="card__time">{durationInHours}</h3>
         </div>
       </div>
 
