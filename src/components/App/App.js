@@ -5,6 +5,7 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
 function App() {
   const width = window.innerWidth;
@@ -61,6 +62,7 @@ function App() {
           )}
         />
       </Routes>
+      <BurgerMenu />
       <Footer />
     </div>
   );

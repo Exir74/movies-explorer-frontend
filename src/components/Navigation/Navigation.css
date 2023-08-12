@@ -56,6 +56,7 @@
   line-height: 1.33;
 }
 
+
 @media screen and (max-width: 600px) {
   .element__registration {
     margin: 0 14px 0 0;

@@ -22,3 +22,5 @@
 @import url(./components/MoviesCard/CardActions/SaveMyMovieIcon/SaveMovieIcon.css);
 @import url(./components/SavedMovies/SavedMovies.css);
 @import url(./components/MoviesCard/CardActions/deleteMovieIcon/deleteMovieIcon.css);
+@import url(./components/BurgerMenu/BurgerMenu.css);
+@import url(./components/AccountButton/AccountButton.css);

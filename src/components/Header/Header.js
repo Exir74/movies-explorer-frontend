@@ -2,15 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Navigation from '../Navigation/Navigation';
-import { logo } from '../../utils/constants';
-
-// const currentUrl = window.location.href;
+import { burgerMenu, logo } from '../../utils/constants';
+import AccountButton from '../AccountButton/AccountButton';
 
 function Header({ isLoggedIn, currentUrl }) {
   const [navMoviesLinkClassName, setNavMoviesLinkClassName] = useState('header__nav-element');
   const [navSavedMoviesLinkClassName, setNavSavedMLinkElementClassName] = useState('header__nav-element');
   useEffect(() => {
-    // console.log(currentUrl.includes('/movies'));
     if (currentUrl.includes('/movies')) {
       setNavMoviesLinkClassName('header__nav-link header__nav-link_selected hover');
       setNavSavedMLinkElementClassName('header__nav-link hover');
@@ -44,10 +42,17 @@ function Header({ isLoggedIn, currentUrl }) {
           </li>
         </nav>
         <Link to="/" className={headerButtonLinkClassName}>
-          <button type="button" className="header__button hover" name="accountButton">
-            Аккаунт
-          </button>
+          <AccountButton />
         </Link>
+        <button type="button" className="header__button-burger button-burger hover" name="burgerButton">
+          <div className="button-burger">
+            <img
+              className="button-burger__img"
+              alt="открыть меню"
+              src={burgerMenu}
+            />
+          </div>
+        </button>
         <Navigation isLoggedIn={isLoggedIn} />
       </div>
     </header>

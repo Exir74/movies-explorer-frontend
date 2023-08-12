@@ -4,11 +4,12 @@ import smallTumbOn from '../images/smallTumbOn.svg';
 import smallTumbOff from '../images/smallTumbOff.svg';
 import saveIcons from '../images/saveIcon.svg';
 import deleteIcon from '../images/deleteIconsvg.svg';
-
+import burgerMenu from '../images/burgerMenu.png';
 import cardImage33Slova from '../images/card33Slova.jpeg';
 import kinoalmanah from '../images/kinoalmanah.png';
 import vPogone from '../images/vPogone.png';
 import vzriv from '../images/vzriv.png';
+import closeIcon from '../images/closeIcon.png';
 
 const myGithub = 'https://github.com/Exir74/';
 const howToLearn = 'https://github.com/Exir74/how-to-learn';
@@ -65,4 +66,6 @@ export {
   saveIcons,
   deleteIcon,
   testCardsArr,
+  burgerMenu,
+  closeIcon,
 };
