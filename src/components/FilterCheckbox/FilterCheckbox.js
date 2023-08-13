@@ -6,6 +6,7 @@ function FilterCheckbox({ isShortMovie, isShortMovieHandler }) {
     <form
       className="filter-checkbox"
       method="get"
+      name="filterCheckBoxForm"
     >
       <button
         className="filter-checkbox__toggle hover"

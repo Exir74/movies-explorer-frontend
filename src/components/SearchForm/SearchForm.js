@@ -8,6 +8,7 @@ function SearchForm({
   return (
     <section className="search-form">
       <form
+        name="searchForm"
         className={(isBurgerOpen && isMobile) ? 'search-form__main search-form__main_popup' : 'search-form__main'}
         // className="search-form__main search-form__main_popup"
         method="post"

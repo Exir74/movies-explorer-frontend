@@ -26,7 +26,7 @@ function Header({ isLoggedIn, isBurgerOpenHandler }) {
         <div className="header__nav-wrapper">
           <FilmNavigation isLoggedIn={isLoggedIn} />
         </div>
-        <Link to="/" className={headerButtonLinkClassName}>
+        <Link to="/profile" className={headerButtonLinkClassName}>
           <AccountButton />
         </Link>
         <button

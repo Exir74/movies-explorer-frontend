@@ -8,6 +8,7 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
 import useWindowSize from '../../utils/hooks/useWindowSize';
+import Profile from '../Profile/Profile';
 
 function App() {
   const size = useWindowSize();
@@ -82,6 +83,12 @@ function App() {
               isMobile={isMobile}
             />
           )}
+        />
+        <Route
+          path="/profile"
+          element={(
+            <Profile />
+               )}
         />
       </Routes>
       <BurgerMenu
