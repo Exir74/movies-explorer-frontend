@@ -7,7 +7,7 @@ function SavedMovies({
   isMyShortMovieHandler, isMyShortMovie, isBurgerOpen, isMobile,
 }) {
   return (
-    <div className="SavedMovies">
+    <div className="saved-movies">
       <SearchForm
         isShortMovie={isMyShortMovie}
         isShortMovieHandler={isMyShortMovieHandler}

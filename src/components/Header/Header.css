@@ -35,45 +35,12 @@
   grid-column: 2/3;
   grid-row: 1/2;
   justify-self: center;
-  display: grid;
-  grid-column-gap: 16px;
+  /*display: grid;*/
+  /*grid-column-gap: 16px;*/
   width: 100%;
-  justify-content: center;
+  /*justify-content: center;*/
 }
 
-/*.header__nav_disabled {*/
-/*  display: none;*/
-/*}*/
-
-/*.header__nav-element {*/
-/*  grid-row: 1/2;*/
-/*  list-style-type: none;*/
-/*}*/
-
-/*.header__nav-link {*/
-/*  color: #FFF;*/
-/*  text-align: right;*/
-/*  font-family: "Inter", "Arial", sans-serif;*/
-/*  font-size: 13px;*/
-/*  font-style: normal;*/
-/*  font-weight: 400;*/
-/*  line-height: 1.38;*/
-/*  !*margin: 0 30px 0 0;*!*/
-/*  padding: 0;*/
-/*  text-decoration: none;*/
-/*}*/
-
-/*.header__nav-link_selected {*/
-/*  color: #fff;*/
-/*  font-family: "Inter", "Arial", "sans-serif";*/
-/*  font-size: 13px;*/
-/*  font-style: normal;*/
-/*  font-weight: 500;*/
-/*  line-height: 1.38;*/
-/*  !*margin: 0 16px 0 0;*!*/
-/*  padding: 0;*/
-
-/*}*/
 
 .header__button-link {
   margin: 0;

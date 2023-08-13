@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -12,6 +12,7 @@ import Profile from '../Profile/Profile';
 
 function App() {
   const size = useWindowSize();
+  const location = useLocation().pathname;
   const [isShortMovie, setIsShortMovie] = useState(true);
   const [isMyShortMovie, setIsMyShortMovie] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -26,11 +27,22 @@ function App() {
       setIsMobile(true);
     }
   });
-
+  // useEffect(() => {
+  //   console.log(location);
+  //   console.log(location === '/');
+  // }, [location]);
   const handlerEscapeClick = (e) => {
     if (e.key === 'Escape') {
       setIsBurgerOpen(false);
     }
+  };
+  const showFooter = () => {
+    if ((location === '/')
+      || (location === '/saved-movies')
+      || (location === '/movies')) {
+      return <Footer />;
+    }
+    return null;
   };
   const isBurgerOpenHandler = () => {
     setIsBurgerOpen(!isBurgerOpen);
@@ -69,7 +81,6 @@ function App() {
               isShortMovieHandler={isShortMovieHandler}
               isBurgerOpen={isBurgerOpen}
               isMobile={isMobile}
-
             />
           )}
         />
@@ -88,7 +99,7 @@ function App() {
           path="/profile"
           element={(
             <Profile />
-               )}
+          )}
         />
       </Routes>
       <BurgerMenu
@@ -96,7 +107,7 @@ function App() {
         isBurgerOpen={isBurgerOpen}
         isBurgerOpenHandler={isBurgerOpenHandler}
       />
-      <Footer />
+      {showFooter()}
     </div>
   );
 }

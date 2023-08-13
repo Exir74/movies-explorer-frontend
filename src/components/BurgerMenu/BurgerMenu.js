@@ -1,9 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { closeIcon } from '../../utils/constants';
 import AccountButton from '../AccountButton/AccountButton';
 import FilmNavigation from '../FilmNavigation/FilmNavigation';
 
 function BurgerMenu({ isLoggedIn, isBurgerOpen, isBurgerOpenHandler }) {
+  const onClickHandler = () => {
+    if (isBurgerOpen) {
+      isBurgerOpenHandler();
+    }
+  };
   return (
     <div
       className={isBurgerOpen ? 'burger-menu' : 'burger-menu_disabled'}
@@ -34,13 +40,9 @@ function BurgerMenu({ isLoggedIn, isBurgerOpen, isBurgerOpenHandler }) {
             isBurgerOpen={isBurgerOpen}
           />
         </nav>
-        <div
-          className="burger-menu__account-button hover"
-          // type="button"
-          // name="accountButtonBurger"
-        >
+        <Link to="/profile" className="burger-menu__account-button hover" onClick={onClickHandler}>
           <AccountButton />
-        </div>
+        </Link>
       </div>
     </div>
   );
