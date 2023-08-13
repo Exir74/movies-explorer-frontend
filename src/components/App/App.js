@@ -7,17 +7,33 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
+import useWindowSize from '../../utils/hooks/useWindowSize';
+
 function App() {
-  const width = window.innerWidth;
+  const size = useWindowSize();
   const [isShortMovie, setIsShortMovie] = useState(true);
   const [isMyShortMovie, setIsMyShortMovie] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [currentUrl, setCurrentUrl] = useState('');
-  const [currentWidth, setCurrentWidth] = useState('');
-  // const checkCurrentUrl = (currentUrl) => currentUrl === window.location.href;
+  const [isBurgerOpen, setIsBurgerOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
-    setCurrentWidth(width);
-  }, [width]);
+    if (size.width >= 770) {
+      setIsMobile(false);
+      setIsBurgerOpen(false);
+    } else {
+      setIsMobile(true);
+    }
+  });
+
+  const handlerEscapeClick = (e) => {
+    if (e.key === 'Escape') {
+      setIsBurgerOpen(false);
+    }
+  };
+  const isBurgerOpenHandler = () => {
+    setIsBurgerOpen(!isBurgerOpen);
+  };
   const isLoggedInHandler = () => {
     setIsLoggedIn(!isLoggedIn);
   };
@@ -28,11 +44,16 @@ function App() {
     setIsShortMovie(!isShortMovie);
   };
   return (
-    <div className="App">
+    <div
+      className={(isBurgerOpen && isMobile) ? 'App App_popup' : 'App'}
+      role="presentation"
+      onKeyDown={handlerEscapeClick}
+    >
       <Header
         isLoggedInHandler={isLoggedInHandler}
         isLoggedIn={isLoggedIn}
-        currentUrl={currentUrl}
+        isBurgerOpen={isBurgerOpen}
+        isBurgerOpenHandler={isBurgerOpenHandler}
       />
       <Routes>
         <Route
@@ -45,8 +66,9 @@ function App() {
             <Movies
               isShortMovie={isShortMovie}
               isShortMovieHandler={isShortMovieHandler}
-              setCurrentUrl={setCurrentUrl}
-              currentWidth={currentWidth}
+              isBurgerOpen={isBurgerOpen}
+              isMobile={isMobile}
+
             />
           )}
         />
@@ -56,13 +78,17 @@ function App() {
             <SavedMovies
               isMyShortMovie={isMyShortMovie}
               isMyShortMovieHandler={isMyShortMovieHandler}
-              setCurrentUrl={setCurrentUrl}
-              currentWidth={currentWidth}
+              isBurgerOpen={isBurgerOpen}
+              isMobile={isMobile}
             />
           )}
         />
       </Routes>
-      <BurgerMenu />
+      <BurgerMenu
+        isLoggedIn={isLoggedIn}
+        isBurgerOpen={isBurgerOpen}
+        isBurgerOpenHandler={isBurgerOpenHandler}
+      />
       <Footer />
     </div>
   );

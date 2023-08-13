@@ -4,7 +4,6 @@ import { deleteIcon, saveIcons } from '../../utils/constants';
 function MoviesCard({
   nameRu, duration, link, img, isMy,
 }) {
-  // const currentUrl = window.location.href;
   const isFilmUrl = window.location.href.includes('/movies');
 
   const durationInHours = (`${Math.trunc(duration / 60)}ч ${duration - 60 * Math.trunc(duration / 60)}м`);

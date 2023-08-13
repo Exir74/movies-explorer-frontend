@@ -9,6 +9,7 @@
     "sourceType": "module"
   },
   "rules": {
+    "no-unused-vars": "off",
     "react/prop-types": "off",
     "react/jsx-filename-extension": [
       1,

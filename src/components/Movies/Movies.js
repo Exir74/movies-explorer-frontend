@@ -1,24 +1,21 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 import Preloader from '../Preloader/Preloader';
 
 function Movies({
-  isShortMovie, isShortMovieHandler, setCurrentUrl, currentWidth,
+  isShortMovie, isShortMovieHandler, isBurgerOpen, isMobile,
 }) {
-  useEffect(() => {
-    setCurrentUrl(window.location.href);
-  }, [currentWidth]);
   return (
     <div className="movies">
       <SearchForm
         isShortMovie={isShortMovie}
         isShortMovieHandler={isShortMovieHandler}
+        isBurgerOpen={isBurgerOpen}
+        isMobile={isMobile}
       />
-      <MoviesCardList
-        currentWidth={currentWidth}
-      />
+      <MoviesCardList />
       <Preloader />
     </div>
   );

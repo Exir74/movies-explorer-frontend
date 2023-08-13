@@ -3,7 +3,7 @@ import React from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { testCardsArr } from '../../utils/constants';
 
-function MoviesCardList({ currentWidth }) {
+function MoviesCardList() {
   return (
     <section className="cards">
       <div className="cards__items">
@@ -15,7 +15,6 @@ function MoviesCardList({ currentWidth }) {
             duration={card.duration}
             nameRu={card.nameRU}
             link={card.link}
-            currentWidth={currentWidth}
           />
         ))}
       </div>

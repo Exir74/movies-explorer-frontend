@@ -53,6 +53,11 @@ const testCardsArr = [
   },
 
 ];
+const textUser = {
+  _id: '64d89b0fc715d84e59b004da',
+  email: 'pochta@yandex.ru',
+  name: 'Виталий',
+};
 export {
   logo,
   myGithub,
@@ -68,4 +73,5 @@ export {
   testCardsArr,
   burgerMenu,
   closeIcon,
+  textUser,
 };

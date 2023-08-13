@@ -7,6 +7,7 @@
   grid-template-columns: 1fr minmax(320px, 1140px) 1fr;
 }
 
+
 .search-form__main {
   grid-column: 2/3;
   margin: 80px 0 28px 0;
@@ -14,8 +15,8 @@
   grid-template-columns: minmax(238px, 1086px) min-content;
   grid-column-gap: 10px;
   align-items: center;
-
 }
+
 
 .search-form__input {
   margin: 0;
@@ -66,6 +67,16 @@
 @media screen and (max-width: 1000px) {
   .search-form__main {
     margin: 80px 30px 40px 30px;
+  }
+
+  .search-form__main_popup {
+    margin: 60px 30px 28px 30px;
+  }
+
+  .search-form__input_popup {
+    border-radius: 25px;
+    border: 1px #8B8B8B solid;
+    background-color: #000;
   }
 
   .search-form__line {
