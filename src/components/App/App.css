@@ -13,7 +13,7 @@
   min-height: 100vh;
   position: relative;
   display: grid;
-  grid-template-rows: min-content;
+  /*grid-template-rows: min-content;*/
 }
 
 .App_popup {

@@ -12,8 +12,8 @@
   padding: 0;
   display: grid;
   align-items: center;
-  grid-template-columns: 38px auto 38px;
-  grid-template-rows: 74px;
+  /*grid-template-columns: 38px auto 38px;*/
+  /*grid-template-rows: 74px;*/
 }
 
 .header__logo-image {
@@ -60,9 +60,10 @@
   display: none;
 }
 
-@media screen and (max-width: 769px) {
+@media screen and (max-width: 840px) {
   .header {
-    /*grid-template-columns: 1fr minmax(320px, 769px) 1fr;*/
+    /*grid-template-columns: 1fr minmax(320px, 500px) 1fr;*/
+
   }
 
   .header__wrapper {
@@ -96,6 +97,10 @@
     width: 44px;
     height: 44px;
   }
+}
+
+@media screen and  (max-width: 840px) {
+
 }
 
 @media screen and (max-width: 600px) {

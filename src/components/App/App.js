@@ -12,6 +12,7 @@ import { logo } from '../../utils/constants';
 import Login from '../Login/Login';
 import FormHeader from '../FormHeader/FormHeader';
 import Register from '../Register/Register';
+import NotFound from '../NotFound/NotFound';
 
 function App() {
   const size = useWindowSize();
@@ -124,7 +125,7 @@ function App() {
         <Route
           path="*"
           element={(
-            <Profile />
+            <NotFound />
           )}
         />
       </Routes>

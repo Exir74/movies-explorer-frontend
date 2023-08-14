@@ -31,7 +31,7 @@
     margin: 20px 20px 0 20px;
     min-height: 834px;
     grid-template-rows: 35px auto 66px;
-    grid-template-columns: 24px auto 24px;
+    grid-template-columns: 24px minmax(min-content, auto) 24px;
   }
 
   .promo__title {
