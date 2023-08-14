@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function FormHeader({ logo }) {
+function FormHeader({ logo, greeting }) {
   return (
     <div className="form-header">
       <Link
@@ -11,7 +11,7 @@ function FormHeader({ logo }) {
         <img className="form-header__img" src={logo} alt="лого" />
       </Link>
       <h3 className="form-header__text">
-        Рады видеть!
+        {greeting}
       </h3>
     </div>
   );

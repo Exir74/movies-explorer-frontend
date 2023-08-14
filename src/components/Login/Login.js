@@ -5,7 +5,7 @@ import ButtonMain from '../ButtonMain/ButtonMain';
 function Login({ FormHeader, logo }) {
   return (
     <section className="login-section">
-      <FormHeader logo={logo} />
+      <FormHeader logo={logo} greeting="Рады видеть!" />
       {/* <FormBody> */}
       <form className="login">
         <span className="login__input-name">E-mail</span>

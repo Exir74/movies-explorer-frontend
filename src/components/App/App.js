@@ -11,6 +11,7 @@ import Profile from '../Profile/Profile';
 import { logo } from '../../utils/constants';
 import Login from '../Login/Login';
 import FormHeader from '../FormHeader/FormHeader';
+import Register from '../Register/Register';
 
 function App() {
   const size = useWindowSize();
@@ -109,6 +110,21 @@ function App() {
               FormHeader={FormHeader}
               logo={logo}
             />
+          )}
+        />
+        <Route
+          path="/signup"
+          element={(
+            <Register
+              FormHeader={FormHeader}
+              logo={logo}
+            />
+          )}
+        />
+        <Route
+          path="*"
+          element={(
+            <Profile />
           )}
         />
       </Routes>
