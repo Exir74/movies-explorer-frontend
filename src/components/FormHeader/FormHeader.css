@@ -1,0 +1,34 @@
+.form-header {
+  width: 100%;
+}
+
+.form-header__link {
+
+}
+
+.form-header__img {
+  margin: 0;
+  padding: 0;
+}
+
+.form-header__text {
+  margin: 37px 0 37px 0;
+  padding: 0;
+  color: #FFF;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+@media screen and (max-width: 500px) {
+  .form-header {
+    text-align: center;
+  }
+
+  .form-header__text {
+    margin: 50px 0 77px 0;
+
+  }
+}

@@ -11,7 +11,6 @@ import Profile from '../Profile/Profile';
 import { logo } from '../../utils/constants';
 import Login from '../Login/Login';
 import FormHeader from '../FormHeader/FormHeader';
-import FormBody from '../FormBody/FormBody';
 
 function App() {
   const size = useWindowSize();
@@ -70,13 +69,6 @@ function App() {
           logo={logo}
         />
       ) : null}
-      {/* <Header */}
-      {/* isLoggedInHandler={isLoggedInHandler} */}
-      {/* isLoggedIn={isLoggedIn} */}
-      {/* isBurgerOpen={isBurgerOpen} */}
-      {/* isBurgerOpenHandler={isBurgerOpenHandler} */}
-      {/* logo={logo} */}
-      {/* /> */}
       <Routes>
         <Route
           path="/"
@@ -111,20 +103,15 @@ function App() {
           )}
         />
         <Route
-          path="/login"
+          path="/signin"
           element={(
             <Login
               FormHeader={FormHeader}
-              FormBody={FormBody}
+              logo={logo}
             />
           )}
         />
       </Routes>
-      {/* <BurgerMenu */}
-      {/*  isLoggedIn={isLoggedIn} */}
-      {/*  isBurgerOpen={isBurgerOpen} */}
-      {/*  isBurgerOpenHandler={isBurgerOpenHandler} */}
-      {/* /> */}
       {isBurgerOpen ? (
         <BurgerMenu
           isLoggedIn={isLoggedIn}
@@ -132,7 +119,6 @@ function App() {
           isBurgerOpenHandler={isBurgerOpenHandler}
         />
       ) : null}
-      {/* {showFooter()} */}
       {isShowFooter() ? <Footer /> : null}
     </div>
   );

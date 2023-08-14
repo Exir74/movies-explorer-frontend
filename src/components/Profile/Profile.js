@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { textUser } from '../../utils/constants';
+import ButtonMain from '../ButtonMain/ButtonMain';
 
 function Profile() {
   return (
@@ -51,13 +52,10 @@ function Profile() {
       <span className="profile__error profile__error_enabled1">
         При обновлении профиля произошла ошибка.
       </span>
-      <button
-        type="button"
-        className="profile__btn profile__save-btn
-        profile__save-btn_error1 profile__btn-disabled hover"
-      >
-        Сохранить
-      </button>
+      <ButtonMain
+        text="Сохранить"
+        isHide
+      />
     </section>
   );
 }

@@ -1,5 +1,124 @@
-.login {
-  min-height: 100%;
+.login-section {
+  margin: 70px auto 70px auto;
+  max-height: 100%;
+  max-width: 396px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  min-width: 396px;
+  max-height: 100%;
+}
+
+.login__input-name {
+  color: #8B8B8B;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  /*margin: 0 0 10px 0;*/
+}
+
+.login__input {
+
+  margin: 10px 0 20px 0;
+  padding: 15px 0 15px 15px;
+  border: none;
+  border-radius: 8px;
+  background: #2F2F2F;
+  color: #FFF;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.login__input:last-of-type {
+  margin: 10px 0 10px 0;
+}
+
+.login__error-wrapper {
+  height: 12px;
+  margin: 8px 0 0 0;
+}
+
+.login__input-message {
+  padding: 0;
+  color: #EE3465;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  /*display: none;*/
+}
+
+.login__input-message_enabled {
+  display: block;
+}
+
+.login__form-button {
+  margin: 157px 0 16px 0;
+}
+
+.login__footer {
+  text-align: center;
+}
+
+.login__footer_text {
+  color: #8B8B8B;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.login__footer_link {
+  color: #4285F4;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 769px) {
+  .login-section {
+    margin: 232px auto 0 auto;
+  }
+
+  .login__form-button {
+    margin: 151px 0 16px 0;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .login-section {
+    margin: 56px auto 0 auto;
+    width: 260px;
+  }
+
+  .login {
+    min-width: 100%;
+  }
+
+  .login__form-button {
+    margin: 235px 0 16px 0;
+  }
+
+  .login__footer_text {
+    font-size: 12px;
+  }
+
+  .login__footer_link {
+    font-size: 12px;
+  }
 }
