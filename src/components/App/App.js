@@ -6,9 +6,9 @@ import Footer from '../Footer/Footer';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
-
 import useWindowSize from '../../utils/hooks/useWindowSize';
 import Profile from '../Profile/Profile';
+import { logo } from '../../utils/constants';
 
 function App() {
   const size = useWindowSize();
@@ -27,23 +27,17 @@ function App() {
       setIsMobile(true);
     }
   });
-  // useEffect(() => {
-  //   console.log(location);
-  //   console.log(location === '/');
-  // }, [location]);
   const handlerEscapeClick = (e) => {
     if (e.key === 'Escape') {
       setIsBurgerOpen(false);
     }
   };
-  const showFooter = () => {
-    if ((location === '/')
-      || (location === '/saved-movies')
-      || (location === '/movies')) {
-      return <Footer />;
-    }
-    return null;
-  };
+  const isShowFooter = () => (location === '/')
+    || (location === '/saved-movies')
+    || (location === '/movies');
+  // const isShowHeader =()=>{
+  //
+  // }
   const isBurgerOpenHandler = () => {
     setIsBurgerOpen(!isBurgerOpen);
   };
@@ -67,6 +61,7 @@ function App() {
         isLoggedIn={isLoggedIn}
         isBurgerOpen={isBurgerOpen}
         isBurgerOpenHandler={isBurgerOpenHandler}
+        logo={logo}
       />
       <Routes>
         <Route
@@ -101,13 +96,19 @@ function App() {
             <Profile />
           )}
         />
+        {/* <Route */}
+        {/*  path="/login" */}
+        {/*  element={( */}
+        {/*    */}
+        {/*  )} */}
+        {/* /> */}
       </Routes>
       <BurgerMenu
         isLoggedIn={isLoggedIn}
         isBurgerOpen={isBurgerOpen}
         isBurgerOpenHandler={isBurgerOpenHandler}
       />
-      {showFooter()}
+      {isShowFooter ? <Footer /> : ''}
     </div>
   );
 }

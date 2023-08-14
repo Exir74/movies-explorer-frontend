@@ -12,6 +12,7 @@ function BurgerMenu({ isLoggedIn, isBurgerOpen, isBurgerOpenHandler }) {
   };
   return (
     <div
+      // className="burger-menu_disabled"
       className={isBurgerOpen ? 'burger-menu' : 'burger-menu_disabled'}
       role="presentation"
       onClick={isBurgerOpenHandler}

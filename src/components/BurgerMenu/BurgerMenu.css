@@ -1,5 +1,6 @@
 .burger-menu {
   display: none;
+
 }
 
 .burger-menu__wrapper {
@@ -7,6 +8,7 @@
 }
 
 @media screen and (max-width: 769px) {
+
   .burger-menu {
     width: 100%;
     height: 100%;
@@ -16,10 +18,16 @@
     position: fixed;
     right: 0;
     top: 0;
+
+    /*animation: slide .5s 1 ease-out;*/
+
+
   }
 
   .burger-menu_disabled {
-    display: none
+    display: none;
+    width: 0;
+    height: 0;
   }
 
   .burger-menu__wrapper {
@@ -28,9 +36,6 @@
     padding: 0;
     width: 520px;
     height: 100%;
-    /*visibility: hidden;*/
-    /*opacity: 1;*/
-    transition: visibility 0.3s, opacity 0.3s linear;
     background: rgba(32, 32, 32, 1);
     display: grid;
     grid-template-columns: 54px 1fr 54px;
@@ -95,5 +100,17 @@
     justify-self: start;
     align-self: end;
 
+  }
+}
+
+
+@keyframes slide {
+  from {
+    width: 0;
+    height: 100%;
+  }
+  to {
+    width: 100%;
+    height: 100%;
   }
 }

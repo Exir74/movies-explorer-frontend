@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Navigation from '../Navigation/Navigation';
-import { burgerMenu, logo } from '../../utils/constants';
+import { burgerMenu } from '../../utils/constants';
 import AccountButton from '../AccountButton/AccountButton';
 import FilmNavigation from '../FilmNavigation/FilmNavigation';
 
-function Header({ isLoggedIn, isBurgerOpenHandler }) {
+function Header({ isLoggedIn, isBurgerOpenHandler, logo }) {
   // const headerNavClassName = (`header__nav ${!isLoggedIn && 'header__nav_disabled'}`);
   const headerButtonLinkClassName = (`header__button-link ${!isLoggedIn && 'header__button-link_disabled'}`);
   // const navLinkElementClassName = (`header__nav-element ${}`)
