@@ -9,6 +9,9 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import useWindowSize from '../../utils/hooks/useWindowSize';
 import Profile from '../Profile/Profile';
 import { logo } from '../../utils/constants';
+import Login from '../Login/Login';
+import FormHeader from '../FormHeader/FormHeader';
+import FormBody from '../FormBody/FormBody';
 
 function App() {
   const size = useWindowSize();
@@ -32,12 +35,14 @@ function App() {
       setIsBurgerOpen(false);
     }
   };
+  const isShowHeader = () => (location === '/')
+    || (location === '/saved-movies')
+    || (location === '/movies')
+    || (location === '/profile');
   const isShowFooter = () => (location === '/')
     || (location === '/saved-movies')
     || (location === '/movies');
-  // const isShowHeader =()=>{
-  //
-  // }
+
   const isBurgerOpenHandler = () => {
     setIsBurgerOpen(!isBurgerOpen);
   };
@@ -56,13 +61,22 @@ function App() {
       role="presentation"
       onKeyDown={handlerEscapeClick}
     >
-      <Header
-        isLoggedInHandler={isLoggedInHandler}
-        isLoggedIn={isLoggedIn}
-        isBurgerOpen={isBurgerOpen}
-        isBurgerOpenHandler={isBurgerOpenHandler}
-        logo={logo}
-      />
+      {isShowHeader() ? (
+        <Header
+          isLoggedInHandler={isLoggedInHandler}
+          isLoggedIn={isLoggedIn}
+          isBurgerOpen={isBurgerOpen}
+          isBurgerOpenHandler={isBurgerOpenHandler}
+          logo={logo}
+        />
+      ) : null}
+      {/* <Header */}
+      {/* isLoggedInHandler={isLoggedInHandler} */}
+      {/* isLoggedIn={isLoggedIn} */}
+      {/* isBurgerOpen={isBurgerOpen} */}
+      {/* isBurgerOpenHandler={isBurgerOpenHandler} */}
+      {/* logo={logo} */}
+      {/* /> */}
       <Routes>
         <Route
           path="/"
@@ -96,19 +110,30 @@ function App() {
             <Profile />
           )}
         />
-        {/* <Route */}
-        {/*  path="/login" */}
-        {/*  element={( */}
-        {/*    */}
-        {/*  )} */}
-        {/* /> */}
+        <Route
+          path="/login"
+          element={(
+            <Login
+              FormHeader={FormHeader}
+              FormBody={FormBody}
+            />
+          )}
+        />
       </Routes>
-      <BurgerMenu
-        isLoggedIn={isLoggedIn}
-        isBurgerOpen={isBurgerOpen}
-        isBurgerOpenHandler={isBurgerOpenHandler}
-      />
-      {isShowFooter ? <Footer /> : ''}
+      {/* <BurgerMenu */}
+      {/*  isLoggedIn={isLoggedIn} */}
+      {/*  isBurgerOpen={isBurgerOpen} */}
+      {/*  isBurgerOpenHandler={isBurgerOpenHandler} */}
+      {/* /> */}
+      {isBurgerOpen ? (
+        <BurgerMenu
+          isLoggedIn={isLoggedIn}
+          isBurgerOpen={isBurgerOpen}
+          isBurgerOpenHandler={isBurgerOpenHandler}
+        />
+      ) : null}
+      {/* {showFooter()} */}
+      {isShowFooter() ? <Footer /> : null}
     </div>
   );
 }

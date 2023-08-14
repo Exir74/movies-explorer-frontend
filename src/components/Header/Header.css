@@ -1,6 +1,7 @@
 .header {
   display: grid;
   grid-template-columns: 1fr minmax(320px, 1280px) 1fr;
+  max-height: 74px;
 }
 
 .header__wrapper {

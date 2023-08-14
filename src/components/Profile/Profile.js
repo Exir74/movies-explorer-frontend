@@ -36,14 +36,14 @@ function Profile() {
       <button
         type="button"
         // profile__btn-disabled
-        className="profile__btn profile__edit-btn hover"
+        className="profile__btn profile__edit-btn profile__btn-disabled1 hover"
       >
         Редактировать
       </button>
       <button
         type="button"
         // profile__btn-disabled
-        className="profile__btn profile__exit-btn hover"
+        className="profile__btn profile__exit-btn profile__btn-disabled1 hover"
       >
         <Link className="profile__exit-link" to="/">Выйти из аккаунта</Link>
       </button>
