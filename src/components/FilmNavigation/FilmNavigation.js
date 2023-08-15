@@ -10,39 +10,41 @@ function FilmNavigation({ isLoggedIn, isBurgerOpen, isBurgerOpenHandler }) {
   };
   return (
     <nav className={headerNavClassName}>
-      <li className="film-navigation-element">
-        <NavLink
-          to="/"
-          onClick={onClickHandler}
-          className={({ isActive }) => (isActive
-            ? 'film-navigation-link film-navigation-link_selected hover'
-            : 'film-navigation-link hover')}
-        >
-          Главная
-        </NavLink>
-      </li>
-      <li className="film-navigation-element">
-        <NavLink
-          onClick={onClickHandler}
-          to="/movies"
-          className={({ isActive }) => (isActive
-            ? 'film-navigation-link film-navigation-link_selected hover'
-            : 'film-navigation-link hover')}
-        >
-          Фильмы
-        </NavLink>
-      </li>
-      <li className="film-navigation-element">
-        <NavLink
-          onClick={onClickHandler}
-          to="/saved-movies"
-          className={({ isActive }) => (isActive
-            ? 'film-navigation-link film-navigation-link_selected hover'
-            : 'film-navigation-link hover')}
-        >
-          Сохранённые фильмы
-        </NavLink>
-      </li>
+      <ul className="film-navigation-wrapper">
+        <li className="film-navigation-element">
+          <NavLink
+            to="/"
+            onClick={onClickHandler}
+            className={({ isActive }) => (isActive
+              ? 'film-navigation-link film-navigation-link_selected hover'
+              : 'film-navigation-link hover')}
+          >
+            Главная
+          </NavLink>
+        </li>
+        <li className="film-navigation-element">
+          <NavLink
+            onClick={onClickHandler}
+            to="/movies"
+            className={({ isActive }) => (isActive
+              ? 'film-navigation-link film-navigation-link_selected hover'
+              : 'film-navigation-link hover')}
+          >
+            Фильмы
+          </NavLink>
+        </li>
+        <li className="film-navigation-element">
+          <NavLink
+            onClick={onClickHandler}
+            to="/saved-movies"
+            className={({ isActive }) => (isActive
+              ? 'film-navigation-link film-navigation-link_selected hover'
+              : 'film-navigation-link hover')}
+          >
+            Сохранённые фильмы
+          </NavLink>
+        </li>
+      </ul>
     </nav>
   );
 }
