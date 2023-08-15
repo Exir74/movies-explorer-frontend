@@ -10,8 +10,7 @@
 .login {
   display: flex;
   flex-direction: column;
-  /*min-width: 396px;*/
-  min-width: 100%;
+  min-width: 396px;
   max-height: 100%;
 }
 
@@ -41,7 +40,7 @@
 }
 
 .login__input:last-of-type {
-  margin: 10px 0 10px 0;
+  margin: 10px 0 0 0;
 }
 
 .login__error-wrapper {
@@ -60,12 +59,13 @@
   /*display: none;*/
 }
 
+
 .login__input-message_enabled {
   display: block;
 }
 
 .login__form-button {
-  margin: 157px 0 16px 0;
+  margin: 71px 0 16px 0;
 }
 
 .login__footer {
@@ -97,7 +97,7 @@
   }
 
   .login__form-button {
-    margin: 151px 0 16px 0;
+    margin: 73px 0 16px 0;
   }
 }
 
@@ -112,7 +112,7 @@
   }
 
   .login__form-button {
-    margin: 235px 0 16px 0;
+    margin: 157px 0 16px 0;
   }
 
   .login__footer_text {
