@@ -5,7 +5,8 @@ function ButtonMain({ text, isHide }) {
   return (
     <button
       type="submit"
-      className={`button-main ${buttonShowClass} button-main_error hover`}
+      // button-main_error
+      className={`button-main ${buttonShowClass} hover`}
     >
       {text}
     </button>

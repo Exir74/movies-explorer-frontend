@@ -10,7 +10,8 @@
 .login {
   display: flex;
   flex-direction: column;
-  min-width: 396px;
+  /*min-width: 396px;*/
+  min-width: 100%;
   max-height: 100%;
 }
 

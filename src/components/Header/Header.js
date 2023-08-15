@@ -16,13 +16,15 @@ function Header({ isLoggedIn, isBurgerOpenHandler, logo }) {
   return (
     <header className="header">
       <div className="header__wrapper">
-        <Link className="header__logo-link hover" to="/">
-          <img
-            className="header__logo-image"
-            alt="лого"
-            src={logo}
-          />
-        </Link>
+        <div className="header__logo-wrapper">
+          <Link className="header__logo-link hover" to="/">
+            <img
+              className="header__logo-image"
+              alt="лого"
+              src={logo}
+            />
+          </Link>
+        </div>
         <div className="header__nav-wrapper">
           <FilmNavigation isLoggedIn={isLoggedIn} />
         </div>
