@@ -60,7 +60,7 @@
   display: none;
 }
 
-@media screen and (max-width: 840px) {
+@media screen and (max-width: 769px) {
   .header {
     /*grid-template-columns: 1fr minmax(320px, 500px) 1fr;*/
 
@@ -97,10 +97,6 @@
     width: 44px;
     height: 44px;
   }
-}
-
-@media screen and  (max-width: 840px) {
-
 }
 
 @media screen and (max-width: 600px) {
