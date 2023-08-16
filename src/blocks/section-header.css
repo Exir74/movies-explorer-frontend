@@ -1,0 +1,27 @@
+.section-header {
+  margin: 0;
+  padding: 0;
+  border-bottom: #DADADA 1px solid;
+}
+
+.section-header__title {
+  color: #FFF;
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+  margin: 0 0 23px 0;
+}
+
+@media screen and (max-width: 600px) {
+  .section-header__title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+  .section-header__title {
+    margin: 0 0 28px 0;
+  }
+}
