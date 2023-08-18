@@ -18,7 +18,6 @@ function Movies({
   setMoviesErrorMessage,
   setSearchValues,
   isPreloaderOn,
-
 }) {
   const [foundMoviesArray, setFoundMoviesArray] = useState([]);
   const [isShowError, setIsShowError] = useState(true);
@@ -38,12 +37,10 @@ function Movies({
 
   const renderItem = () => {
     if (filterMovies().length > 0) {
-      console.log(filterMovies());
       setFoundMoviesArray(filterMovies);
       setMoviesErrorMessage('');
     } else {
       setMoviesErrorMessage('Ничего не найдено');
-      console.log(filterMovies());
     }
   };
 
@@ -67,12 +64,12 @@ function Movies({
         searchValues={searchValues}
         handleSubmit={handleSubmit}
       />
-      {isShowError && (
+      {isShowError && !isPreloaderOn && (
         <ErrorMessage
           moviesApiErrorMessage={moviesErrorMessage}
         />
       )}
-      {!isShowError && (<MoviesCardList moviesArray={foundMoviesArray} />)}
+      {!isShowError && !isPreloaderOn && (<MoviesCardList moviesArray={foundMoviesArray} />)}
       {isPreloaderOn && (<Preloader />)}
     </div>
   );
