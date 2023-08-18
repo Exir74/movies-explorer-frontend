@@ -13,6 +13,7 @@ import Login from '../Login/Login';
 import FormHeader from '../FormHeader/FormHeader';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
+import { getAllMovies } from '../../utils/MoviesApi';
 
 function App() {
   const size = useWindowSize();
@@ -22,7 +23,14 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-
+  const [moviesArray, setMoviesArray] = useState([]);
+  const [searchValues, setSearchValues] = useState('');
+  const [moviesErrorMessage, setMoviesErrorMessage] = useState('');
+  // const [moviesServerStatus, setMoviesServerStatus] = useState('');
+  const [isPreloaderOn, setIsPreloaderOn] = useState(false);
+  const handleSearchInput = (e) => {
+    setSearchValues(e.target.value);
+  };
   useEffect(() => {
     if (size.width >= 770) {
       setIsMobile(false);
@@ -47,6 +55,18 @@ function App() {
   const isBurgerOpenHandler = () => {
     setIsBurgerOpen(!isBurgerOpen);
   };
+  const getMovies = () => {
+    getAllMovies().then((res) => {
+      setIsPreloaderOn(true);
+      setMoviesArray(res);
+      // setIsPreloaderOn(false);
+    })
+      .catch(() => {
+        setMoviesErrorMessage('Во время запроса произошла ошибка. Возможно, проблема '
+          + 'с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+      });
+  };
+
   const isLoggedInHandler = () => {
     setIsLoggedIn(!isLoggedIn);
   };
@@ -84,6 +104,14 @@ function App() {
               isShortMovieHandler={isShortMovieHandler}
               isBurgerOpen={isBurgerOpen}
               isMobile={isMobile}
+              getMovies={getMovies}
+              moviesArray={moviesArray}
+              handleSearchInput={handleSearchInput}
+              searchValues={searchValues}
+              moviesErrorMessage={moviesErrorMessage}
+              setMoviesErrorMessage={setMoviesErrorMessage}
+              setSearchValues={setSearchValues}
+              isPreloaderOn={isPreloaderOn}
             />
           )}
         />
@@ -95,6 +123,9 @@ function App() {
               isMyShortMovieHandler={isMyShortMovieHandler}
               isBurgerOpen={isBurgerOpen}
               isMobile={isMobile}
+              handleSearchInput={handleSearchInput}
+              searchValues={searchValues}
+              setSearchValues={setSearchValues}
             />
           )}
         />

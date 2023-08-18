@@ -1,22 +1,23 @@
 import React from 'react';
 
 import MoviesCard from '../MoviesCard/MoviesCard';
-import { testCardsArr } from '../../utils/constants';
+import { MOVIES_URL } from '../../utils/constants';
 
-function MoviesCardList() {
+function MoviesCardList({ moviesArray }) {
   return (
     <section className="cards">
       <div className="cards__items">
-        {testCardsArr.map((card) => (
+        {moviesArray.slice(0, 3).map((card) => (
           <MoviesCard
             key={card.id}
-            img={card.image}
+            img={`${MOVIES_URL}${card.image.url}`}
             isMy={card.isMy}
             duration={card.duration}
             nameRu={card.nameRU}
-            link={card.link}
+            link={card.trailerLink}
           />
         ))}
+
       </div>
       <button
         type="button"

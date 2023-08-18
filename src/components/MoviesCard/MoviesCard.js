@@ -5,7 +5,6 @@ function MoviesCard({
   nameRu, duration, link, img, isMy,
 }) {
   const isFilmUrl = window.location.href.includes('/movies');
-
   const durationInHours = (`${Math.trunc(duration / 60)}ч ${duration - 60 * Math.trunc(duration / 60)}м`);
   const [mouseEnter, setMouseEnter] = useState('');
 

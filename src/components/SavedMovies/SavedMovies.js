@@ -4,7 +4,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
 function SavedMovies({
-  isMyShortMovieHandler, isMyShortMovie, isBurgerOpen, isMobile,
+  isMyShortMovieHandler, isMyShortMovie, isBurgerOpen, isMobile, handleSearchInput, searchValues,
 }) {
   return (
     <div className="saved-movies">
@@ -13,6 +13,8 @@ function SavedMovies({
         isShortMovieHandler={isMyShortMovieHandler}
         isBurgerOpen={isBurgerOpen}
         isMobile={isMobile}
+        handleSearchInput={handleSearchInput}
+        searchValues={searchValues}
       />
       <MoviesCardList />
       <Preloader />

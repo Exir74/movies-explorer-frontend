@@ -12,8 +12,11 @@
 
   min-height: 100vh;
   position: relative;
-  display: grid;
-  grid-template-columns: 100%;
+  /*display: grid;*/
+  /*grid-template-columns: 100%;*/
+  /*grid-template-rows: min-content;*/
+  display: flex;
+  flex-direction: column;
 }
 
 .App_popup {
