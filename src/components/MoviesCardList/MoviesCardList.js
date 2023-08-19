@@ -4,19 +4,18 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import { MOVIES_URL } from '../../utils/constants';
 
 function MoviesCardList({
-  moviesArray, moviesQuantity, isShowButton, addMoviesQuantity,
+  moviesArray, moviesQuantity, isShowButton, addMoviesQuantity, setIsShowButton,
 }) {
-  const [startArrayQuantity, setStartArrayQuantity] = useState(0);
   const [endArrayQuantity, setEndArrayQuantity] = useState(moviesQuantity);
-
+  useEffect(() => {
+    if (moviesArray.length > endArrayQuantity) {
+      setIsShowButton(true);
+    } else setIsShowButton(false);
+    console.log(moviesQuantity);
+  }, [endArrayQuantity]);
   const handleAddButton = () => {
-    const start = (startArrayQuantity + moviesQuantity);
-    const end = (start + addMoviesQuantity);
-    setStartArrayQuantity(start);
-    setEndArrayQuantity(end);
-  };
-  const handleEndButton = () => {
-    setEndArrayQuantity(startArrayQuantity + addMoviesQuantity);
+    setEndArrayQuantity((prev) => prev + addMoviesQuantity);
+    console.log(endArrayQuantity);
   };
 
   return (
@@ -37,7 +36,7 @@ function MoviesCardList({
       <button
         type="button"
         // className="cards__button hover"
-        className={`${isShowButton ? 'cards__button hover' : 'cards__button_disabled'}`}
+        className={`${(isShowButton) ? 'cards__button hover' : 'cards__button_disabled'}`}
         onClick={handleAddButton}
       >
         Ещё

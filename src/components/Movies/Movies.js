@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-
 import Preloader from '../Preloader/Preloader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { getAllMovies } from '../../utils/MoviesApi';
 
 function Movies({
   isShortMovie,
   isShortMovieHandler,
   isBurgerOpen,
-  isMobile,
   isTablet,
-  getMovies,
   handleSearchInput,
   searchValues,
   moviesErrorMessage,
@@ -20,6 +18,7 @@ function Movies({
   isPreloaderOn,
   moviesQuantity,
   addMoviesQuantity,
+  setPreloaderOn,
 }) {
   const [foundMoviesArray, setFoundMoviesArray] = useState([]);
   const [isShowError, setIsShowError] = useState(true);
@@ -40,15 +39,14 @@ function Movies({
     .includes(searchValues.toLowerCase()));
 
   const handleButtonMore = () => {
+    console.log(filterMovies());
     if (filterMovies().length > moviesQuantity) {
       setIsShowButton(true);
     } else setIsShowButton(false);
   };
 
   const renderItem = () => {
-    // console.log(filterMovies());
     handleButtonMore();
-    // console.log(isShowButton);
     if (filterMovies().length > 0) {
       setFoundMoviesArray(filterMovies);
       setMoviesErrorMessage('');
@@ -57,17 +55,30 @@ function Movies({
     }
   };
 
+  const getMovies = () => {
+    getAllMovies()
+      .then((movie) => {
+        window.localStorage.setItem('movies', JSON.stringify(movie));
+        renderItem();
+      })
+      .catch(() => {
+        setMoviesErrorMessage('Во время запроса произошла ошибка. Возможно, проблема '
+          + 'с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+      })
+      .finally(() => {
+        setPreloaderOn(false);
+      });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    getMovies();
-    console.log(window.localStorage.getItem('movies'));
+    setPreloaderOn(true);
     if (searchValues === '') {
       setMoviesErrorMessage('Нужно ввести ключевое слово');
     } else {
-      renderItem();
+      getMovies();
     }
   };
-
   return (
     <div className="movies">
       <SearchForm
@@ -90,7 +101,7 @@ function Movies({
           moviesQuantity={moviesQuantity}
           isShowButton={isShowButton}
           addMoviesQuantity={addMoviesQuantity}
-
+          setIsShowButton={setIsShowButton}
         />
       )}
       {isPreloaderOn && (<Preloader />)}

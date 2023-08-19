@@ -44,11 +44,9 @@ function App() {
   const handleResize = () => {
     if (size.width <= 767) {
       setIsMobile(true);
-      setMoviesQuantity(5);
       setIsTablet(false);
+      setMoviesQuantity(5);
       setAddMoviesQuantity(2);
-
-      setAddMoviesQuantity();
     } else if (size.width <= 1281) {
       setIsMobile(false);
       setIsTablet(true);
@@ -85,7 +83,7 @@ function App() {
   const getMovies = () => {
     setIsPreloaderOn(true);
     getAllMovies().then((res) => {
-      window.localStorage.setItem('movies', JSON.stringify(res));
+      localStorage.setItem('movies', JSON.stringify(res));
       setIsPreloaderOn(false);
     })
       .catch(() => {
@@ -133,7 +131,7 @@ function App() {
               isShortMovie={isShortMovie}
               isShortMovieHandler={isShortMovieHandler}
               isBurgerOpen={isBurgerOpen}
-              isMobile={isMobile}
+              // isMobile={isMobile}
               isTablet={isTablet}
               getMovies={getMovies}
               handleSearchInput={handleSearchInput}
@@ -144,6 +142,7 @@ function App() {
               isPreloaderOn={isPreloaderOn}
               moviesQuantity={moviesQuantity}
               addMoviesQuantity={addMoviesQuantity}
+              setPreloaderOn={setIsPreloaderOn}
             />
           )}
         />

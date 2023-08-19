@@ -64,7 +64,7 @@
   border: 1px solid #424242;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
   .search-form__main {
     margin: 80px 30px 40px 30px;
   }
