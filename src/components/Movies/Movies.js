@@ -11,7 +11,6 @@ function Movies({
   isBurgerOpen,
   isMobile,
   getMovies,
-  moviesArray,
   handleSearchInput,
   searchValues,
   moviesErrorMessage,
@@ -32,7 +31,7 @@ function Movies({
     setMoviesErrorMessage('Нужно ввести ключевое слово');
   }, []);
 
-  const filterMovies = () => moviesArray.filter((movie) => movie.nameRU.toLowerCase()
+  const filterMovies = () => JSON.parse(window.localStorage.getItem('movies')).filter((movie) => movie.nameRU.toLowerCase()
     .includes(searchValues.toLowerCase()));
 
   const renderItem = () => {

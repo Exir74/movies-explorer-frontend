@@ -23,7 +23,6 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [moviesArray, setMoviesArray] = useState([]);
   const [searchValues, setSearchValues] = useState('');
   const [moviesErrorMessage, setMoviesErrorMessage] = useState('');
   // const [moviesServerStatus, setMoviesServerStatus] = useState('');
@@ -59,7 +58,7 @@ function App() {
     setIsPreloaderOn(true);
     getAllMovies().then((res) => {
       setIsPreloaderOn(false);
-      setMoviesArray(res);
+      window.localStorage.setItem('movies', JSON.stringify(res));
     })
       .catch(() => {
         setMoviesErrorMessage('Во время запроса произошла ошибка. Возможно, проблема '
@@ -108,7 +107,6 @@ function App() {
               isBurgerOpen={isBurgerOpen}
               isMobile={isMobile}
               getMovies={getMovies}
-              moviesArray={moviesArray}
               handleSearchInput={handleSearchInput}
               searchValues={searchValues}
               moviesErrorMessage={moviesErrorMessage}
