@@ -10,6 +10,7 @@ function Movies({
   isShortMovieHandler,
   isBurgerOpen,
   isMobile,
+  isTablet,
   getMovies,
   handleSearchInput,
   searchValues,
@@ -17,9 +18,13 @@ function Movies({
   setMoviesErrorMessage,
   setSearchValues,
   isPreloaderOn,
+  moviesQuantity,
+  addMoviesQuantity,
 }) {
   const [foundMoviesArray, setFoundMoviesArray] = useState([]);
   const [isShowError, setIsShowError] = useState(true);
+  const [isShowButton, setIsShowButton] = useState(false);
+
   const handleIsShowError = () => setIsShowError(moviesErrorMessage !== '');
 
   useEffect(() => {
@@ -34,7 +39,16 @@ function Movies({
   const filterMovies = () => JSON.parse(window.localStorage.getItem('movies')).filter((movie) => movie.nameRU.toLowerCase()
     .includes(searchValues.toLowerCase()));
 
+  const handleButtonMore = () => {
+    if (filterMovies().length > moviesQuantity) {
+      setIsShowButton(true);
+    } else setIsShowButton(false);
+  };
+
   const renderItem = () => {
+    // console.log(filterMovies());
+    handleButtonMore();
+    // console.log(isShowButton);
     if (filterMovies().length > 0) {
       setFoundMoviesArray(filterMovies);
       setMoviesErrorMessage('');
@@ -46,19 +60,21 @@ function Movies({
   const handleSubmit = (e) => {
     e.preventDefault();
     getMovies();
+    console.log(window.localStorage.getItem('movies'));
     if (searchValues === '') {
       setMoviesErrorMessage('Нужно ввести ключевое слово');
     } else {
       renderItem();
     }
   };
+
   return (
     <div className="movies">
       <SearchForm
         isShortMovie={isShortMovie}
         isShortMovieHandler={isShortMovieHandler}
         isBurgerOpen={isBurgerOpen}
-        isMobile={isMobile}
+        isTablet={isTablet}
         handleSearchInput={handleSearchInput}
         searchValues={searchValues}
         handleSubmit={handleSubmit}
@@ -68,7 +84,15 @@ function Movies({
           moviesApiErrorMessage={moviesErrorMessage}
         />
       )}
-      {!isShowError && !isPreloaderOn && (<MoviesCardList moviesArray={foundMoviesArray} />)}
+      {!isShowError && !isPreloaderOn && (
+        <MoviesCardList
+          moviesArray={foundMoviesArray}
+          moviesQuantity={moviesQuantity}
+          isShowButton={isShowButton}
+          addMoviesQuantity={addMoviesQuantity}
+
+        />
+      )}
       {isPreloaderOn && (<Preloader />)}
     </div>
   );

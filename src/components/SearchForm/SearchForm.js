@@ -6,7 +6,7 @@ function SearchForm({
   isShortMovieHandler,
   isShortMovie,
   isBurgerOpen,
-  isMobile,
+  isTablet,
   handleSearchInput,
   searchValues,
   handleSubmit,
@@ -15,12 +15,12 @@ function SearchForm({
     <section className="search-form">
       <form
         name="searchForm"
-        className={(isBurgerOpen && isMobile) ? 'search-form__main search-form__main_popup' : 'search-form__main'}
+        className={(isBurgerOpen && isTablet) ? 'search-form__main search-form__main_popup' : 'search-form__main'}
         // className="search-form__main search-form__main_popup"
         // method="post"
       >
         <input
-          className={(isBurgerOpen && isMobile) ? 'search-form__input search-form__input_popup' : 'search-form__input'}
+          className={(isBurgerOpen && isTablet) ? 'search-form__input search-form__input_popup' : 'search-form__input'}
           // className="search-form__input search-form__input_popup"
           name="search"
           onChange={handleSearchInput}

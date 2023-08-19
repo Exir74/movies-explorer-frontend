@@ -23,26 +23,54 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
   const [searchValues, setSearchValues] = useState('');
   const [moviesErrorMessage, setMoviesErrorMessage] = useState('');
-  // const [moviesServerStatus, setMoviesServerStatus] = useState('');
   const [isPreloaderOn, setIsPreloaderOn] = useState(false);
+  const [moviesQuantity, setMoviesQuantity] = useState(0);
+  const [addMoviesQuantity, setAddMoviesQuantity] = useState(0);
   const handleSearchInput = (e) => {
     setSearchValues(e.target.value);
   };
-  useEffect(() => {
-    if (size.width >= 770) {
-      setIsMobile(false);
-      setIsBurgerOpen(false);
-    } else {
+  // useEffect(() => {
+  //   if (size.width >= 770) {
+  //     setIsMobile(false);
+  //     setIsBurgerOpen(false);
+  //   } else {
+  //     setIsMobile(true);
+  //   }
+  // });
+
+  const handleResize = () => {
+    if (size.width <= 767) {
       setIsMobile(true);
+      setMoviesQuantity(5);
+      setIsTablet(false);
+      setAddMoviesQuantity(2);
+
+      setAddMoviesQuantity();
+    } else if (size.width <= 1281) {
+      setIsMobile(false);
+      setIsTablet(true);
+      setMoviesQuantity(8);
+      setAddMoviesQuantity(2);
+      console.log('tab');
+    } else {
+      setIsMobile(false);
+      setIsTablet(false);
+      setMoviesQuantity(12);
+      setAddMoviesQuantity(3);
     }
+  };
+  useEffect(() => {
+    handleResize();
   });
   const handlerEscapeClick = (e) => {
     if (e.key === 'Escape') {
       setIsBurgerOpen(false);
     }
   };
+
   const isShowHeader = () => (location === '/')
     || (location === '/saved-movies')
     || (location === '/movies')
@@ -57,8 +85,8 @@ function App() {
   const getMovies = () => {
     setIsPreloaderOn(true);
     getAllMovies().then((res) => {
-      setIsPreloaderOn(false);
       window.localStorage.setItem('movies', JSON.stringify(res));
+      setIsPreloaderOn(false);
     })
       .catch(() => {
         setMoviesErrorMessage('Во время запроса произошла ошибка. Возможно, проблема '
@@ -80,7 +108,7 @@ function App() {
   };
   return (
     <div
-      className={(isBurgerOpen && isMobile) ? 'App App_popup' : 'App'}
+      className={(isBurgerOpen && isTablet) ? 'App App_popup' : 'App'}
       role="presentation"
       onKeyDown={handlerEscapeClick}
     >
@@ -106,6 +134,7 @@ function App() {
               isShortMovieHandler={isShortMovieHandler}
               isBurgerOpen={isBurgerOpen}
               isMobile={isMobile}
+              isTablet={isTablet}
               getMovies={getMovies}
               handleSearchInput={handleSearchInput}
               searchValues={searchValues}
@@ -113,6 +142,8 @@ function App() {
               setMoviesErrorMessage={setMoviesErrorMessage}
               setSearchValues={setSearchValues}
               isPreloaderOn={isPreloaderOn}
+              moviesQuantity={moviesQuantity}
+              addMoviesQuantity={addMoviesQuantity}
             />
           )}
         />
