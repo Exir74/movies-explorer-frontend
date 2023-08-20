@@ -18,7 +18,7 @@ import { getAllMovies } from '../../utils/MoviesApi';
 function App() {
   const size = useWindowSize();
   const location = useLocation().pathname;
-  const [isShortMovie, setIsShortMovie] = useState(true);
+  const [isShortMovie, setIsShortMovie] = useState(false);
   const [isMyShortMovie, setIsMyShortMovie] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);

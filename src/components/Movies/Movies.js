@@ -6,13 +6,13 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { getAllMovies } from '../../utils/MoviesApi';
 
 function Movies({
-  isShortMovie,
-  isShortMovieHandler,
+  // isShortMovie,
+  // isShortMovieHandler,
   isBurgerOpen,
   isTablet,
   handleSearchInput,
   searchValues,
-  moviesErrorMessage,
+  // moviesErrorMessage,
   setMoviesErrorMessage,
   setSearchValues,
   isPreloaderOn,
@@ -21,41 +21,50 @@ function Movies({
   setPreloaderOn,
 }) {
   const [foundMoviesArray, setFoundMoviesArray] = useState([]);
-  const [isShowError, setIsShowError] = useState(true);
+  const [shortMoviesArray, setShortMoviesArray] = useState([]);
+  // const [isShowError, setIsShowError] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState(null);
   const [isShowButton, setIsShowButton] = useState(false);
   const [movieArr, setMoviesArr] = useState(null);
-
-  const handleIsShowError = () => setIsShowError(moviesErrorMessage !== '');
-
-  useEffect(() => {
-    handleIsShowError();
-  }, [moviesErrorMessage]);
+  const [isShortMovie, setIsShortMovie] = useState(false);
 
   useEffect(() => {
-    setSearchValues('');
-    setMoviesErrorMessage('Нужно ввести ключевое слово');
+    if (searchValues === '') {
+      setShowErrorMessage('Нужно ввести ключевое слово');
+    }
   }, []);
-
-  const filterMovies = () => movieArr.filter((movie) => movie.nameRU.toLowerCase()
-    .includes(searchValues.toLowerCase()));
-
-  const handleButtonMore = () => {
-    console.log(filterMovies());
-    if (filterMovies().length > moviesQuantity) {
-      setIsShowButton(true);
-    } else setIsShowButton(false);
+  const filterMovies = () => {
+    const arr = movieArr.filter((movie) => movie.nameRU
+      .toLowerCase()
+      .includes(searchValues.toLowerCase()));
+    setFoundMoviesArray(arr);
+    setShowErrorMessage(null);
+    if (arr.length === 0) {
+      setShowErrorMessage('Ничего не найдено');
+    }
   };
+  const shortMovie = () => {
+    const arr = foundMoviesArray.filter((movie) => movie.duration <= 52);
+    setShortMoviesArray(arr);
+    setShowErrorMessage(null);
+  };
+  const isShortMovieHandler = () => {
+    setIsShortMovie(!isShortMovie);
+    if (foundMoviesArray !== []) {
+      shortMovie();
+    }
+  };
+  useEffect(() => {
+    shortMovie();
+  }, [foundMoviesArray]);
 
   const renderItem = () => {
-    handleButtonMore();
-    window.localStorage.setItem('movies', JSON.stringify(filterMovies()));
-    window.localStorage.setItem('inputMoviesValues', searchValues);
-    if (filterMovies().length > 0) {
-      setFoundMoviesArray(filterMovies);
-      setMoviesErrorMessage('');
-    } else {
-      setMoviesErrorMessage('Ничего не найдено');
-    }
+    // filterHandler();
+    filterMovies();
+    // a();
+    // handleButtonMore();
+    // window.localStorage.setItem('movies', JSON.stringify(filterMovies()));
+    // window.localStorage.setItem('inputMoviesValues', searchValues);
   };
 
   const getMovies = () => {
@@ -65,8 +74,10 @@ function Movies({
         // window.localStorage.setItem('movies', JSON.stringify(movie));
       })
       .catch(() => {
-        setMoviesErrorMessage('Во время запроса произошла ошибка. Возможно, проблема '
+        setPreloaderOn(false);
+        setShowErrorMessage('Во время запроса произошла ошибка. Возможно, проблема '
           + 'с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+        // setIsShowError(true);
       })
       .finally(() => {
         setPreloaderOn(false);
@@ -77,17 +88,22 @@ function Movies({
     e.preventDefault();
     setPreloaderOn(true);
     if (searchValues === '') {
-      setMoviesErrorMessage('Нужно ввести ключевое слово');
+      setPreloaderOn(false);
     } else {
       getMovies();
     }
   };
-
+  useEffect(() => {
+    if (searchValues === '') {
+      setShowErrorMessage('Нужно ввести ключевое слово');
+    }
+  }, []);
   useEffect(() => {
     if (movieArr) {
       renderItem();
     }
   }, [movieArr]);
+
   return (
     <div className="movies">
       <SearchForm
@@ -99,14 +115,14 @@ function Movies({
         searchValues={searchValues}
         handleSubmit={handleSubmit}
       />
-      {isShowError && !isPreloaderOn && (
+      {showErrorMessage && !isPreloaderOn && (
         <ErrorMessage
-          moviesApiErrorMessage={moviesErrorMessage}
+          moviesApiErrorMessage={showErrorMessage}
         />
       )}
-      {!isShowError && !isPreloaderOn && (
+      {!showErrorMessage && !isPreloaderOn && (
         <MoviesCardList
-          moviesArray={foundMoviesArray}
+          moviesArray={isShortMovie ? shortMoviesArray : foundMoviesArray}
           moviesQuantity={moviesQuantity}
           isShowButton={isShowButton}
           addMoviesQuantity={addMoviesQuantity}

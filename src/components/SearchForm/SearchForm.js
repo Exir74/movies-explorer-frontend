@@ -33,7 +33,7 @@ function SearchForm({
           className="search-form__button hover"
           type="submit"
           onClick={handleSubmit}
-          disabled={!searchValues}
+          // disabled={!searchValues}
         >
           <img
             className="search-form__button-img"
