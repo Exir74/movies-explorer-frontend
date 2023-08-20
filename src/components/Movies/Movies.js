@@ -23,6 +23,7 @@ function Movies({
   const [foundMoviesArray, setFoundMoviesArray] = useState([]);
   const [isShowError, setIsShowError] = useState(true);
   const [isShowButton, setIsShowButton] = useState(false);
+  const [movieArr, setMoviesArr] = useState(null);
 
   const handleIsShowError = () => setIsShowError(moviesErrorMessage !== '');
 
@@ -35,7 +36,7 @@ function Movies({
     setMoviesErrorMessage('Нужно ввести ключевое слово');
   }, []);
 
-  const filterMovies = () => JSON.parse(window.localStorage.getItem('movies')).filter((movie) => movie.nameRU.toLowerCase()
+  const filterMovies = () => movieArr.filter((movie) => movie.nameRU.toLowerCase()
     .includes(searchValues.toLowerCase()));
 
   const handleButtonMore = () => {
@@ -58,8 +59,8 @@ function Movies({
   const getMovies = () => {
     getAllMovies()
       .then((movie) => {
-        window.localStorage.setItem('movies', JSON.stringify(movie));
-        renderItem();
+        setMoviesArr(movie);
+        // window.localStorage.setItem('movies', JSON.stringify(movie));
       })
       .catch(() => {
         setMoviesErrorMessage('Во время запроса произошла ошибка. Возможно, проблема '
@@ -79,6 +80,11 @@ function Movies({
       getMovies();
     }
   };
+  useEffect(() => {
+    if (movieArr) {
+      renderItem();
+    }
+  }, [movieArr]);
   return (
     <div className="movies">
       <SearchForm
