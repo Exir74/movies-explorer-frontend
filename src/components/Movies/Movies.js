@@ -82,6 +82,7 @@ function Movies({
       getMovies();
     }
   };
+
   useEffect(() => {
     if (movieArr) {
       renderItem();
