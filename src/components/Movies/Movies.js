@@ -48,6 +48,8 @@ function Movies({
 
   const renderItem = () => {
     handleButtonMore();
+    window.localStorage.setItem('movies', JSON.stringify(filterMovies()));
+    window.localStorage.setItem('inputMoviesValues', searchValues);
     if (filterMovies().length > 0) {
       setFoundMoviesArray(filterMovies);
       setMoviesErrorMessage('');

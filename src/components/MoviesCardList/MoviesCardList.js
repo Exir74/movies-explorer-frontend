@@ -23,7 +23,9 @@ function MoviesCardList({
 
   useEffect(() => {
     handleShortMovies();
+    window.localStorage.setItem('isShortMovie', JSON.stringify(isShortMovie));
   }, [isShortMovie]);
+
   useEffect(() => {
     if (handleShortMovies().length > endArrayQuantity) {
       setIsShowButton(true);
