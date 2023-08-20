@@ -108,6 +108,7 @@ function Movies({
           isShowButton={isShowButton}
           addMoviesQuantity={addMoviesQuantity}
           setIsShowButton={setIsShowButton}
+          isShortMovie={isShortMovie}
         />
       )}
       {isPreloaderOn && (<Preloader />)}

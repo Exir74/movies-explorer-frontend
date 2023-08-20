@@ -4,24 +4,43 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import { MOVIES_URL } from '../../utils/constants';
 
 function MoviesCardList({
-  moviesArray, moviesQuantity, isShowButton, addMoviesQuantity, setIsShowButton,
+  moviesArray, moviesQuantity, isShowButton, addMoviesQuantity, setIsShowButton, isShortMovie,
 }) {
   const [endArrayQuantity, setEndArrayQuantity] = useState(moviesQuantity);
+
+  function handleShortMovies() {
+    if (isShortMovie) {
+      return moviesArray.filter((movie) => movie.duration <= 52);
+    }
+    return moviesArray;
+
+    // function handleShortMovies () {
+    //   const newIndex = index + 1;
+    //   setIndex(newIndex);
+    //   console.log(newIndex);
+    // }
+  }
+
   useEffect(() => {
-    if (moviesArray.length > endArrayQuantity) {
+    handleShortMovies();
+  }, [isShortMovie]);
+  useEffect(() => {
+    if (handleShortMovies().length > endArrayQuantity) {
       setIsShowButton(true);
     } else setIsShowButton(false);
     console.log(moviesQuantity);
-  }, [endArrayQuantity]);
+  }, [endArrayQuantity, isShortMovie]);
+
+  const [index, setIndex] = useState([]);
+
   const handleAddButton = () => {
     setEndArrayQuantity((prev) => prev + addMoviesQuantity);
     console.log(endArrayQuantity);
   };
-
   return (
     <section className="cards">
       <div className="cards__items">
-        {moviesArray.slice(0, endArrayQuantity).map((card) => (
+        {handleShortMovies().slice(0, endArrayQuantity).map((card) => (
           <MoviesCard
             key={card.id}
             img={`${MOVIES_URL}${card.image.url}`}
