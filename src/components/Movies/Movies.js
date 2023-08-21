@@ -4,6 +4,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { getAllMovies } from '../../utils/MoviesApi';
+import { logo } from '../../utils/constants';
 
 function Movies({
   // isShortMovie,
@@ -28,20 +29,12 @@ function Movies({
   const [movieArr, setMoviesArr] = useState(null);
   const [isShortMovie, setIsShortMovie] = useState(false);
 
-  useEffect(() => {
-    if (searchValues === '') {
-      setShowErrorMessage('Нужно ввести ключевое слово');
-    }
-  }, []);
   const filterMovies = () => {
     const arr = movieArr.filter((movie) => movie.nameRU
       .toLowerCase()
       .includes(searchValues.toLowerCase()));
     setFoundMoviesArray(arr);
     setShowErrorMessage(null);
-    if (arr.length === 0) {
-      setShowErrorMessage('Ничего не найдено');
-    }
   };
   const shortMovie = () => {
     const arr = foundMoviesArray.filter((movie) => movie.duration <= 52);
@@ -59,12 +52,19 @@ function Movies({
   }, [foundMoviesArray]);
 
   const renderItem = () => {
-    // filterHandler();
     filterMovies();
-    // a();
     // handleButtonMore();
     // window.localStorage.setItem('movies', JSON.stringify(filterMovies()));
     // window.localStorage.setItem('inputMoviesValues', searchValues);
+  };
+  const err = () => {
+    if (searchValues === '' && foundMoviesArray.length === 0) {
+      setShowErrorMessage('Нужно ввести ключевое слово');
+    } else if (foundMoviesArray.length === 0 && !isShortMovie) {
+      setShowErrorMessage('Ничего не найдено');
+    } else if (shortMoviesArray.length === 0 && isShortMovie) {
+      setShowErrorMessage('Ничего не найдено');
+    }
   };
 
   const getMovies = () => {
@@ -93,11 +93,10 @@ function Movies({
       getMovies();
     }
   };
+
   useEffect(() => {
-    if (searchValues === '') {
-      setShowErrorMessage('Нужно ввести ключевое слово');
-    }
-  }, []);
+    err();
+  }, [isShortMovie]);
   useEffect(() => {
     if (movieArr) {
       renderItem();
