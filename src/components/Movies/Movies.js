@@ -4,7 +4,6 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { getAllMovies } from '../../utils/MoviesApi';
-import { logo } from '../../utils/constants';
 
 function Movies({
   isBurgerOpen,
@@ -23,6 +22,7 @@ function Movies({
   const [isShowButton, setIsShowButton] = useState(false);
   const [movieArr, setMoviesArr] = useState(null);
   const [isShortMovie, setIsShortMovie] = useState(false);
+
   useEffect(() => {
     setSearchValues('');
     if (localStorage.getItem('inputMoviesValues')) {
@@ -35,6 +35,7 @@ function Movies({
       setMoviesArr(JSON.parse(localStorage.getItem('movies')));
     }
   }, []);
+
   const filterMovies = () => {
     const arr = movieArr.filter((movie) => movie.nameRU
       .toLowerCase()
@@ -42,11 +43,13 @@ function Movies({
     setFoundMoviesArray(arr);
     setShowErrorMessage(null);
   };
+
   const shortMovie = () => {
     const arr = foundMoviesArray.filter((movie) => movie.duration <= 52);
     setShortMoviesArray(arr);
     setShowErrorMessage(null);
   };
+
   const isShortMovieHandler = () => {
     setIsShortMovie(!isShortMovie);
     localStorage.setItem('isShortMovie', JSON.stringify(!isShortMovie));
@@ -54,13 +57,16 @@ function Movies({
       shortMovie();
     }
   };
+
   useEffect(() => {
     shortMovie();
   }, [foundMoviesArray]);
+
   const renderItem = () => {
     filterMovies();
     window.localStorage.setItem('inputMoviesValues', searchValues);
   };
+
   const handleError = () => {
     if (searchValues === '' && foundMoviesArray.length === 0) {
       setShowErrorMessage('Нужно ввести ключевое слово');

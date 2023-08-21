@@ -128,16 +128,10 @@ function App() {
           path="/movies"
           element={(
             <Movies
-              isShortMovie={isShortMovie}
-              isShortMovieHandler={isShortMovieHandler}
               isBurgerOpen={isBurgerOpen}
-              // isMobile={isMobile}
               isTablet={isTablet}
-              getMovies={getMovies}
               handleSearchInput={handleSearchInput}
               searchValues={searchValues}
-              moviesErrorMessage={moviesErrorMessage}
-              setMoviesErrorMessage={setMoviesErrorMessage}
               setSearchValues={setSearchValues}
               isPreloaderOn={isPreloaderOn}
               moviesQuantity={moviesQuantity}
