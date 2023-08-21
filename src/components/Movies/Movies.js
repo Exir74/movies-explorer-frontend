@@ -7,14 +7,10 @@ import { getAllMovies } from '../../utils/MoviesApi';
 import { logo } from '../../utils/constants';
 
 function Movies({
-  // isShortMovie,
-  // isShortMovieHandler,
   isBurgerOpen,
   isTablet,
   handleSearchInput,
   searchValues,
-  // moviesErrorMessage,
-  setMoviesErrorMessage,
   setSearchValues,
   isPreloaderOn,
   moviesQuantity,
@@ -23,7 +19,6 @@ function Movies({
 }) {
   const [foundMoviesArray, setFoundMoviesArray] = useState([]);
   const [shortMoviesArray, setShortMoviesArray] = useState([]);
-  // const [isShowError, setIsShowError] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(null);
   const [isShowButton, setIsShowButton] = useState(false);
   const [movieArr, setMoviesArr] = useState(null);
@@ -32,7 +27,7 @@ function Movies({
     setSearchValues(localStorage.getItem('inputMoviesValues'));
     setIsShortMovie(JSON.parse(localStorage.getItem('isShortMovie')));
     setMoviesArr(JSON.parse(localStorage.getItem('movies')));
-  }, [1]);
+  }, []);
   const filterMovies = () => {
     const arr = movieArr.filter((movie) => movie.nameRU
       .toLowerCase()
