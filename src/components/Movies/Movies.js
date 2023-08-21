@@ -24,9 +24,16 @@ function Movies({
   const [movieArr, setMoviesArr] = useState(null);
   const [isShortMovie, setIsShortMovie] = useState(false);
   useEffect(() => {
-    setSearchValues(localStorage.getItem('inputMoviesValues'));
-    setIsShortMovie(JSON.parse(localStorage.getItem('isShortMovie')));
-    setMoviesArr(JSON.parse(localStorage.getItem('movies')));
+    setSearchValues('');
+    if (localStorage.getItem('inputMoviesValues')) {
+      setSearchValues(localStorage.getItem('inputMoviesValues'));
+    }
+    if (JSON.parse(localStorage.getItem('isShortMovie')) !== null) {
+      setIsShortMovie(JSON.parse(localStorage.getItem('isShortMovie')));
+    }
+    if (JSON.parse(localStorage.getItem('movies')) !== []) {
+      setMoviesArr(JSON.parse(localStorage.getItem('movies')));
+    }
   }, []);
   const filterMovies = () => {
     const arr = movieArr.filter((movie) => movie.nameRU

@@ -4,6 +4,11 @@ import { textUser } from '../../utils/constants';
 import ButtonMain from '../ButtonMain/ButtonMain';
 
 function Profile() {
+  const onClickExit = () => {
+    localStorage.removeItem('inputMoviesValues');
+    localStorage.removeItem('isShortMovie');
+    localStorage.removeItem('movies');
+  };
   return (
     <section className="profile">
       <h2 className="profile__greetings">{`Привет, ${textUser.name}!`}</h2>
@@ -43,6 +48,7 @@ function Profile() {
       </button>
       <button
         type="button"
+        onClick={onClickExit}
         // profile__btn-disabled
         className="profile__btn profile__exit-btn profile__btn-disabled1 hover"
       >
