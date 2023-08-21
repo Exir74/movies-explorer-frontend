@@ -28,12 +28,15 @@ function Movies({
   const [isShowButton, setIsShowButton] = useState(false);
   const [movieArr, setMoviesArr] = useState(null);
   const [isShortMovie, setIsShortMovie] = useState(false);
-
+  useEffect(() => {
+    setSearchValues(localStorage.getItem('inputMoviesValues'));
+    setIsShortMovie(JSON.parse(localStorage.getItem('isShortMovie')));
+    setMoviesArr(JSON.parse(localStorage.getItem('movies')));
+  }, [1]);
   const filterMovies = () => {
     const arr = movieArr.filter((movie) => movie.nameRU
       .toLowerCase()
       .includes(searchValues.toLowerCase()));
-    window.localStorage.setItem('filteredMovies', JSON.stringify(arr));
     setFoundMoviesArray(arr);
     setShowErrorMessage(null);
   };
@@ -44,6 +47,7 @@ function Movies({
   };
   const isShortMovieHandler = () => {
     setIsShortMovie(!isShortMovie);
+    localStorage.setItem('isShortMovie', JSON.stringify(!isShortMovie));
     if (foundMoviesArray !== []) {
       shortMovie();
     }
@@ -51,10 +55,8 @@ function Movies({
   useEffect(() => {
     shortMovie();
   }, [foundMoviesArray]);
-
   const renderItem = () => {
     filterMovies();
-    // window.localStorage.setItem('movies', JSON.stringify(filterMovies()));
     window.localStorage.setItem('inputMoviesValues', searchValues);
   };
   const handleError = () => {
