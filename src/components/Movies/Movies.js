@@ -33,6 +33,7 @@ function Movies({
     const arr = movieArr.filter((movie) => movie.nameRU
       .toLowerCase()
       .includes(searchValues.toLowerCase()));
+    window.localStorage.setItem('filteredMovies', JSON.stringify(arr));
     setFoundMoviesArray(arr);
     setShowErrorMessage(null);
   };
@@ -53,11 +54,10 @@ function Movies({
 
   const renderItem = () => {
     filterMovies();
-    // handleButtonMore();
     // window.localStorage.setItem('movies', JSON.stringify(filterMovies()));
-    // window.localStorage.setItem('inputMoviesValues', searchValues);
+    window.localStorage.setItem('inputMoviesValues', searchValues);
   };
-  const err = () => {
+  const handleError = () => {
     if (searchValues === '' && foundMoviesArray.length === 0) {
       setShowErrorMessage('Нужно ввести ключевое слово');
     } else if (foundMoviesArray.length === 0 && !isShortMovie) {
@@ -71,13 +71,12 @@ function Movies({
     getAllMovies()
       .then((movie) => {
         setMoviesArr(movie);
-        // window.localStorage.setItem('movies', JSON.stringify(movie));
+        window.localStorage.setItem('movies', JSON.stringify(movie));
       })
       .catch(() => {
         setPreloaderOn(false);
         setShowErrorMessage('Во время запроса произошла ошибка. Возможно, проблема '
           + 'с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
-        // setIsShowError(true);
       })
       .finally(() => {
         setPreloaderOn(false);
@@ -95,8 +94,9 @@ function Movies({
   };
 
   useEffect(() => {
-    err();
-  }, [isShortMovie]);
+    handleError();
+  }, [shortMoviesArray]);
+
   useEffect(() => {
     if (movieArr) {
       renderItem();

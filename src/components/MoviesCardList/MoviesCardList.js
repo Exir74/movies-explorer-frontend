@@ -26,19 +26,19 @@ function MoviesCardList({
   //   window.localStorage.setItem('isShortMovie', JSON.stringify(isShortMovie));
   // }, [isShortMovie]);
   //
-  // useEffect(() => {
-  //   if (handleShortMovies().length > endArrayQuantity) {
-  //     setIsShowButton(true);
-  //   } else setIsShowButton(false);
-  //   console.log(moviesQuantity);
-  // }, [endArrayQuantity, isShortMovie]);
+  useEffect(() => {
+    if (moviesArray.length > endArrayQuantity) {
+      setIsShowButton(true);
+    } else setIsShowButton(false);
+    console.log(moviesQuantity);
+  }, [endArrayQuantity, isShortMovie]);
   //
   // const [index, setIndex] = useState([]);
   //
-  // const handleAddButton = () => {
-  //   setEndArrayQuantity((prev) => prev + addMoviesQuantity);
-  //   console.log(endArrayQuantity);
-  // };
+  const handleAddButton = () => {
+    setEndArrayQuantity((prev) => prev + addMoviesQuantity);
+    console.log(endArrayQuantity);
+  };
   // console.log(moviesArray);
   return (
     <section className="cards">
@@ -59,7 +59,7 @@ function MoviesCardList({
         type="button"
         // className="cards__button hover"
         className={`${(isShowButton) ? 'cards__button hover' : 'cards__button_disabled'}`}
-        // onClick={handleAddButton}
+        onClick={handleAddButton}
       >
         Ещё
       </button>
