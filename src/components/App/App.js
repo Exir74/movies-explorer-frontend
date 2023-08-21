@@ -29,6 +29,7 @@ function App() {
   const [moviesQuantity, setMoviesQuantity] = useState(0);
   const [addMoviesQuantity, setAddMoviesQuantity] = useState(0);
   const [isSavedMovie, setIsSavedMovie] = useState(false);
+
   const handleSearchInput = (e) => {
     setSearchValues(e.target.value);
   };
@@ -72,8 +73,9 @@ function App() {
   const isBurgerOpenHandler = () => {
     setIsBurgerOpen(!isBurgerOpen);
   };
+  const [test, setTest] = useState([]);
+  const tArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
   const isSavedMovieHandler = (card) => {
-    console.log(card);
     setIsSavedMovie(!isSavedMovie);
   };
 

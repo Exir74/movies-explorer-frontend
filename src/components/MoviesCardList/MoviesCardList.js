@@ -14,7 +14,6 @@ function MoviesCardList({
   isSavedMovie,
 }) {
   const [endArrayQuantity, setEndArrayQuantity] = useState(moviesQuantity);
-
   useEffect(() => {
     if (moviesArray.length > endArrayQuantity) {
       setIsShowButton(true);
@@ -26,20 +25,29 @@ function MoviesCardList({
     setEndArrayQuantity((prev) => prev + addMoviesQuantity);
     console.log(endArrayQuantity);
   };
+  const handler = (card) => {
+    // isSavedMovieHandler();
+    console.log(card);
+    const likes = [card.id];
+    if (likes.includes(card.id)) {
+      isSavedMovieHandler();
+    }
+  };
   return (
     <section className="cards">
       <div className="cards__items">
         {moviesArray.slice(0, endArrayQuantity).map((card) => (
           <MoviesCard
-            card={card}
             key={card.id}
+            card={card}
             img={`${MOVIES_URL}${card.image.url}`}
             // isMy={card.isMy}
             duration={card.duration}
             nameRu={card.nameRU}
             link={card.trailerLink}
-            isSavedMovieHandler={isSavedMovieHandler}
+            isSavedMovieHandler={handler}
             isSavedMovie={isSavedMovie}
+            moviesArray={moviesArray}
           />
         ))}
 
