@@ -15,6 +15,8 @@ function Movies({
   moviesQuantity,
   addMoviesQuantity,
   setPreloaderOn,
+  isSavedMovie,
+  isSavedMovieHandler,
 }) {
   const [foundMoviesArray, setFoundMoviesArray] = useState([]);
   const [shortMoviesArray, setShortMoviesArray] = useState([]);
@@ -137,6 +139,8 @@ function Movies({
           addMoviesQuantity={addMoviesQuantity}
           setIsShowButton={setIsShowButton}
           isShortMovie={isShortMovie}
+          isSavedMovie={isSavedMovie}
+          isSavedMovieHandler={isSavedMovieHandler}
         />
       )}
       {isPreloaderOn && (<Preloader />)}

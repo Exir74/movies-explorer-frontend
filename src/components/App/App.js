@@ -25,21 +25,13 @@ function App() {
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
   const [searchValues, setSearchValues] = useState('');
-  const [moviesErrorMessage, setMoviesErrorMessage] = useState('');
   const [isPreloaderOn, setIsPreloaderOn] = useState(false);
   const [moviesQuantity, setMoviesQuantity] = useState(0);
   const [addMoviesQuantity, setAddMoviesQuantity] = useState(0);
+  const [isSavedMovie, setIsSavedMovie] = useState(false);
   const handleSearchInput = (e) => {
     setSearchValues(e.target.value);
   };
-  // useEffect(() => {
-  //   if (size.width >= 770) {
-  //     setIsMobile(false);
-  //     setIsBurgerOpen(false);
-  //   } else {
-  //     setIsMobile(true);
-  //   }
-  // });
 
   const handleResize = () => {
     if (size.width <= 767) {
@@ -52,7 +44,6 @@ function App() {
       setIsTablet(true);
       setMoviesQuantity(8);
       setAddMoviesQuantity(2);
-      console.log('tab');
     } else {
       setIsMobile(false);
       setIsTablet(false);
@@ -62,7 +53,8 @@ function App() {
   };
   useEffect(() => {
     handleResize();
-  });
+  }, [size.width]);
+
   const handlerEscapeClick = (e) => {
     if (e.key === 'Escape') {
       setIsBurgerOpen(false);
@@ -80,19 +72,9 @@ function App() {
   const isBurgerOpenHandler = () => {
     setIsBurgerOpen(!isBurgerOpen);
   };
-  const getMovies = () => {
-    setIsPreloaderOn(true);
-    getAllMovies().then((res) => {
-      localStorage.setItem('movies', JSON.stringify(res));
-      setIsPreloaderOn(false);
-    })
-      .catch(() => {
-        setMoviesErrorMessage('Во время запроса произошла ошибка. Возможно, проблема '
-          + 'с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
-      })
-      .finally(() => {
-        setIsPreloaderOn(false);
-      });
+  const isSavedMovieHandler = (card) => {
+    console.log(card);
+    setIsSavedMovie(!isSavedMovie);
   };
 
   const isLoggedInHandler = () => {
@@ -137,6 +119,8 @@ function App() {
               moviesQuantity={moviesQuantity}
               addMoviesQuantity={addMoviesQuantity}
               setPreloaderOn={setIsPreloaderOn}
+              isSavedMovie={isSavedMovie}
+              isSavedMovieHandler={isSavedMovieHandler}
             />
           )}
         />
