@@ -32,7 +32,6 @@ function App() {
   const [moviesQuantity, setMoviesQuantity] = useState({});
   const handleResize = () => {
     const deviseWidth = window.innerWidth;
-    console.log(deviseWidth);
     if (deviseWidth <= 767) {
       setMoviesQuantity({ allMovies: 5, addMovies: 2 });
     } else if (deviseWidth <= 1281) {
@@ -48,27 +47,6 @@ function App() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-  // const handleResize = () => {
-  //   if (size.width <= 767) {
-  //     setIsMobile(true);
-  //     setIsTablet(false);
-  //     setMoviesQuantity(5);
-  //     setAddMoviesQuantity(2);
-  //   } else if (size.width <= 1281) {
-  //     setIsMobile(false);
-  //     setIsTablet(true);
-  //     setMoviesQuantity(8);
-  //     setAddMoviesQuantity(2);
-  //   } else {
-  //     setIsMobile(false);
-  //     setIsTablet(false);
-  //     setMoviesQuantity(12);
-  //     setAddMoviesQuantity(3);
-  //   }
-  // };
-  // useEffect(() => {
-  //   handleResize();
-  // }, [size.width]);
   const handlerEscapeClick = (e) => {
     if (e.key === 'Escape') {
       setIsBurgerOpen(false);
