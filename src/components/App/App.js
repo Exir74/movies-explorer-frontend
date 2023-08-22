@@ -13,7 +13,6 @@ import Login from '../Login/Login';
 import FormHeader from '../FormHeader/FormHeader';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
-import { getAllMovies } from '../../utils/MoviesApi';
 
 function App() {
   const size = useWindowSize();
@@ -73,9 +72,8 @@ function App() {
   const isBurgerOpenHandler = () => {
     setIsBurgerOpen(!isBurgerOpen);
   };
-  const [test, setTest] = useState([]);
-  const tArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-  const isSavedMovieHandler = (card) => {
+
+  const isSavedMovieHandler = () => {
     setIsSavedMovie(!isSavedMovie);
   };
 
@@ -94,6 +92,7 @@ function App() {
       role="presentation"
       onKeyDown={handlerEscapeClick}
     >
+
       {isShowHeader() ? (
         <Header
           isLoggedInHandler={isLoggedInHandler}
@@ -102,6 +101,7 @@ function App() {
           isBurgerOpenHandler={isBurgerOpenHandler}
           logo={logo}
         />
+
       ) : null}
       <Routes>
         <Route
@@ -123,6 +123,7 @@ function App() {
               setPreloaderOn={setIsPreloaderOn}
               isSavedMovie={isSavedMovie}
               isSavedMovieHandler={isSavedMovieHandler}
+              isShortMovieHandler={isShortMovieHandler}
             />
           )}
         />

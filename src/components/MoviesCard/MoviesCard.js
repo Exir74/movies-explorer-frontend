@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { deleteIcon, logo, saveIcons } from '../../utils/constants';
+import React from 'react';
+import { deleteIcon, saveIcons } from '../../utils/constants';
 
 function MoviesCard({
   card, nameRu, duration, link, img, isSavedMovieHandler, isSavedMovie, moviesArray,
 }) {
   const durationInHours = (`${Math.trunc(duration / 60)}ч ${duration - 60 * Math.trunc(duration / 60)}м`);
-  // const a = [2, 4, 10, 5];
   // const isFilmUrl = window.location.href.includes('/movies');
   // const isSaved = a.includes(card.id);
   // const durationInHours = (`${Math.trunc(duration / 60)}ч
