@@ -20,42 +20,7 @@ const mesto = 'https://github.com/Exir74/react-mesto-auth';
 const yandexPraktikum = 'https://practicum.yandex.ru/';
 
 // удалить рыбов тоже
-const testCardsArr = [
-  {
-    id: 1,
-    image: cardImage33Slova,
-    nameRU: '33 слова о дизайне',
-    duration: 77,
-    link: 'https://youtube.ru',
-    isMy: false,
 
-  },
-  {
-    id: 2,
-    image: kinoalmanah,
-    nameRU: 'Киноальманах «100 лет дизайна»',
-    duration: 77,
-    link: 'https://ya.ru',
-    isMy: true,
-  },
-  {
-    id: 3,
-    image: vPogone,
-    nameRU: 'В погоне за Бенкси»',
-    duration: 77,
-    link: 'https://vk.ru',
-    isMy: false,
-  },
-  {
-    id: 4,
-    image: vzriv,
-    nameRU: 'Баския: Взрыв реальности»',
-    duration: 77,
-    link: 'https://mail.ru',
-    isMy: true,
-  },
-
-];
 const textUser = {
   _id: '64d89b0fc715d84e59b004da',
   email: 'pochta@yandex.ru',
@@ -63,6 +28,7 @@ const textUser = {
 };
 
 const MOVIES_URL = 'https://api.nomoreparties.co';
+// const MAIN_URL = ''
 
 export {
   logo,
@@ -76,7 +42,6 @@ export {
   smallTumbOff,
   saveIcons,
   deleteIcon,
-  testCardsArr,
   burgerMenu,
   closeIcon,
   textUser,
