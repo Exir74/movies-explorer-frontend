@@ -24,14 +24,6 @@ function Movies({
   const [movieArr, setMoviesArr] = useState(null);
   const [isShortMovie, setIsShortMovie] = useState(false);
 
-  // const a = () => console.log(window.innerWidth);
-  //
-  // useEffect(() => {
-  //   console.log('test');
-  //   window.addEventListener('resize', a);
-  //   window.removeEventListener('resize', a);
-  // }, [window.innerWidth]);
-
   useEffect(() => {
     setSearchValues('');
     if (localStorage.getItem('inputMoviesValues')) {
@@ -108,8 +100,6 @@ function Movies({
     if (searchValues === '') {
       setMoviesArr(null);
       setFoundMoviesArray([]);
-      console.log(movieArr);
-      console.log(foundMoviesArray);
       setPreloaderOn(false);
     } else {
       getMovies();

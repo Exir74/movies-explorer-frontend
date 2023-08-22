@@ -114,7 +114,6 @@ function App() {
               setPreloaderOn={setIsPreloaderOn}
               isSavedMovie={isSavedMovie}
               isSavedMovieHandler={isSavedMovieHandler}
-              isShortMovieHandler={isShortMovieHandler}
             />
           )}
         />
