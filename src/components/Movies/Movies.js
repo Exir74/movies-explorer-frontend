@@ -57,6 +57,7 @@ function Movies({
     if (foundMoviesArray !== []) {
       shortMovie();
     }
+    console.log(foundMoviesArray);
   };
 
   useEffect(() => {
@@ -115,9 +116,9 @@ function Movies({
       renderItem();
     }
   }, [movieArr]);
-
+  const [state, setState] = useState([{ id: 1 }, { id: 2 }, { id: 3 }]);
   const isSavedMovieHandler = (card) => {
-    console.log(card);
+    setState([...state, card]);
   };
   return (
     <div className="movies">
@@ -129,6 +130,7 @@ function Movies({
         handleSearchInput={handleSearchInput}
         searchValues={searchValues}
         handleSubmit={handleSubmit}
+        isSaveMoviedHandler={isSavedMovieHandler}
       />
       {showErrorMessage && !isPreloaderOn && (
         <ErrorMessage
@@ -144,6 +146,7 @@ function Movies({
           isShortMovie={isShortMovie}
           isSavedMovie={isSavedMovie}
           isSavedMovieHandler={isSavedMovieHandler}
+          state={state}
         />
       )}
       {isPreloaderOn && (<Preloader />)}

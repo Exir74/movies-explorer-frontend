@@ -2,10 +2,11 @@ import React from 'react';
 import { deleteIcon, saveIcons } from '../../utils/constants';
 
 function MoviesCard({
-  card, nameRu, duration, link, img, isSavedMovieHandler, isSavedMovie, moviesArray,
+  card, nameRu, duration, link, img, isSavedMovieHandler, isSavedMovie, moviesArray, state,
 }) {
   const durationInHours = (`${Math.trunc(duration / 60)}ч ${duration - 60 * Math.trunc(duration / 60)}м`);
-
+  const isLiked = state.includes(card);
+  const a = (`card__saved-img ${isLiked ? 'card__saved-img_enable' : ''}`);
   const onClickSave = () => {
     isSavedMovieHandler(card);
   };
@@ -59,9 +60,10 @@ function MoviesCard({
             //   ? `card__save-btn card__save-btn${mouseEnter}`
             //   : 'card__save-btn card__save-btn_disabled'}
             onClick={onClickSave}
+            className={`card__save-btn ${isLiked ? 'card__save-btn_disabled' : 'card__save-btn_enable'}`}
             type="button"
             name="save-movie"
-            className="card__save-btn card__save-btn_enable"
+            // className="card__save-btn card__save-btn_enable"
           >
             Сохранить
           </button>
@@ -72,7 +74,7 @@ function MoviesCard({
             // className="card__saved-img"
             alt="Сохранен"
             src={saveIcons}
-            className="card__saved-img card__saved-img_enable"
+            className={`card__saved-img ${isLiked ? 'card__saved-img_enable' : ''}`}
 
           />
         </div>

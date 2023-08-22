@@ -10,6 +10,8 @@ function MoviesCardList({
   setIsShowButton,
   isShortMovie,
   isSavedMovie,
+  isSavedMovieHandler,
+  state,
 }) {
   const [endArrayQuantity, setEndArrayQuantity] = useState(moviesQuantity.allMovies);
 
@@ -17,15 +19,16 @@ function MoviesCardList({
     if (moviesArray.length > endArrayQuantity) {
       setIsShowButton(true);
     } else setIsShowButton(false);
-  }, [endArrayQuantity, isShortMovie]);
+  }, [endArrayQuantity, isShortMovie, moviesArray]);
 
   const handleAddButton = () => {
     console.log(moviesQuantity.addMovies);
     setEndArrayQuantity((prev) => prev + moviesQuantity.addMovies);
   };
   const handler = (card) => {
-
+    isSavedMovieHandler(card);
   };
+
   return (
     <section className="cards">
       <div className="cards__items">
@@ -41,6 +44,7 @@ function MoviesCardList({
             isSavedMovieHandler={handler}
             isSavedMovie={isSavedMovie}
             moviesArray={moviesArray}
+            state={state}
           />
         ))}
 
