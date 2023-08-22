@@ -52,15 +52,16 @@ function MoviesCard({
             //   ? `card__save-btn card__save-btn${mouseEnter}`
             //   : 'card__save-btn_disabled'}
             // className="card__save-btn card__save-btn_enable"
-            className={`card__save-btn ${isSavedMovie
-              ? 'card__save-btn_disabled'
-              : 'card__save-btn_enable'}`}
+            // className={`card__save-btn ${isSavedMovie
+            //   ? 'card__save-btn_disabled'
+            //   : 'card__save-btn_enable'}`}
             // className={isFilmUrl
             //   ? `card__save-btn card__save-btn${mouseEnter}`
             //   : 'card__save-btn card__save-btn_disabled'}
             onClick={onClickSave}
             type="button"
             name="save-movie"
+            className="card__save-btn card__save-btn_enable"
           >
             Сохранить
           </button>
@@ -68,12 +69,11 @@ function MoviesCard({
             // className={(isFilmUrl && isSaved)
             // className="card__saved-img"
             // className="card__saved-img card__saved-img_disabled"
-            className={`'card__saved-img' ${isSavedMovie
-              ? ''
-              : ' card__saved-img_disabled'}`}
             // className="card__saved-img"
             alt="Сохранен"
             src={saveIcons}
+            className="card__saved-img card__saved-img_enable"
+
           />
         </div>
         <h3 className="card__title">

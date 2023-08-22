@@ -7,10 +7,8 @@ function MoviesCardList({
   moviesArray,
   moviesQuantity,
   isShowButton,
-  addMoviesQuantity,
   setIsShowButton,
   isShortMovie,
-  isSavedMovieHandler,
   isSavedMovie,
 }) {
   const [endArrayQuantity, setEndArrayQuantity] = useState(moviesQuantity.allMovies);

@@ -15,7 +15,7 @@ function Movies({
   moviesQuantity,
   setPreloaderOn,
   isSavedMovie,
-  isSavedMovieHandler,
+  // isSavedMovieHandler,
 }) {
   const [foundMoviesArray, setFoundMoviesArray] = useState([]);
   const [shortMoviesArray, setShortMoviesArray] = useState([]);
@@ -116,6 +116,9 @@ function Movies({
     }
   }, [movieArr]);
 
+  const isSavedMovieHandler = (card) => {
+    console.log(card);
+  };
   return (
     <div className="movies">
       <SearchForm
