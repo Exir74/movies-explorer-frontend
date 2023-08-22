@@ -6,7 +6,6 @@ import Footer from '../Footer/Footer';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
-import useWindowSize from '../../utils/hooks/useWindowSize';
 import Profile from '../Profile/Profile';
 import { logo } from '../../utils/constants';
 import Login from '../Login/Login';
@@ -15,7 +14,6 @@ import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 
 function App() {
-  const size = useWindowSize();
   const location = useLocation().pathname;
   const [isShortMovie, setIsShortMovie] = useState(false);
   const [isMyShortMovie, setIsMyShortMovie] = useState(true);
@@ -34,6 +32,7 @@ function App() {
   const [moviesQuantity, setMoviesQuantity] = useState({});
   const handleResize = () => {
     const deviseWidth = window.innerWidth;
+    console.log(deviseWidth);
     if (deviseWidth <= 767) {
       setMoviesQuantity({ allMovies: 5, addMovies: 2 });
     } else if (deviseWidth <= 1281) {
@@ -42,16 +41,13 @@ function App() {
       setMoviesQuantity({ allMovies: 12, addMovies: 3 });
     }
   };
-
   useEffect(() => {
     handleResize();
     window.addEventListener('resize', handleResize);
-  }, [window.innerWidth]);
-
-  useEffect(() => {
-    window.removeEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
-
   // const handleResize = () => {
   //   if (size.width <= 767) {
   //     setIsMobile(true);
