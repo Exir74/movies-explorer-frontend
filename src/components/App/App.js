@@ -25,36 +25,54 @@ function App() {
   const [isTablet, setIsTablet] = useState(false);
   const [searchValues, setSearchValues] = useState('');
   const [isPreloaderOn, setIsPreloaderOn] = useState(false);
-  const [moviesQuantity, setMoviesQuantity] = useState(0);
-  const [addMoviesQuantity, setAddMoviesQuantity] = useState(0);
   const [isSavedMovie, setIsSavedMovie] = useState(false);
 
   const handleSearchInput = (e) => {
     setSearchValues(e.target.value);
   };
 
+  const [moviesQuantity, setMoviesQuantity] = useState({});
   const handleResize = () => {
-    if (size.width <= 767) {
-      setIsMobile(true);
-      setIsTablet(false);
-      setMoviesQuantity(5);
-      setAddMoviesQuantity(2);
-    } else if (size.width <= 1281) {
-      setIsMobile(false);
-      setIsTablet(true);
-      setMoviesQuantity(8);
-      setAddMoviesQuantity(2);
+    const deviseWidth = window.innerWidth;
+    if (deviseWidth <= 767) {
+      setMoviesQuantity({ allMovies: 5, addMovies: 2 });
+    } else if (deviseWidth <= 1281) {
+      setMoviesQuantity({ allMovies: 8, addMovies: 2 });
     } else {
-      setIsMobile(false);
-      setIsTablet(false);
-      setMoviesQuantity(12);
-      setAddMoviesQuantity(3);
+      setMoviesQuantity({ allMovies: 12, addMovies: 3 });
     }
   };
+
   useEffect(() => {
     handleResize();
-  }, [size.width]);
+    window.addEventListener('resize', handleResize);
+  }, [window.innerWidth]);
 
+  useEffect(() => {
+    window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // const handleResize = () => {
+  //   if (size.width <= 767) {
+  //     setIsMobile(true);
+  //     setIsTablet(false);
+  //     setMoviesQuantity(5);
+  //     setAddMoviesQuantity(2);
+  //   } else if (size.width <= 1281) {
+  //     setIsMobile(false);
+  //     setIsTablet(true);
+  //     setMoviesQuantity(8);
+  //     setAddMoviesQuantity(2);
+  //   } else {
+  //     setIsMobile(false);
+  //     setIsTablet(false);
+  //     setMoviesQuantity(12);
+  //     setAddMoviesQuantity(3);
+  //   }
+  // };
+  // useEffect(() => {
+  //   handleResize();
+  // }, [size.width]);
   const handlerEscapeClick = (e) => {
     if (e.key === 'Escape') {
       setIsBurgerOpen(false);
@@ -119,7 +137,6 @@ function App() {
               setSearchValues={setSearchValues}
               isPreloaderOn={isPreloaderOn}
               moviesQuantity={moviesQuantity}
-              addMoviesQuantity={addMoviesQuantity}
               setPreloaderOn={setIsPreloaderOn}
               isSavedMovie={isSavedMovie}
               isSavedMovieHandler={isSavedMovieHandler}

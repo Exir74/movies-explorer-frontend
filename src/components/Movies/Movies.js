@@ -13,7 +13,6 @@ function Movies({
   setSearchValues,
   isPreloaderOn,
   moviesQuantity,
-  addMoviesQuantity,
   setPreloaderOn,
   isSavedMovie,
   isSavedMovieHandler,
@@ -99,6 +98,10 @@ function Movies({
     e.preventDefault();
     setPreloaderOn(true);
     if (searchValues === '') {
+      setMoviesArr(null);
+      setFoundMoviesArray([]);
+      console.log(movieArr);
+      console.log(foundMoviesArray);
       setPreloaderOn(false);
     } else {
       getMovies();
@@ -136,7 +139,6 @@ function Movies({
           moviesArray={isShortMovie ? shortMoviesArray : foundMoviesArray}
           moviesQuantity={moviesQuantity}
           isShowButton={isShowButton}
-          addMoviesQuantity={addMoviesQuantity}
           setIsShowButton={setIsShowButton}
           isShortMovie={isShortMovie}
           isSavedMovie={isSavedMovie}

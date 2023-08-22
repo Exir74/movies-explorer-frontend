@@ -5,27 +5,6 @@ function MoviesCard({
   card, nameRu, duration, link, img, isSavedMovieHandler, isSavedMovie, moviesArray,
 }) {
   const durationInHours = (`${Math.trunc(duration / 60)}ч ${duration - 60 * Math.trunc(duration / 60)}м`);
-  // const isFilmUrl = window.location.href.includes('/movies');
-  // const isSaved = a.includes(card.id);
-  // const durationInHours = (`${Math.trunc(duration / 60)}ч
-  // ${duration - 60 * Math.trunc(duration / 60)}м`);
-  // const [mouseEnter, setMouseEnter] = useState('');
-  // const onMouseEnterHandler = () => {
-  //   setMouseEnter('_enable');
-  //   console.log(card.id);
-  // };
-  // const onClickSave = () => {
-  //   console.log(card.id);
-  //   isSavedMovieHandler(card);
-  //   console.log(isSaved);
-  // };
-  // const onMouseLeaveHandler = () => {
-  //   a.push(card.id);
-  //   setMouseEnter('');
-  //   console.log(a);
-  // };
-  // const testArr = [1, 2, 3, 4, 5, 6];
-  console.log(1);
 
   const onClickSave = () => {
     isSavedMovieHandler(card);

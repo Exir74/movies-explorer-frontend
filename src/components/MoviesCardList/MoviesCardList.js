@@ -13,25 +13,20 @@ function MoviesCardList({
   isSavedMovieHandler,
   isSavedMovie,
 }) {
-  const [endArrayQuantity, setEndArrayQuantity] = useState(moviesQuantity);
+  const [endArrayQuantity, setEndArrayQuantity] = useState(moviesQuantity.allMovies);
+
   useEffect(() => {
     if (moviesArray.length > endArrayQuantity) {
       setIsShowButton(true);
     } else setIsShowButton(false);
-    console.log(moviesQuantity);
   }, [endArrayQuantity, isShortMovie]);
 
   const handleAddButton = () => {
-    setEndArrayQuantity((prev) => prev + addMoviesQuantity);
-    console.log(endArrayQuantity);
+    console.log(moviesQuantity.addMovies);
+    setEndArrayQuantity((prev) => prev + moviesQuantity.addMovies);
   };
   const handler = (card) => {
-    // isSavedMovieHandler();
-    console.log(card);
-    const likes = [card.id];
-    if (likes.includes(card.id)) {
-      isSavedMovieHandler();
-    }
+
   };
   return (
     <section className="cards">
