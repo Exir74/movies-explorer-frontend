@@ -15,7 +15,8 @@ function Movies({
   moviesQuantity,
   setPreloaderOn,
   isSavedMovie,
-  // isSavedMovieHandler,
+  isSavedMovieHandler,
+  state,
 }) {
   const [foundMoviesArray, setFoundMoviesArray] = useState([]);
   const [shortMoviesArray, setShortMoviesArray] = useState([]);
@@ -116,10 +117,7 @@ function Movies({
       renderItem();
     }
   }, [movieArr]);
-  const [state, setState] = useState([{ id: 1 }, { id: 2 }, { id: 3 }]);
-  const isSavedMovieHandler = (card) => {
-    setState([...state, card]);
-  };
+
   return (
     <div className="movies">
       <SearchForm
@@ -131,6 +129,7 @@ function Movies({
         searchValues={searchValues}
         handleSubmit={handleSubmit}
         isSaveMoviedHandler={isSavedMovieHandler}
+
       />
       {showErrorMessage && !isPreloaderOn && (
         <ErrorMessage

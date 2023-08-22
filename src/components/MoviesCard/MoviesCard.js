@@ -2,7 +2,16 @@ import React from 'react';
 import { deleteIcon, saveIcons } from '../../utils/constants';
 
 function MoviesCard({
-  card, nameRu, duration, link, img, isSavedMovieHandler, isSavedMovie, moviesArray, state,
+  card,
+  nameRu,
+  duration,
+  link,
+  img,
+  isSavedMovieHandler,
+  isSavedMovie,
+  moviesArray,
+  state,
+  isAllFilms,
 }) {
   const durationInHours = (`${Math.trunc(duration / 60)}ч ${duration - 60 * Math.trunc(duration / 60)}м`);
   const isLiked = state.includes(card);
@@ -48,30 +57,14 @@ function MoviesCard({
             />
           </button>
           <button
-            // onClick={onClickSave}
-            // className={(isFilmUrl && !isSavedMovie)
-            //   ? `card__save-btn card__save-btn${mouseEnter}`
-            //   : 'card__save-btn_disabled'}
-            // className="card__save-btn card__save-btn_enable"
-            // className={`card__save-btn ${isSavedMovie
-            //   ? 'card__save-btn_disabled'
-            //   : 'card__save-btn_enable'}`}
-            // className={isFilmUrl
-            //   ? `card__save-btn card__save-btn${mouseEnter}`
-            //   : 'card__save-btn card__save-btn_disabled'}
             onClick={onClickSave}
             className={`card__save-btn ${isLiked ? 'card__save-btn_disabled' : 'card__save-btn_enable'}`}
             type="button"
             name="save-movie"
-            // className="card__save-btn card__save-btn_enable"
           >
             Сохранить
           </button>
           <img
-            // className={(isFilmUrl && isSaved)
-            // className="card__saved-img"
-            // className="card__saved-img card__saved-img_disabled"
-            // className="card__saved-img"
             alt="Сохранен"
             src={saveIcons}
             className={`card__saved-img ${isLiked ? 'card__saved-img_enable' : ''}`}

@@ -65,8 +65,9 @@ function App() {
     setIsBurgerOpen(!isBurgerOpen);
   };
 
-  const isSavedMovieHandler = () => {
-    setIsSavedMovie(!isSavedMovie);
+  const [state, setState] = useState([{ id: 1 }, { id: 2 }, { id: 3 }]);
+  const isSavedMovieHandler = (card) => {
+    setState([...state, card]);
   };
 
   const isLoggedInHandler = () => {
@@ -114,6 +115,7 @@ function App() {
               setPreloaderOn={setIsPreloaderOn}
               isSavedMovie={isSavedMovie}
               isSavedMovieHandler={isSavedMovieHandler}
+              state={state}
             />
           )}
         />

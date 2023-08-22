@@ -45,6 +45,7 @@ function MoviesCardList({
             isSavedMovie={isSavedMovie}
             moviesArray={moviesArray}
             state={state}
+            isAllFilms
           />
         ))}
 
