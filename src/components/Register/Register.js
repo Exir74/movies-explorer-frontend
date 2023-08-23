@@ -11,6 +11,9 @@ function Register({ FormHeader, logo }) {
   useEffect(() => {
     resetFrom({}, {}, true);
   }, [resetFrom]);
+  useEffect(() => {
+    console.log(errors.password);
+  });
   return (
     <section className="register-section">
       <FormHeader logo={logo} greeting="Добро пожаловать!" />
@@ -18,7 +21,7 @@ function Register({ FormHeader, logo }) {
       <form className="register">
         <span className="register__input-name">Имя</span>
         <input
-          className="register__input register__input_userName"
+          className={`register__input register__input_userName ${errors.name ? 'register__input_error' : ''}`}
           name="name"
           id="name-input-register"
           type="text"
@@ -40,7 +43,7 @@ function Register({ FormHeader, logo }) {
         </div>
         <span className="register__input-name">E-mail</span>
         <input
-          className="register__input register__input_email"
+          className={`register__input register__input_email ${errors.email ? 'register__input_error' : ''}`}
           name="email"
           id="email-input-register"
           // placeholder="E-mail"
@@ -61,7 +64,7 @@ function Register({ FormHeader, logo }) {
         </div>
         <span className="register__input-name">Пароль</span>
         <input
-          className="register__input register__input_password"
+          className={`register__input register__input_password ${errors.password ? 'register__input_error' : ''}`}
           name="password"
           id="password-input-register"
           autoComplete="current-password"

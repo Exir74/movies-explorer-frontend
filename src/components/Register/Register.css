@@ -39,6 +39,10 @@
   line-height: normal;
 }
 
+.register__input_error {
+  color: #EE3465;
+}
+
 .register__input:last-of-type {
   margin: 10px 0 0 0;
 }
