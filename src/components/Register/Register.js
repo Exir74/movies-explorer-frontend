@@ -8,12 +8,11 @@ function Register({ FormHeader, logo }) {
   const {
     values, handleChange, resetFrom, errors, isValid,
   } = useValidation();
+
   useEffect(() => {
     resetFrom({}, {}, true);
   }, [resetFrom]);
-  useEffect(() => {
-    console.log(errors.password);
-  });
+
   return (
     <section className="register-section">
       <FormHeader logo={logo} greeting="Добро пожаловать!" />
@@ -85,9 +84,11 @@ function Register({ FormHeader, logo }) {
           </label>
         </div>
         <div className="register__form-button">
+          <span className="register__footer_error">er</span>
           <ButtonMain
             text="Зарегистрироваться"
             isHide={false}
+            isValid={isValid}
           />
         </div>
         <div className="register__footer">
