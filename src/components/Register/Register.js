@@ -4,15 +4,23 @@ import ButtonMain from '../ButtonMain/ButtonMain';
 import useForm from '../../utils/hooks/useForm';
 import useValidation from '../../utils/hooks/useValidation';
 
-function Register({ FormHeader, logo }) {
+function Register({
+  FormHeader, logo, handleOnClick, serverError,
+}) {
   const {
-    values, handleChange, resetFrom, errors, isValid,
+    values, handleChange, resetFrom, errors, isValid, setIsValid,
   } = useValidation();
 
   useEffect(() => {
     resetFrom({}, {}, true);
   }, [resetFrom]);
-
+  const submitHandler = () => {
+    if (Object.keys(values).length === 0) {
+      setIsValid(false);
+    } else {
+      handleOnClick(values.name, values.email, values.password);
+    }
+  };
   return (
     <section className="register-section">
       <FormHeader logo={logo} greeting="Добро пожаловать!" />
@@ -84,11 +92,12 @@ function Register({ FormHeader, logo }) {
           </label>
         </div>
         <div className="register__form-button">
-          <span className="register__footer_error">er</span>
+          <span className="register__footer_error">{serverError}</span>
           <ButtonMain
             text="Зарегистрироваться"
             isHide={false}
             isValid={isValid}
+            submitHandler={submitHandler}
           />
         </div>
         <div className="register__footer">

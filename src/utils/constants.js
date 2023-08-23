@@ -28,7 +28,7 @@ const textUser = {
 };
 
 const MOVIES_URL = 'https://api.nomoreparties.co';
-// const MAIN_URL = ''
+const MAIN_URL = 'http://localhost:3000';
 
 export {
   logo,
@@ -46,4 +46,5 @@ export {
   closeIcon,
   textUser,
   MOVIES_URL,
+  MAIN_URL,
 };

@@ -4,7 +4,7 @@ const getResponseData = (res) => {
   if (res.ok) {
     return res.json();
   }
-  return Promise.reject(res.json);
+  return Promise.reject(res.json());
 };
 
 const getAllMovies = () => fetch(`${MOVIES_URL}/beatfilm-movies`, {

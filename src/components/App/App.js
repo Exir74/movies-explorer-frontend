@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import {
+  json,
+  Route, Routes, useLocation, useNavigate,
+} from 'react-router-dom';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -12,8 +15,10 @@ import Login from '../Login/Login';
 import FormHeader from '../FormHeader/FormHeader';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
+import { authUser, registerUser } from '../../utils/MainApi';
 
 function App() {
+  const navigate = useNavigate();
   const location = useLocation().pathname;
   const [isShortMovie, setIsShortMovie] = useState(false);
   const [isMyShortMovie, setIsMyShortMovie] = useState(true);
@@ -24,6 +29,7 @@ function App() {
   const [searchValues, setSearchValues] = useState('');
   const [isPreloaderOn, setIsPreloaderOn] = useState(false);
   const [isSavedMovie, setIsSavedMovie] = useState(false);
+  const [serverError, setServerError] = useState('');
 
   const handleSearchInput = (e) => {
     setSearchValues(e.target.value);
@@ -79,13 +85,36 @@ function App() {
   const isShortMovieHandler = () => {
     setIsShortMovie(!isShortMovie);
   };
+  const login = (email, password) => {
+    authUser(email, password)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        err.then((res) => {
+          setServerError(`Ошибка: ${res.message}`);
+        });
+      });
+  };
+
+  const registrationUser = (name, email, password) => {
+    registerUser(name, email, password)
+      .then((res) => {
+        navigate('/movies', { replace: true });
+        login(email, password);
+      })
+      .catch((err) => {
+        err.then((res) => {
+          setServerError(`Ошибка: ${res.message}`);
+        });
+      });
+  };
   return (
     <div
       className={(isBurgerOpen && isTablet) ? 'App App_popup' : 'App'}
       role="presentation"
       onKeyDown={handlerEscapeClick}
     >
-
       {isShowHeader() ? (
         <Header
           isLoggedInHandler={isLoggedInHandler}
@@ -115,7 +144,7 @@ function App() {
               setPreloaderOn={setIsPreloaderOn}
               isSavedMovie={isSavedMovie}
               isSavedMovieHandler={isSavedMovieHandler}
-              state={state}
+
             />
           )}
         />
@@ -154,6 +183,8 @@ function App() {
             <Register
               FormHeader={FormHeader}
               logo={logo}
+              handleOnClick={registrationUser}
+              serverError={serverError}
             />
           )}
         />
