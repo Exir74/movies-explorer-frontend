@@ -96,7 +96,6 @@ function App() {
         });
       });
   };
-
   const registrationUser = (name, email, password) => {
     registerUser(name, email, password)
       .then((res) => {

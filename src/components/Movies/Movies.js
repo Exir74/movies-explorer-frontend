@@ -16,7 +16,7 @@ function Movies({
   setPreloaderOn,
   isSavedMovie,
   isSavedMovieHandler,
-  state,
+  // state,
 }) {
   const [foundMoviesArray, setFoundMoviesArray] = useState([]);
   const [shortMoviesArray, setShortMoviesArray] = useState([]);
@@ -24,6 +24,7 @@ function Movies({
   const [isShowButton, setIsShowButton] = useState(false);
   const [movieArr, setMoviesArr] = useState(null);
   const [isShortMovie, setIsShortMovie] = useState(false);
+  const [state, setState] = useState([]);
 
   useEffect(() => {
     setSearchValues('');
