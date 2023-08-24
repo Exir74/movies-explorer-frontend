@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { textUser } from '../../utils/constants';
 import ButtonMain from '../ButtonMain/ButtonMain';
+import CurrentUserContext from '../contexts/CurrentUser';
 
 function Profile() {
+  const currentUser = useContext(CurrentUserContext);
+  const [isReadOnly, setIsReadOnly] = useState(true);
+  const onClickButton = () => {
+
+  };
+
   const onClickExit = () => {
     localStorage.removeItem('inputMoviesValues');
     localStorage.removeItem('isShortMovie');
@@ -11,7 +17,7 @@ function Profile() {
   };
   return (
     <section className="profile">
-      <h2 className="profile__greetings">{`Привет, ${textUser.name}!`}</h2>
+      <h2 className="profile__greetings">{`Привет, ${currentUser.name}!`}</h2>
       <form className="profile__form">
         <span className="profile__item profile__row-name">
           Имя
@@ -21,8 +27,8 @@ function Profile() {
           name="name"
           id="profile-name"
           required
-          // readOnly
-          value={textUser.name}
+          readOnly={isReadOnly}
+          value={currentUser.name || ''}
         />
         <span className="profile__item profile__row-email">
           E-mail
@@ -35,14 +41,15 @@ function Profile() {
           autoComplete="email"
           type="email"
           required
-          // readOnly
-          value={textUser.email}
+          readOnly={isReadOnly}
+          value={currentUser.email || ''}
         />
       </form>
       <button
         type="button"
         // profile__btn-disabled
         className="profile__btn profile__edit-btn profile__btn-disabled1 hover"
+        onClick={onClickButton}
       >
         Редактировать
       </button>

@@ -16,7 +16,7 @@ function Movies({
   setPreloaderOn,
   isSavedMovie,
   isSavedMovieHandler,
-  // state,
+
 }) {
   const [foundMoviesArray, setFoundMoviesArray] = useState([]);
   const [shortMoviesArray, setShortMoviesArray] = useState([]);

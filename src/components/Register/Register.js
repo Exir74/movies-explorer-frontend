@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ButtonMain from '../ButtonMain/ButtonMain';
-import useForm from '../../utils/hooks/useForm';
 import useValidation from '../../utils/hooks/useValidation';
 
 function Register({

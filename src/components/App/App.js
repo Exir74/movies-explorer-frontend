@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {
-  json,
   Route, Routes, useLocation, useNavigate,
 } from 'react-router-dom';
 import Header from '../Header/Header';
@@ -15,7 +14,8 @@ import Login from '../Login/Login';
 import FormHeader from '../FormHeader/FormHeader';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
-import { authUser, registerUser } from '../../utils/MainApi';
+import { authUser, getUserInformation, registerUser } from '../../utils/MainApi';
+import CurrentUserContext from '../contexts/CurrentUser';
 
 function App() {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ function App() {
   const [isPreloaderOn, setIsPreloaderOn] = useState(false);
   const [isSavedMovie, setIsSavedMovie] = useState(false);
   const [serverError, setServerError] = useState('');
-
+  const [currentUser, setCurrentUser] = useState(null);
   const handleSearchInput = (e) => {
     setSearchValues(e.target.value);
   };
@@ -79,19 +79,21 @@ function App() {
   const isLoggedInHandler = () => {
     setIsLoggedIn(!isLoggedIn);
   };
+
   const isMyShortMovieHandler = () => {
     setIsMyShortMovie(!isMyShortMovie);
   };
   const isShortMovieHandler = () => {
     setIsShortMovie(!isShortMovie);
   };
-  const login = (email, password) => {
+  const loginUser = (email, password) => {
     authUser(email, password)
       .then((res) => {
-        console.log(res);
+        navigate('/movies', { replace: true });
       })
       .catch((err) => {
         err.then((res) => {
+          console.log(res.message);
           setServerError(`Ошибка: ${res.message}`);
         });
       });
@@ -99,8 +101,7 @@ function App() {
   const registrationUser = (name, email, password) => {
     registerUser(name, email, password)
       .then((res) => {
-        navigate('/movies', { replace: true });
-        login(email, password);
+        loginUser(email, password);
       })
       .catch((err) => {
         err.then((res) => {
@@ -108,101 +109,116 @@ function App() {
         });
       });
   };
+  useEffect(() => {
+    getUserInformation()
+      .then((user) => {
+        setIsLoggedIn(true);
+        setCurrentUser(user);
+      })
+      .catch((err) => {
+        err.then(() => {
+          setIsLoggedIn(false);
+        });
+      });
+  }, []);
   return (
-    <div
-      className={(isBurgerOpen && isTablet) ? 'App App_popup' : 'App'}
-      role="presentation"
-      onKeyDown={handlerEscapeClick}
-    >
-      {isShowHeader() ? (
-        <Header
-          isLoggedInHandler={isLoggedInHandler}
-          isLoggedIn={isLoggedIn}
-          isBurgerOpen={isBurgerOpen}
-          isBurgerOpenHandler={isBurgerOpenHandler}
-          logo={logo}
-        />
+    <CurrentUserContext.Provider value={currentUser}>
+      <div
+        className={(isBurgerOpen && isTablet) ? 'App App_popup' : 'App'}
+        role="presentation"
+        onKeyDown={handlerEscapeClick}
+      >
+        {isShowHeader() ? (
+          <Header
+            isLoggedInHandler={isLoggedInHandler}
+            isLoggedIn={isLoggedIn}
+            isBurgerOpen={isBurgerOpen}
+            isBurgerOpenHandler={isBurgerOpenHandler}
+            logo={logo}
+          />
+        ) : null}
+        <Routes>
+          <Route
+            path="/"
+            element={<Main />}
+          />
+          <Route
+            path="/movies"
+            element={(
+              <Movies
+                isBurgerOpen={isBurgerOpen}
+                isTablet={isTablet}
+                handleSearchInput={handleSearchInput}
+                searchValues={searchValues}
+                setSearchValues={setSearchValues}
+                isPreloaderOn={isPreloaderOn}
+                moviesQuantity={moviesQuantity}
+                setPreloaderOn={setIsPreloaderOn}
+                isSavedMovie={isSavedMovie}
+                isSavedMovieHandler={isSavedMovieHandler}
 
-      ) : null}
-      <Routes>
-        <Route
-          path="/"
-          element={<Main />}
-        />
-        <Route
-          path="/movies"
-          element={(
-            <Movies
-              isBurgerOpen={isBurgerOpen}
-              isTablet={isTablet}
-              handleSearchInput={handleSearchInput}
-              searchValues={searchValues}
-              setSearchValues={setSearchValues}
-              isPreloaderOn={isPreloaderOn}
-              moviesQuantity={moviesQuantity}
-              setPreloaderOn={setIsPreloaderOn}
-              isSavedMovie={isSavedMovie}
-              isSavedMovieHandler={isSavedMovieHandler}
-
-            />
-          )}
-        />
-        <Route
-          path="/saved-movies"
-          element={(
-            <SavedMovies
-              isMyShortMovie={isMyShortMovie}
-              isMyShortMovieHandler={isMyShortMovieHandler}
-              isBurgerOpen={isBurgerOpen}
-              isMobile={isMobile}
-              handleSearchInput={handleSearchInput}
-              searchValues={searchValues}
-              setSearchValues={setSearchValues}
-            />
-          )}
-        />
-        <Route
-          path="/profile"
-          element={(
-            <Profile />
-          )}
-        />
-        <Route
-          path="/signin"
-          element={(
-            <Login
-              FormHeader={FormHeader}
-              logo={logo}
-            />
-          )}
-        />
-        <Route
-          path="/signup"
-          element={(
-            <Register
-              FormHeader={FormHeader}
-              logo={logo}
-              handleOnClick={registrationUser}
-              serverError={serverError}
-            />
-          )}
-        />
-        <Route
-          path="*"
-          element={(
-            <NotFound />
-          )}
-        />
-      </Routes>
-      {isBurgerOpen ? (
-        <BurgerMenu
-          isLoggedIn={isLoggedIn}
-          isBurgerOpen={isBurgerOpen}
-          isBurgerOpenHandler={isBurgerOpenHandler}
-        />
-      ) : null}
-      {isShowFooter() ? <Footer /> : null}
-    </div>
+              />
+            )}
+          />
+          <Route
+            path="/saved-movies"
+            element={(
+              <SavedMovies
+                isMyShortMovie={isMyShortMovie}
+                isMyShortMovieHandler={isMyShortMovieHandler}
+                isBurgerOpen={isBurgerOpen}
+                isMobile={isMobile}
+                handleSearchInput={handleSearchInput}
+                searchValues={searchValues}
+                setSearchValues={setSearchValues}
+              />
+            )}
+          />
+          <Route
+            path="/profile"
+            element={(
+              <Profile />
+            )}
+          />
+          <Route
+            path="/signin"
+            element={(
+              <Login
+                FormHeader={FormHeader}
+                logo={logo}
+                handleOnClick={loginUser}
+                serverError={serverError}
+              />
+            )}
+          />
+          <Route
+            path="/signup"
+            element={(
+              <Register
+                FormHeader={FormHeader}
+                logo={logo}
+                handleOnClick={registrationUser}
+                serverError={serverError}
+              />
+            )}
+          />
+          <Route
+            path="*"
+            element={(
+              <NotFound />
+            )}
+          />
+        </Routes>
+        {isBurgerOpen ? (
+          <BurgerMenu
+            isLoggedIn={isLoggedIn}
+            isBurgerOpen={isBurgerOpen}
+            isBurgerOpenHandler={isBurgerOpenHandler}
+          />
+        ) : null}
+        {isShowFooter() ? <Footer /> : null}
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

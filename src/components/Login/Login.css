@@ -5,6 +5,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+
 }
 
 .login {
@@ -12,6 +14,8 @@
   flex-direction: column;
   min-width: 396px;
   max-height: 100%;
+
+
 }
 
 .login__input-name {
@@ -26,7 +30,7 @@
 
 .login__input {
 
-  margin: 10px 0 20px 0;
+  margin: 10px 0 0 0;
   padding: 15px 0 15px 15px;
   border: none;
   border-radius: 8px;
@@ -37,6 +41,8 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+
+
 }
 
 .login__input:last-of-type {
@@ -44,11 +50,26 @@
 }
 
 .login__error-wrapper {
+  max-width: 396px;
   height: 12px;
-  margin: 8px 0 0 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 10px 0 10px 0;
+  color: #EE3465;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.login__input_error {
+  color: #EE3465;
 }
 
 .login__input-message {
+  margin: 0;
   padding: 0;
   color: #EE3465;
   font-family: 'Inter', 'Arial', sans-serif;
@@ -56,7 +77,6 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  /*display: none;*/
 }
 
 
