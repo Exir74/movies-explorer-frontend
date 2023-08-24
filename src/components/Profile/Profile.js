@@ -6,13 +6,11 @@ import useValidation from '../../utils/hooks/useValidation';
 
 function Profile({ logOut, isLoggedIn }) {
   const [isSameData, setIsSameData] = useState(true);
-  // const [isValidData, setIsValidData] = useState(true);
   const [isEditMode, setIsEditMode] = useState(false);
-  // const [currentUser, setCurrentUser] = useState({});
   const currentUser = useContext(CurrentUserContext);
 
   const {
-    values, handleChange, resetFrom, errors, isValid, setIsValid,
+    values, handleChange, resetFrom, errors, isValid,
   } = useValidation();
 
   const onClickEdit = () => {
@@ -25,8 +23,6 @@ function Profile({ logOut, isLoggedIn }) {
 
   const handleOnChange = (evt) => {
     handleChange(evt);
-    console.log(evt.target.value);
-    console.log(currentUser.name);
     if ((evt.target.value === currentUser.name) || (evt.target.value === currentUser.email)) {
       setIsSameData(true);
     } else {
@@ -34,11 +30,6 @@ function Profile({ logOut, isLoggedIn }) {
     }
   };
 
-  useEffect(() => {
-    // console.log(currentUser.email);
-    // console.log(values.email);
-    // console.log(isValid);
-  }, [values]);
   const onClickExit = () => {
     localStorage.removeItem('inputMoviesValues');
     localStorage.removeItem('isShortMovie');
