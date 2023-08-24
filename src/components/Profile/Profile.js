@@ -2,15 +2,43 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ButtonMain from '../ButtonMain/ButtonMain';
 import CurrentUserContext from '../contexts/CurrentUser';
+import useValidation from '../../utils/hooks/useValidation';
 
 function Profile({ logOut, isLoggedIn }) {
-  // const currentUser = { name: 22, email: 33 };
+  const [isSameData, setIsSameData] = useState(true);
+  // const [isValidData, setIsValidData] = useState(true);
+  const [isEditMode, setIsEditMode] = useState(false);
+  // const [currentUser, setCurrentUser] = useState({});
   const currentUser = useContext(CurrentUserContext);
 
-  const onClickButton = () => {
+  const {
+    values, handleChange, resetFrom, errors, isValid, setIsValid,
+  } = useValidation();
 
+  const onClickEdit = () => {
+    setIsEditMode(true);
   };
 
+  const submitHandler = () => {
+    console.log('opa');
+  };
+
+  const handleOnChange = (evt) => {
+    handleChange(evt);
+    console.log(evt.target.value);
+    console.log(currentUser.name);
+    if ((evt.target.value === currentUser.name) || (evt.target.value === currentUser.email)) {
+      setIsSameData(true);
+    } else {
+      setIsSameData(false);
+    }
+  };
+
+  useEffect(() => {
+    // console.log(currentUser.email);
+    // console.log(values.email);
+    // console.log(isValid);
+  }, [values]);
   const onClickExit = () => {
     localStorage.removeItem('inputMoviesValues');
     localStorage.removeItem('isShortMovie');
@@ -28,16 +56,21 @@ function Profile({ logOut, isLoggedIn }) {
           className="profile__item profile__input  profile__input-name"
           name="name"
           id="profile-name"
+          type="text"
+          pattern="[A-Za-zА-ЯЁа-яё \-]{1,}"
+          minLength={2}
+          maxLength={20}
           required
-          value={currentUser.name || ''}
+          onChange={handleOnChange}
+          value={values.name || currentUser.name || ''}
         />
-        <div className="login__error-wrapper">
+        <div className="profile__error-wrapper profile__error-wrapper_name">
           <label
             htmlFor="password-input-login"
-            className="login__input-message"
+            className="profile__input-message"
             id="name-input-error"
           >
-            уцдкдуцкд
+            {errors.name || ''}
           </label>
         </div>
         <span className="profile__item profile__row-email">
@@ -51,33 +84,51 @@ function Profile({ logOut, isLoggedIn }) {
           autoComplete="email"
           type="email"
           required
-          value={currentUser.email || ''}
+          onChange={handleOnChange}
+          value={values.email || currentUser.email || ''}
         />
+        <div className="profile__error-wrapper profile__error-wrapper_email">
+          <label
+            htmlFor="password-input-login"
+            className="profile__input-message"
+            id="name-input-error"
+          >
+            {errors.email || ''}
+          </label>
+        </div>
       </form>
-      <button
-        type="button"
-        // profile__btn-disabled
-        className="profile__btn profile__edit-btn profile__btn-disabled1 hover"
-        onClick={onClickButton}
-      >
-        Редактировать
-      </button>
-      <button
-        type="button"
-        onClick={onClickExit}
-        // profile__btn-disabled
-        className="profile__btn profile__exit-btn profile__btn-disabled1 hover"
-      >
-        <Link className="profile__exit-link" to="/">Выйти из аккаунта</Link>
-      </button>
+      {!isEditMode && (
+        <button
+          type="button"
+          // profile__btn-disabled
+          className="profile__btn profile__edit-btn profile__btn-disabled1 hover"
+          onClick={onClickEdit}
+        >
+          Редактировать
+        </button>
+      )}
+      {!isEditMode && (
+        <button
+          type="button"
+          onClick={onClickExit}
+          // profile__btn-disabled
+          className="profile__btn profile__exit-btn profile__btn-disabled1 hover"
+        >
+          <Link className="profile__exit-link" to="/">Выйти из аккаунта</Link>
+        </button>
+      )}
       {/* profile__error_enabled */}
       <span className="profile__error profile__error_enabled1">
         При обновлении профиля произошла ошибка.
       </span>
-      <ButtonMain
-        text="Сохранить"
-        isHide
-      />
+      {isEditMode && (
+        <ButtonMain
+          text="Сохранить"
+          isHide={false}
+          isValid={(isValid && !isSameData)}
+          submitHandler={submitHandler}
+        />
+      )}
     </section>
   );
 }

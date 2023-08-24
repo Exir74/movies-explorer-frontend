@@ -56,12 +56,19 @@ function useFormWithValidation() {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false); //+
+
+  const defaultError = (input) => {
+    if (input.validity.valid) {
+      return ('');
+    }
+    return ('Что-то пошло не так...');
+  };
   const handleChange = (evt) => {
     const input = evt.target;
     const { value } = input;
     const { name } = input;
     setValues({ ...values, [name]: value });
-    setErrors({ ...errors, [name]: input.validationMessage }); //+
+    setErrors({ ...errors, [name]: defaultError(input) }); //+
     setIsValid(input.closest('form').checkValidity());
   };
 
