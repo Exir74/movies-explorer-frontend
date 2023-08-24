@@ -22,7 +22,7 @@ function App() {
   const location = useLocation().pathname;
   const [isShortMovie, setIsShortMovie] = useState(false);
   const [isMyShortMovie, setIsMyShortMovie] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
@@ -83,13 +83,23 @@ function App() {
   const isMyShortMovieHandler = () => {
     setIsMyShortMovie(!isMyShortMovie);
   };
-  const isShortMovieHandler = () => {
-    setIsShortMovie(!isShortMovie);
+  const getCurrentUserInfo = () => {
+    getUserInformation()
+      .then((user) => {
+        setIsLoggedIn(true);
+        setCurrentUser(user);
+      })
+      .catch((err) => {
+        err.then(() => {
+          setIsLoggedIn(false);
+        });
+      });
   };
   const loginUser = (email, password) => {
     authUser(email, password)
-      .then((res) => {
+      .then(() => {
         navigate('/movies', { replace: true });
+        getCurrentUserInfo();
       })
       .catch((err) => {
         err.then((res) => {
@@ -98,6 +108,7 @@ function App() {
         });
       });
   };
+
   const registrationUser = (name, email, password) => {
     registerUser(name, email, password)
       .then((res) => {
@@ -110,16 +121,7 @@ function App() {
       });
   };
   useEffect(() => {
-    getUserInformation()
-      .then((user) => {
-        setIsLoggedIn(true);
-        setCurrentUser(user);
-      })
-      .catch((err) => {
-        err.then(() => {
-          setIsLoggedIn(false);
-        });
-      });
+    getCurrentUserInfo();
   }, []);
   return (
     <CurrentUserContext.Provider value={currentUser}>

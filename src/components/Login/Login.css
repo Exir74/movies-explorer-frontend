@@ -12,7 +12,9 @@
 .login {
   display: flex;
   flex-direction: column;
-  min-width: 396px;
+  /*max-width: 396px;*/
+  width: 396px;
+
   max-height: 100%;
 
 
@@ -50,7 +52,7 @@
 }
 
 .login__error-wrapper {
-  max-width: 396px;
+  /*width: 396px;*/
   height: 12px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -128,7 +130,7 @@
   }
 
   .login {
-    min-width: 100%;
+    width: 260px;
   }
 
   .login__form-button {

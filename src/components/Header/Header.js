@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Navigation from '../Navigation/Navigation';
@@ -13,6 +13,7 @@ function Header({ isLoggedIn, isBurgerOpenHandler, logo }) {
   const onClickBurgerBtn = () => {
     isBurgerOpenHandler();
   };
+
   return (
     <header className="header">
       <div className="header__wrapper">
@@ -26,7 +27,7 @@ function Header({ isLoggedIn, isBurgerOpenHandler, logo }) {
           </Link>
         </div>
         <div className="header__nav-wrapper">
-          <FilmNavigation isLoggedIn={isLoggedIn} />
+          {isLoggedIn && <FilmNavigation />}
         </div>
         <Link to="/profile" className={headerButtonLinkClassName}>
           <AccountButton />
@@ -45,7 +46,7 @@ function Header({ isLoggedIn, isBurgerOpenHandler, logo }) {
             />
           </div>
         </button>
-        <Navigation isLoggedIn={isLoggedIn} />
+        {!isLoggedIn && <Navigation />}
       </div>
     </header>
   );
