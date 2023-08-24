@@ -57,11 +57,22 @@ const getUserInformation = () => fetch(`${MAIN_URL}/users/me`, {
   },
 })
   .then((res) => getResponseData(res));
+const signOut = () => fetch(`${MAIN_URL}/users/me`, {
+  method: 'GET',
+  credentials: 'include',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+})
+  .then((res) => getResponseData(res));
+
 export {
   registerUser,
   getResponseData,
   authUser,
   checkToken,
   getUserInformation,
+  signOut,
   // УДАЛИ ГЕТ РЕСПОС ДАТА
 };

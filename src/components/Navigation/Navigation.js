@@ -17,7 +17,7 @@ function Navigation() {
           </Link>
         </li>
         <li className="list__element element">
-          <Link to="/signin" className="element element__login login hover">
+          <Link to="/signin" className="element element__login hover">
             <button type="button" name="menuLogin" className="login__button">Войти</button>
           </Link>
         </li>

@@ -14,7 +14,9 @@ import Login from '../Login/Login';
 import FormHeader from '../FormHeader/FormHeader';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
-import { authUser, getUserInformation, registerUser } from '../../utils/MainApi';
+import {
+  authUser, getUserInformation, registerUser, signOut,
+} from '../../utils/MainApi';
 import CurrentUserContext from '../contexts/CurrentUser';
 
 function App() {
@@ -123,6 +125,11 @@ function App() {
   useEffect(() => {
     getCurrentUserInfo();
   }, []);
+  const logoutUser = () => {
+    signOut()
+      .then(() => {
+      });
+  };
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div
