@@ -125,9 +125,14 @@ function App() {
   useEffect(() => {
     getCurrentUserInfo();
   }, []);
+
   const logoutUser = () => {
     signOut()
-      .then(() => {
+      .then((res) => {
+        setCurrentUser({});
+      })
+      .catch((e) => {
+        console.log(e);
       });
   };
   return (
@@ -186,7 +191,7 @@ function App() {
           <Route
             path="/profile"
             element={(
-              <Profile />
+              <Profile logOut={logoutUser} />
             )}
           />
           <Route

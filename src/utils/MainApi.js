@@ -57,11 +57,10 @@ const getUserInformation = () => fetch(`${MAIN_URL}/users/me`, {
   },
 })
   .then((res) => getResponseData(res));
-const signOut = () => fetch(`${MAIN_URL}/users/me`, {
+const signOut = () => fetch(`${MAIN_URL}/signout`, {
   method: 'GET',
   credentials: 'include',
   headers: {
-    Accept: 'application/json',
     'Content-Type': 'application/json',
   },
 })

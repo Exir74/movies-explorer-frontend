@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import ButtonMain from '../ButtonMain/ButtonMain';
 import CurrentUserContext from '../contexts/CurrentUser';
 
-function Profile() {
+function Profile({ logOut }) {
   const currentUser = useContext(CurrentUserContext);
   const [isReadOnly, setIsReadOnly] = useState(true);
   const onClickButton = () => {
@@ -14,6 +14,7 @@ function Profile() {
     localStorage.removeItem('inputMoviesValues');
     localStorage.removeItem('isShortMovie');
     localStorage.removeItem('movies');
+    logOut();
   };
   return (
     <section className="profile">
