@@ -32,7 +32,7 @@ function App() {
   const [isPreloaderOn, setIsPreloaderOn] = useState(false);
   const [isSavedMovie, setIsSavedMovie] = useState(false);
   const [serverError, setServerError] = useState('');
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState({});
   const handleSearchInput = (e) => {
     setSearchValues(e.target.value);
   };
@@ -110,7 +110,6 @@ function App() {
         });
       });
   };
-
   const registrationUser = (name, email, password) => {
     registerUser(name, email, password)
       .then((res) => {
@@ -191,7 +190,7 @@ function App() {
           <Route
             path="/profile"
             element={(
-              <Profile logOut={logoutUser} />
+              <Profile logOut={logoutUser} isLoggedIn={isLoggedIn} />
             )}
           />
           <Route

@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import ButtonMain from '../ButtonMain/ButtonMain';
 import CurrentUserContext from '../contexts/CurrentUser';
 
-function Profile({ logOut }) {
+function Profile({ logOut, isLoggedIn }) {
+  // const currentUser = { name: 22, email: 33 };
   const currentUser = useContext(CurrentUserContext);
-  const [isReadOnly, setIsReadOnly] = useState(true);
+
   const onClickButton = () => {
 
   };
@@ -28,9 +29,17 @@ function Profile({ logOut }) {
           name="name"
           id="profile-name"
           required
-          readOnly={isReadOnly}
           value={currentUser.name || ''}
         />
+        <div className="login__error-wrapper">
+          <label
+            htmlFor="password-input-login"
+            className="login__input-message"
+            id="name-input-error"
+          >
+            уцдкдуцкд
+          </label>
+        </div>
         <span className="profile__item profile__row-email">
           E-mail
         </span>
@@ -42,7 +51,6 @@ function Profile({ logOut }) {
           autoComplete="email"
           type="email"
           required
-          readOnly={isReadOnly}
           value={currentUser.email || ''}
         />
       </form>
