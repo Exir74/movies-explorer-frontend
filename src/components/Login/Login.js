@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ButtonMain from '../ButtonMain/ButtonMain';
 import useValidation from '../../utils/hooks/useValidation';
@@ -10,6 +10,8 @@ function Login({
     values, handleChange, resetFrom, errors, isValid, setIsValid,
   } = useValidation();
 
+  const [buttonError, setButtonError] = useState('');
+
   useEffect(() => {
     resetFrom({}, {}, true);
   }, [resetFrom]);
@@ -17,8 +19,10 @@ function Login({
   const submitHandler = () => {
     if (Object.keys(values).length === 0) {
       setIsValid(false);
+      setButtonError('Введите данные');
     } else {
       handleOnClick(values.email, values.password);
+      handleOnClick(values.name, values.email, values.password);
     }
   };
   return (
@@ -70,7 +74,7 @@ function Login({
           </label>
         </div>
         <div className="login__form-button">
-          <span className="register__footer_error">{serverError}</span>
+          <span className="register__footer_error">{buttonError}</span>
           <ButtonMain
             text="Войти"
             isHide={false}

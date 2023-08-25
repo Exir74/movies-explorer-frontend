@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ButtonMain from '../ButtonMain/ButtonMain';
 import useValidation from '../../utils/hooks/useValidation';
@@ -6,6 +6,7 @@ import useValidation from '../../utils/hooks/useValidation';
 function Register({
   FormHeader, logo, handleOnClick, serverError,
 }) {
+  const [buttonError, setButtonError] = useState('');
   const {
     values, handleChange, resetFrom, errors, isValid, setIsValid,
   } = useValidation();
@@ -15,11 +16,22 @@ function Register({
   }, [resetFrom]);
   const submitHandler = () => {
     if (Object.keys(values).length === 0) {
+      setButtonError('Введите данные');
       setIsValid(false);
     } else {
+      setButtonError(serverError);
       handleOnClick(values.name, values.email, values.password);
     }
   };
+  // useEffect(() => {
+  //   if (Object.keys(values).length === 0) {
+  //     setButtonError('Введите данные');
+  //     setIsValid(false);
+  //   } else {
+  //     setButtonError(serverError);
+  //     handleOnClick(values.name, values.email, values.password);
+  //   }
+  // }, []);
   return (
     <section className="register-section">
       <FormHeader logo={logo} greeting="Добро пожаловать!" />
@@ -91,7 +103,7 @@ function Register({
           </label>
         </div>
         <div className="register__form-button">
-          <span className="register__footer_error">{serverError}</span>
+          <span className="register__footer_error">{buttonError}</span>
           <ButtonMain
             text="Зарегистрироваться"
             isHide={false}
