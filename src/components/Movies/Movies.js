@@ -48,7 +48,7 @@ function Movies({
   };
 
   const shortMovie = () => {
-    const arr = foundMoviesArray.filter((movie) => movie.duration <= 52);
+    const arr = foundMoviesArray.filter((movie) => movie.duration <= 40);
     setShortMoviesArray(arr);
     setShowErrorMessage(null);
   };
