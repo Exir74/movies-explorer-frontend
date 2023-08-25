@@ -33,6 +33,7 @@ function App() {
   const [isSavedMovie, setIsSavedMovie] = useState(false);
   const [serverError, setServerError] = useState('');
   const [currentUser, setCurrentUser] = useState({});
+  const [isRequestSend, setIsRequestSend] = useState(false);
   const handleSearchInput = (e) => {
     setSearchValues(e.target.value);
   };
@@ -106,6 +107,7 @@ function App() {
   const loginUser = (email, password) => {
     authUser(email, password)
       .then(() => {
+        setServerError('');
         navigate('/movies', { replace: true });
         getCurrentUserInfo();
       })
@@ -121,9 +123,11 @@ function App() {
     setUserInformation(name, email)
       .then((user) => {
         setCurrentUser(user);
-        console.log(user);
+        setServerError('Успешный успех');
+        setIsRequestSend(true);
       })
       .catch((err) => {
+        setIsRequestSend(false);
         err.then((res) => {
           setServerError(`Ошибка: ${res.message}`);
         });
@@ -132,6 +136,7 @@ function App() {
   const registrationUser = (name, email, password) => {
     registerUser(name, email, password)
       .then((res) => {
+        setServerError('');
         loginUser(email, password);
       })
       .catch((err) => {
@@ -215,6 +220,7 @@ function App() {
                 isLoggedIn={isLoggedIn}
                 setUserInfo={setUserInfo}
                 serverError={serverError}
+                isRequestSend={isRequestSend}
 
               />
             )}

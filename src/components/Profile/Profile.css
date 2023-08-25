@@ -109,6 +109,7 @@
   line-height: normal;
 }
 
+
 .profile__error-wrapper_name {
   grid-column: 1/2;
   grid-row: 2/3;
@@ -137,6 +138,8 @@
   font-weight: 400;
   line-height: normal;
   grid-row: 4/5;
+  grid-column: 1/2;
+
 }
 
 .profile__exit-btn {
@@ -148,6 +151,8 @@
   font-weight: 500;
   line-height: normal;
   grid-row: 5/6;
+  grid-column: 1/2;
+
 }
 
 .profile__exit-link {
@@ -162,7 +167,8 @@
 
 .profile__error {
   margin: 0 0 20px 0;
-  grid-row: 4/5;
+  grid-row: 3/4;
+  grid-column: 1/2;
   color: #FF004C;
   text-align: center;
   font-family: 'Inter', 'Arial', sans-serif;
@@ -177,6 +183,9 @@
   display: block;
 }
 
+.profile__error_success {
+  color: #3DDC84;
+}
 
 @media screen and (max-width: 769px) {
   .profile {

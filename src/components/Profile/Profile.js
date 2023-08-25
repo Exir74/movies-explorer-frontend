@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 import ButtonMain from '../ButtonMain/ButtonMain';
 import CurrentUserContext from '../contexts/CurrentUser';
 import useValidation from '../../utils/hooks/useValidation';
-import { setUserInformation } from '../../utils/MainApi';
 
-function Profile({ logOut, isLoggedIn, setUserInfo }) {
+function Profile({
+  logOut, isLoggedIn, setUserInfo, serverError, isRequestSend,
+}) {
   const [isSameData, setIsSameData] = useState(true);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [buttonError, setButtonError] = useState('');
+
   const currentUser = useContext(CurrentUserContext);
 
   const {
@@ -22,19 +25,37 @@ function Profile({ logOut, isLoggedIn, setUserInfo }) {
     setUserInfo(values.name, values.email);
     setIsEditMode(false);
     setIsSameData(true);
+    console.log(isRequestSend);
+    setTimeout(() => {
+      setButtonError('');
+    }, 2000);
   };
+
   const handleOnChange = (evt) => {
     handleChange(evt);
     if ((evt.target.value === currentUser.name) || (evt.target.value === currentUser.email)) {
       setIsSameData(true);
+      setButtonError(serverError);
     } else {
       setIsSameData(false);
+      setButtonError(serverError);
     }
   };
+  useEffect(() => {
+
+  }, [isRequestSend]);
+
+  useEffect(() => {
+    setButtonError('');
+  }, []);
 
   useEffect(() => {
     setValues({ name: currentUser.name, email: currentUser.email });
-  }, [currentUser]);
+  }, [currentUser, isEditMode]);
+
+  useEffect(() => {
+    setButtonError(serverError);
+  }, [isEditMode, serverError]);
 
   const onClickExit = () => {
     localStorage.removeItem('inputMoviesValues');
@@ -116,9 +137,12 @@ function Profile({ logOut, isLoggedIn, setUserInfo }) {
         </button>
       )}
       {/* profile__error_enabled */}
-      <span className="profile__error profile__error_enabled1">
-        При обновлении профиля произошла ошибка.
-      </span>
+      {!isEditMode && (
+        // <span className="profile__error profile__error_success profile__error_enabled">
+        <span className={`profile__error profile__error_enabled ${isRequestSend ? 'profile__error_success' : ''}`}>
+          {buttonError}
+        </span>
+      )}
       {isEditMode && (
         <ButtonMain
           text="Сохранить"

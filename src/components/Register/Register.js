@@ -12,6 +12,13 @@ function Register({
   } = useValidation();
 
   useEffect(() => {
+    setButtonError(serverError);
+  }, [serverError]);
+  useEffect(() => {
+    setButtonError('');
+  }, []);
+
+  useEffect(() => {
     resetFrom({}, {}, true);
   }, [resetFrom]);
   const submitHandler = () => {
@@ -23,15 +30,7 @@ function Register({
       handleOnClick(values.name, values.email, values.password);
     }
   };
-  // useEffect(() => {
-  //   if (Object.keys(values).length === 0) {
-  //     setButtonError('Введите данные');
-  //     setIsValid(false);
-  //   } else {
-  //     setButtonError(serverError);
-  //     handleOnClick(values.name, values.email, values.password);
-  //   }
-  // }, []);
+
   return (
     <section className="register-section">
       <FormHeader logo={logo} greeting="Добро пожаловать!" />

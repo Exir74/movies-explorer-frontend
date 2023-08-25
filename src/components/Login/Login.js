@@ -10,7 +10,14 @@ function Login({
     values, handleChange, resetFrom, errors, isValid, setIsValid,
   } = useValidation();
 
-  const [buttonError, setButtonError] = useState('');
+  const [buttonError, setButtonError] = useState(serverError);
+
+  useEffect(() => {
+    setButtonError(serverError);
+  }, [serverError]);
+  useEffect(() => {
+    setButtonError('');
+  }, []);
 
   useEffect(() => {
     resetFrom({}, {}, true);
@@ -22,7 +29,7 @@ function Login({
       setButtonError('Введите данные');
     } else {
       handleOnClick(values.email, values.password);
-      handleOnClick(values.name, values.email, values.password);
+      setButtonError('');
     }
   };
   return (
