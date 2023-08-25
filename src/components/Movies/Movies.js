@@ -40,9 +40,14 @@ function Movies({
   }, []);
 
   const filterMovies = () => {
-    const arr = movieArr.filter((movie) => movie.nameRU
+    const arrRU = movieArr.filter((movie) => (movie.nameRU)
       .toLowerCase()
       .includes(searchValues.toLowerCase()));
+    const arrEN = movieArr.filter((movie) => (movie.nameEN)
+      .toLowerCase()
+      .includes(searchValues.toLowerCase()));
+    const concatArr = arrRU.concat(arrEN);
+    const arr = [...new Set(concatArr)];
     setFoundMoviesArray(arr);
     setShowErrorMessage(null);
   };
@@ -59,7 +64,6 @@ function Movies({
     if (foundMoviesArray !== []) {
       shortMovie();
     }
-    console.log(foundMoviesArray);
   };
 
   useEffect(() => {
