@@ -13,9 +13,10 @@ function ButtonMain({
     <button
       type="submit"
       onClick={OnClick}
+      disabled={!isValid}
       // button-main_error
       className={`button-main ${buttonShowClass} ${isValid ? '' : 'button-main_error'} hover`}
-      // disabled={isValid}
+
     >
       {text}
     </button>

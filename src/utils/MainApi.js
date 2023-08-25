@@ -66,6 +66,19 @@ const signOut = () => fetch(`${MAIN_URL}/signout`, {
 })
   .then((res) => getResponseData(res));
 
+const setUserInformation = (name, email) => fetch(`${MAIN_URL}/users/me`, {
+  method: 'PATCH',
+  credentials: 'include',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    name,
+    email,
+  }),
+})
+  .then((res) => getResponseData(res));
+
 export {
   registerUser,
   getResponseData,
@@ -73,5 +86,6 @@ export {
   checkToken,
   getUserInformation,
   signOut,
+  setUserInformation,
   // УДАЛИ ГЕТ РЕСПОС ДАТА
 };

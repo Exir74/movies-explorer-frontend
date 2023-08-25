@@ -3,14 +3,15 @@ import { Link } from 'react-router-dom';
 import ButtonMain from '../ButtonMain/ButtonMain';
 import CurrentUserContext from '../contexts/CurrentUser';
 import useValidation from '../../utils/hooks/useValidation';
+import { setUserInformation } from '../../utils/MainApi';
 
-function Profile({ logOut, isLoggedIn }) {
+function Profile({ logOut, isLoggedIn, setUserInfo }) {
   const [isSameData, setIsSameData] = useState(true);
   const [isEditMode, setIsEditMode] = useState(false);
   const currentUser = useContext(CurrentUserContext);
 
   const {
-    values, handleChange, resetFrom, errors, isValid,
+    values, setValues, handleChange, resetFrom, errors, isValid,
   } = useValidation();
 
   const onClickEdit = () => {
@@ -18,9 +19,10 @@ function Profile({ logOut, isLoggedIn }) {
   };
 
   const submitHandler = () => {
-    console.log('opa');
+    setUserInfo(values.name, values.email);
+    setIsEditMode(false);
+    setIsSameData(true);
   };
-
   const handleOnChange = (evt) => {
     handleChange(evt);
     if ((evt.target.value === currentUser.name) || (evt.target.value === currentUser.email)) {
@@ -29,6 +31,10 @@ function Profile({ logOut, isLoggedIn }) {
       setIsSameData(false);
     }
   };
+
+  useEffect(() => {
+    setValues({ name: currentUser.name, email: currentUser.email });
+  }, [currentUser]);
 
   const onClickExit = () => {
     localStorage.removeItem('inputMoviesValues');
@@ -53,7 +59,8 @@ function Profile({ logOut, isLoggedIn }) {
           maxLength={20}
           required
           onChange={handleOnChange}
-          value={values.name || currentUser.name || ''}
+          value={values.name || ''}
+          disabled={!isEditMode}
         />
         <div className="profile__error-wrapper profile__error-wrapper_name">
           <label
@@ -72,11 +79,11 @@ function Profile({ logOut, isLoggedIn }) {
           className="profile__item profile__input profile__input-email"
           name="email"
           id="profile-email"
-          autoComplete="email"
           type="email"
           required
           onChange={handleOnChange}
-          value={values.email || currentUser.email || ''}
+          value={values.email || ''}
+          disabled={!isEditMode}
         />
         <div className="profile__error-wrapper profile__error-wrapper_email">
           <label

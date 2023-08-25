@@ -78,7 +78,7 @@ function useFormWithValidation() {
     setIsValid(newIsValid);
   }, [setValues, setErrors, setIsValid]);
   return {
-    values, handleChange, resetFrom, errors, isValid, setIsValid,
+    values, setValues, handleChange, resetFrom, errors, isValid, setIsValid,
   };
 }
 

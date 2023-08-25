@@ -15,7 +15,7 @@ import FormHeader from '../FormHeader/FormHeader';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 import {
-  authUser, getUserInformation, registerUser, signOut,
+  authUser, getUserInformation, registerUser, setUserInformation, signOut,
 } from '../../utils/MainApi';
 import CurrentUserContext from '../contexts/CurrentUser';
 
@@ -81,7 +81,13 @@ function App() {
   const isLoggedInHandler = () => {
     setIsLoggedIn(!isLoggedIn);
   };
-
+  useEffect(() => {
+    if (Object.keys(currentUser).length === 0) {
+      setIsLoggedIn(false);
+    } else {
+      setIsLoggedIn(true);
+    }
+  }, [currentUser]);
   const isMyShortMovieHandler = () => {
     setIsMyShortMovie(!isMyShortMovie);
   };
@@ -110,6 +116,19 @@ function App() {
         });
       });
   };
+
+  const setUserInfo = (name, email) => {
+    setUserInformation(name, email)
+      .then((user) => {
+        setCurrentUser(user);
+        console.log(user);
+      })
+      .catch((err) => {
+        err.then((res) => {
+          setServerError(`Ошибка: ${res.message}`);
+        });
+      });
+  };
   const registrationUser = (name, email, password) => {
     registerUser(name, email, password)
       .then((res) => {
@@ -134,6 +153,7 @@ function App() {
         console.log(e);
       });
   };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div
@@ -190,7 +210,13 @@ function App() {
           <Route
             path="/profile"
             element={(
-              <Profile logOut={logoutUser} isLoggedIn={isLoggedIn} />
+              <Profile
+                logOut={logoutUser}
+                isLoggedIn={isLoggedIn}
+                setUserInfo={setUserInfo}
+                serverError={serverError}
+
+              />
             )}
           />
           <Route
