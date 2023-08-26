@@ -112,9 +112,17 @@ const getLikes = () => fetch(`${MAIN_URL}/movies`, {
   .then((res) => getResponseData(res))
   .then((res) => res.movie);
 
+const removeLike = (movie) => fetch(`${MAIN_URL}/movies/${movie._id}`, {
+  method: 'DELETE',
+  credentials: 'include',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
+  .then((res) => getResponseData(res))
+  .then((res) => res.movie);
 export {
   registerUser,
-  getResponseData,
   authUser,
   checkToken,
   getUserInformation,
@@ -122,5 +130,6 @@ export {
   setUserInformation,
   setLike,
   getLikes,
+  removeLike,
   // УДАЛИ ГЕТ РЕСПОС ДАТА
 };

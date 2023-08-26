@@ -15,7 +15,8 @@ import FormHeader from '../FormHeader/FormHeader';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 import {
-  authUser, getLikes, getUserInformation, registerUser, setLike, setUserInformation, signOut,
+  authUser, getLikes, getUserInformation,
+  registerUser, removeLike, setLike, setUserInformation, signOut,
 } from '../../utils/MainApi';
 import CurrentUserContext from '../contexts/CurrentUser';
 
@@ -183,6 +184,18 @@ function App() {
       });
   };
 
+  const removeLikeHandler = (movie) => {
+    removeLike(movie)
+      .then((item) => {
+        setSavedMovie((prevState) => prevState.filter((film) => film.movieId !== item._id));
+      })
+      .catch((err) => {
+        err.then((res) => {
+          setServerError(`Ошибка: ${res.message}`);
+        });
+      });
+  };
+
   useEffect(() => {
     getLikesHandler();
   }, [setSavedMovie]);
@@ -238,6 +251,7 @@ function App() {
                 searchValues={searchValues}
                 setSearchValues={setSearchValues}
                 moviesQuantity={moviesQuantity}
+                removeLikeHandler={removeLikeHandler}
 
               />
             )}
