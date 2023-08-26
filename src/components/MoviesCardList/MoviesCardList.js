@@ -23,32 +23,31 @@ function MoviesCardList({
   useEffect(() => {
     setEndArrayQuantity(moviesQuantity.allMovies);
   }, [isShortMovie, moviesArray]);
+
   useEffect(() => {
     if (moviesArray.length > endArrayQuantity) {
       setIsShowButton(true);
     } else setIsShowButton(false);
   }, [endArrayQuantity, isShortMovie, moviesArray]);
+
   const handleAddButton = () => {
     setEndArrayQuantity((prev) => prev + moviesQuantity.addMovies);
   };
-  useEffect(() => {
-    console.log(moviesArray);
-  }, [moviesArray]);
 
   return (
     <section className="cards">
       <div className="cards__items">
         {moviesArray.slice(0, endArrayQuantity).map((card) => (
           <MoviesCard
-            key={card.id}
+            key={card.id || card.movieId}
             card={card}
-            // img={`${MOVIES_URL}${card.image.url}`}
             img={setImageUrl(card)}
             duration={card.duration}
             nameRu={card.nameRU}
             link={card.trailerLink}
             onClickLike={onClickLike}
             savedMovie={savedMovie}
+            currentUrl={currentUrl}
           />
         ))}
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { deleteIcon, saveIcons } from '../../utils/constants';
 
 function MoviesCard({
@@ -8,20 +8,25 @@ function MoviesCard({
   link,
   img,
   onClickLike,
-  // isLiked,
   savedMovie,
+  currentUrl,
 }) {
+  const isSavedPage = (!!currentUrl.includes('/saved-movies'));
+
   const durationInHours = (`${Math.trunc(duration / 60)}ч ${duration - 60 * Math.trunc(duration / 60)}м`);
-  // const a = (`card__saved-img ${isLiked ? 'card__saved-img_enable' : ''}`);
   const isLiked = !!savedMovie.some((movie) => movie.movieId === card.id);
   const onClickSave = () => {
     onClickLike(card);
   };
+  const [isMouseEnter, setIsMouseEnter] = useState(false);
+  const onMouseEnterHandler = () => setIsMouseEnter(true);
+
+  const onMouseLeaveHandler = () => setIsMouseEnter(false);
   return (
     <div
       className="card"
-      // onMouseEnter={onMouseEnterHandler}
-      // onMouseLeave={onMouseLeaveHandler}
+      onMouseEnter={onMouseEnterHandler}
+      onMouseLeave={onMouseLeaveHandler}
     >
       <div className="card__main">
         <a
@@ -38,35 +43,39 @@ function MoviesCard({
           />
         </a>
         <div className="card__action-block">
-          <button
-            // className={(!isFilmUrl && isMy)
-            //   ? `card__delete-btn card__delete-btn${mouseEnter}`
-            //   : 'card__delete-btn_disabled'}
-            // className="card__delete-btn card__delete-btn_disabled"
-            className="card__delete-btn card__delete-btn_disabled"
-            // className="card__delete-btn card__delete-btn_disabled"
-            type="button"
-            name="deleteMovie"
-          >
-            <img
-              className="card__delete-img"
-              alt="удалить"
-              src={deleteIcon}
-            />
-          </button>
-          <button
-            onClick={onClickSave}
-            className={`card__save-btn ${isLiked ? 'card__save-btn_disabled' : 'card__save-btn_enable'}`}
-            type="button"
-            name="save-movie"
-          >
-            Сохранить
-          </button>
+          {isSavedPage && (
+            <button
+              className={`card__delete-btn ${isMouseEnter
+                ? 'card__delete-btn_enable'
+                : 'card__delete-btn_disabled'}`}
+              type="button"
+              name="deleteMovie"
+            >
+              <img
+                className="card__delete-img"
+                alt="удалить"
+                src={deleteIcon}
+              />
+            </button>
+          )}
+          {!isSavedPage && (
+            <button
+              onClick={onClickSave}
+              className={`card__save-btn ${(isLiked || !isMouseEnter)
+                ? 'card__save-btn_disabled'
+                : 'card__save-btn_enable'}`}
+              type="button"
+              name="save-movie"
+            >
+              Сохранить
+            </button>
+          )}
           <img
             alt="Сохранен"
             src={saveIcons}
-            className={`card__saved-img ${isLiked ? 'card__saved-img_enable' : ''}`}
-
+            className={`card__saved-img ${isLiked
+              ? 'card__saved-img_enable'
+              : ''}`}
           />
         </div>
         <h3 className="card__title">

@@ -4,6 +4,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import getAllMovies from '../../utils/MoviesApi';
+import { filterForMovies, shortMovieFilter } from '../../utils/filter';
 
 function Movies({
   isBurgerOpen,
@@ -17,43 +18,25 @@ function Movies({
   movieArr,
   setMoviesArr,
   onClickLike,
-
   savedMovie,
 }) {
   const [foundMoviesArray, setFoundMoviesArray] = useState([]);
   const [shortMoviesArray, setShortMoviesArray] = useState([]);
   const [showErrorMessage, setShowErrorMessage] = useState(null);
   const [isShowButton, setIsShowButton] = useState(false);
-  // const [movieArr, setMoviesArr] = useState(null);
   const [isShortMovie, setIsShortMovie] = useState(false);
-  const [state, setState] = useState([]);
+
   const shortMovie = () => {
-    const arr = foundMoviesArray.filter((movie) => movie.duration <= 40);
-    setShortMoviesArray(arr);
-    // if (arr.length === 0 && isShortMovie) {
-    //   setShowErrorMessage('Ничего не найдено1');
-    // } else if (arr.length === 0 && !isShortMovie) {
-    //   setShowErrorMessage(null);
-    // }
+    setShortMoviesArray(shortMovieFilter(foundMoviesArray));
   };
   useEffect(() => {
     shortMovie();
   }, [foundMoviesArray]);
 
   const filterMovies = (movies, searchString) => {
-    const arrRU = movies.filter((movie) => (movie.nameRU)
-      .toLowerCase()
-      .includes(searchString.toLowerCase()));
-    const arrEN = movies.filter((movie) => (movie.nameEN)
-      .toLowerCase()
-      .includes(searchString.toLowerCase()));
-    const concatArr = arrRU.concat(arrEN);
-    const arr = [...new Set(concatArr)];
-    setFoundMoviesArray(arr);
-    // if (arr.length !== 0) {
-    //   setShowErrorMessage(null);
-    // }
+    setFoundMoviesArray(filterForMovies(movies, searchString));
   };
+
   const getMovies = () => {
     getAllMovies()
       .then((movie) => {
