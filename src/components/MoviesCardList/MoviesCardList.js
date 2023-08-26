@@ -13,14 +13,15 @@ function MoviesCardList({
 
   savedMovie,
 }) {
-  const [endArrayQuantity, setEndArrayQuantity] = useState(moviesQuantity.allMovies);
-
+  const [endArrayQuantity, setEndArrayQuantity] = useState();
+  useEffect(() => {
+    setEndArrayQuantity(moviesQuantity.allMovies);
+  }, [isShortMovie, moviesArray]);
   useEffect(() => {
     if (moviesArray.length > endArrayQuantity) {
       setIsShowButton(true);
     } else setIsShowButton(false);
   }, [endArrayQuantity, isShortMovie, moviesArray]);
-
   const handleAddButton = () => {
     console.log(moviesQuantity.addMovies);
     setEndArrayQuantity((prev) => prev + moviesQuantity.addMovies);
