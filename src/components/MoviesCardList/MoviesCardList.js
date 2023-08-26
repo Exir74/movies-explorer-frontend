@@ -10,7 +10,7 @@ function MoviesCardList({
   setIsShowButton,
   isShortMovie,
   onClickLike,
-  isLiked,
+
   savedMovie,
 }) {
   const [endArrayQuantity, setEndArrayQuantity] = useState(moviesQuantity.allMovies);
@@ -38,7 +38,6 @@ function MoviesCardList({
             nameRu={card.nameRU}
             link={card.trailerLink}
             onClickLike={onClickLike}
-            isLiked={isLiked}
             savedMovie={savedMovie}
           />
         ))}

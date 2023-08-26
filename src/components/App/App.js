@@ -34,7 +34,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [isRequestSend, setIsRequestSend] = useState(false);
   const [movieArr, setMoviesArr] = useState(null);
-  const [isLiked, setIsLiked] = useState(false);
+
   const handleSearchInput = (e) => {
     setSearchValues(e.target.value);
   };
@@ -155,14 +155,22 @@ function App() {
       .then((res) => {
         setCurrentUser({});
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((err) => {
+        console.log(err);
       });
   };
   const onClickLike = (card) => {
-
+    const isLiked = savedMovie.some((movie) => movie.movieId === card.id);
+    if (!isLiked) {
+      setLike(card)
+        .then((movie) => setSavedMovie([...savedMovie, movie]))
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      console.log(card);
+    }
   };
-
   const getLikesHandler = () => {
     getLikes()
       .then((likes) => {
@@ -174,6 +182,7 @@ function App() {
         });
       });
   };
+
   useEffect(() => {
     getLikesHandler();
   }, [setSavedMovie]);
@@ -213,7 +222,6 @@ function App() {
                 movieArr={movieArr}
                 setMoviesArr={setMoviesArr}
                 onClickLike={onClickLike}
-                isLiked={isLiked}
                 savedMovie={savedMovie}
               />
             )}

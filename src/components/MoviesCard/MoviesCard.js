@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { deleteIcon, saveIcons } from '../../utils/constants';
 
 function MoviesCard({
@@ -14,7 +14,6 @@ function MoviesCard({
   const durationInHours = (`${Math.trunc(duration / 60)}ч ${duration - 60 * Math.trunc(duration / 60)}м`);
   // const a = (`card__saved-img ${isLiked ? 'card__saved-img_enable' : ''}`);
   const isLiked = !!savedMovie.some((movie) => movie.movieId === card.id);
-  // const isLiked = savedMovie.map((i) => i.movieId === card.id);
   const onClickSave = () => {
     onClickLike(card);
   };

@@ -99,7 +99,8 @@ const setLike = (moviesLike) => fetch(`${MAIN_URL}/movies`, {
     nameEN: moviesLike.nameEN,
   }),
 })
-  .then((res) => getResponseData(res));
+  .then((res) => getResponseData(res))
+  .then((res) => res.movie);
 
 const getLikes = () => fetch(`${MAIN_URL}/movies`, {
   method: 'GET',

@@ -17,7 +17,7 @@ function Movies({
   movieArr,
   setMoviesArr,
   onClickLike,
-  isLiked,
+
   savedMovie,
 }) {
   const [foundMoviesArray, setFoundMoviesArray] = useState([]);
@@ -109,6 +109,7 @@ function Movies({
     } else {
       setPreloaderOn(false);
       filterMovies(movieArr, searchValues);
+      window.localStorage.setItem('inputMoviesValues', JSON.stringify(searchValues));
     }
   };
 
@@ -137,7 +138,6 @@ function Movies({
           setIsShowButton={setIsShowButton}
           isShortMovie={isShortMovie}
           onClickLike={onClickLike}
-          isLiked={isLiked}
           savedMovie={savedMovie}
         />
       )}
