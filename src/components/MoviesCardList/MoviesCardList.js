@@ -10,7 +10,6 @@ function MoviesCardList({
   setIsShowButton,
   isShortMovie,
   onClickLike,
-
   savedMovie,
 }) {
   const [endArrayQuantity, setEndArrayQuantity] = useState();
