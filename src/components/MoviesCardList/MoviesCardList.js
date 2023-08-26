@@ -22,7 +22,6 @@ function MoviesCardList({
     } else setIsShowButton(false);
   }, [endArrayQuantity, isShortMovie, moviesArray]);
   const handleAddButton = () => {
-    console.log(moviesQuantity.addMovies);
     setEndArrayQuantity((prev) => prev + moviesQuantity.addMovies);
   };
 
