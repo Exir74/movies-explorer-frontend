@@ -12,6 +12,13 @@ function MoviesCardList({
   onClickLike,
   savedMovie,
 }) {
+  const currentUrl = window.location.href;
+  const setImageUrl = (card) => {
+    if (currentUrl.includes('/saved-movies')) {
+      return card.image;
+    }
+    return `${MOVIES_URL}${card.image.url}`;
+  };
   const [endArrayQuantity, setEndArrayQuantity] = useState();
   useEffect(() => {
     setEndArrayQuantity(moviesQuantity.allMovies);
@@ -24,6 +31,9 @@ function MoviesCardList({
   const handleAddButton = () => {
     setEndArrayQuantity((prev) => prev + moviesQuantity.addMovies);
   };
+  useEffect(() => {
+    console.log(moviesArray);
+  }, [moviesArray]);
 
   return (
     <section className="cards">
@@ -32,7 +42,8 @@ function MoviesCardList({
           <MoviesCard
             key={card.id}
             card={card}
-            img={`${MOVIES_URL}${card.image.url}`}
+            // img={`${MOVIES_URL}${card.image.url}`}
+            img={setImageUrl(card)}
             duration={card.duration}
             nameRu={card.nameRU}
             link={card.trailerLink}

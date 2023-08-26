@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
@@ -11,7 +11,12 @@ function SavedMovies({
   handleSearchInput,
   searchValues,
   moviesQuantity,
+  savedMovie,
+
 }) {
+  const [isShowButton, setIsShowButton] = useState(false);
+  const [isShortMovie, setIsShortMovie] = useState(false);
+
   return (
     <div className="saved-movies">
       <SearchForm
@@ -22,7 +27,14 @@ function SavedMovies({
         handleSearchInput={handleSearchInput}
         searchValues={searchValues}
       />
-      <MoviesCardList />
+      <MoviesCardList
+        moviesQuantity={moviesQuantity}
+        isShowButton={isShowButton}
+        setIsShowButton={setIsShowButton}
+        isShortMovie={isShortMovie}
+        moviesArray={savedMovie}
+        savedMovie={savedMovie}
+      />
       <Preloader />
     </div>
   );

@@ -91,9 +91,9 @@ const setLike = (moviesLike) => fetch(`${MAIN_URL}/movies`, {
     duration: moviesLike.duration,
     year: moviesLike.year,
     description: moviesLike.description,
-    image: `${MOVIES_URL}/beatfilm-movies${moviesLike.image.url}`, // ~~~~~~~~~~~~
+    image: `${MOVIES_URL}${moviesLike.image.url}`, // ~~~~~~~~~~~~
     trailerLink: moviesLike.trailerLink,
-    thumbnail: `${MOVIES_URL}/beatfilm-movies${moviesLike.image.formats.thumbnail.url}`,
+    thumbnail: `${MOVIES_URL}${moviesLike.image.formats.thumbnail.url}`,
     movieId: moviesLike.id,
     nameRU: moviesLike.nameRU,
     nameEN: moviesLike.nameEN,

@@ -164,7 +164,10 @@ function App() {
     const isLiked = savedMovie.some((movie) => movie.movieId === card.id);
     if (!isLiked) {
       setLike(card)
-        .then((movie) => setSavedMovie([...savedMovie, movie]))
+        .then((movie) => {
+          console.log(movie);
+          setSavedMovie([...savedMovie, movie]);
+        })
         .catch((err) => {
           console.log(err);
         });
@@ -252,6 +255,7 @@ function App() {
                 setSearchValues={setSearchValues}
                 moviesQuantity={moviesQuantity}
                 removeLikeHandler={removeLikeHandler}
+                savedMovie={savedMovie}
 
               />
             )}
