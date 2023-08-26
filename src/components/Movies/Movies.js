@@ -30,11 +30,11 @@ function Movies({
   const shortMovie = () => {
     const arr = foundMoviesArray.filter((movie) => movie.duration <= 40);
     setShortMoviesArray(arr);
-    if (arr.length === 0 && isShortMovie) {
-      setShowErrorMessage('Ничего не найдено');
-    } else if (arr.length === 0 && !isShortMovie) {
-      setShowErrorMessage(null);
-    }
+    // if (arr.length === 0 && isShortMovie) {
+    //   setShowErrorMessage('Ничего не найдено1');
+    // } else if (arr.length === 0 && !isShortMovie) {
+    //   setShowErrorMessage(null);
+    // }
   };
   useEffect(() => {
     shortMovie();
@@ -50,9 +50,9 @@ function Movies({
     const concatArr = arrRU.concat(arrEN);
     const arr = [...new Set(concatArr)];
     setFoundMoviesArray(arr);
-    if (arr.length !== 0) {
-      setShowErrorMessage(null);
-    }
+    // if (arr.length !== 0) {
+    //   setShowErrorMessage(null);
+    // }
   };
   const getMovies = () => {
     getAllMovies()
@@ -101,15 +101,17 @@ function Movies({
 
   useEffect(() => {
     if (foundMoviesArray.length === 0) {
-      setShowErrorMessage('Ничего не найдено');
+      setShowErrorMessage('Ничего не найдено...');
+    } else if (shortMoviesArray.length === 0 && isShortMovie) {
+      setShowErrorMessage('Ничего не найдено...');
+    } else {
+      setShowErrorMessage(null);
     }
-  }, [foundMoviesArray, isShortMovie]);
-
+  }, [foundMoviesArray, isShortMovie, shortMoviesArray]);
   const handleSubmit = (e) => {
     e.preventDefault();
     setPreloaderOn(true);
     if (searchValues === '') {
-      console.log(1);
       setShowErrorMessage('Введите запрос');
       setMoviesArr(null);
       setFoundMoviesArray([]);
@@ -120,7 +122,6 @@ function Movies({
       window.localStorage.setItem('inputMoviesValues', JSON.stringify(searchValues));
     }
   };
-
   return (
     <div className="movies">
       <SearchForm
