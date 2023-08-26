@@ -32,11 +32,10 @@ function Movies({
     setShortMoviesArray(arr);
     if (arr.length === 0 && isShortMovie) {
       setShowErrorMessage('Ничего не найдено');
-    } else {
+    } else if (arr.length === 0 && !isShortMovie) {
       setShowErrorMessage(null);
     }
   };
-
   useEffect(() => {
     shortMovie();
   }, [foundMoviesArray]);
@@ -51,9 +50,7 @@ function Movies({
     const concatArr = arrRU.concat(arrEN);
     const arr = [...new Set(concatArr)];
     setFoundMoviesArray(arr);
-    if (arr.length === 0) {
-      setShowErrorMessage('Ничего не найдено');
-    } else {
+    if (arr.length !== 0) {
       setShowErrorMessage(null);
     }
   };
@@ -102,6 +99,12 @@ function Movies({
     }
   }, [isShortMovie]);
 
+  useEffect(() => {
+    if (foundMoviesArray.length === 0) {
+      setShowErrorMessage('Ничего не найдено');
+    }
+  }, [foundMoviesArray, isShortMovie]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setPreloaderOn(true);
@@ -130,7 +133,7 @@ function Movies({
         handleSubmit={handleSubmit}
 
       />
-      {showErrorMessage && !isPreloaderOn && (
+      {(showErrorMessage) && !isPreloaderOn && (
         <ErrorMessage
           moviesApiErrorMessage={showErrorMessage}
         />
