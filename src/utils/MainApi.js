@@ -108,7 +108,8 @@ const getLikes = () => fetch(`${MAIN_URL}/movies`, {
     'Content-Type': 'application/json',
   },
 })
-  .then((res) => getResponseData(res));
+  .then((res) => getResponseData(res))
+  .then((res) => res.movie);
 
 export {
   registerUser,

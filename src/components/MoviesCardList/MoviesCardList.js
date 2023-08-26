@@ -9,11 +9,9 @@ function MoviesCardList({
   isShowButton,
   setIsShowButton,
   isShortMovie,
-  isSavedMovie,
-  isSavedMovieHandler,
-  state,
-  setLikeHandler,
+  onClickLike,
   isLiked,
+  savedMovie,
 }) {
   const [endArrayQuantity, setEndArrayQuantity] = useState(moviesQuantity.allMovies);
 
@@ -27,9 +25,6 @@ function MoviesCardList({
     console.log(moviesQuantity.addMovies);
     setEndArrayQuantity((prev) => prev + moviesQuantity.addMovies);
   };
-  const handler = (card) => {
-    isSavedMovieHandler(card);
-  };
 
   return (
     <section className="cards">
@@ -39,17 +34,12 @@ function MoviesCardList({
             key={card.id}
             card={card}
             img={`${MOVIES_URL}${card.image.url}`}
-            // isMy={card.isMy}
             duration={card.duration}
             nameRu={card.nameRU}
             link={card.trailerLink}
-            isSavedMovieHandler={handler}
-            isSavedMovie={isSavedMovie}
-            moviesArray={moviesArray}
-            state={state}
-            isAllFilms
-            setLikeHandler={setLikeHandler}
+            onClickLike={onClickLike}
             isLiked={isLiked}
+            savedMovie={savedMovie}
           />
         ))}
 

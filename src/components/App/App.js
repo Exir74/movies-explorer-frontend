@@ -29,7 +29,7 @@ function App() {
   const [isTablet, setIsTablet] = useState(false);
   const [searchValues, setSearchValues] = useState('');
   const [isPreloaderOn, setIsPreloaderOn] = useState(false);
-  const [isSavedMovie, setIsSavedMovie] = useState(false);
+  const [savedMovie, setSavedMovie] = useState([]);
   const [serverError, setServerError] = useState('');
   const [currentUser, setCurrentUser] = useState({});
   const [isRequestSend, setIsRequestSend] = useState(false);
@@ -159,25 +159,14 @@ function App() {
         console.log(e);
       });
   };
+  const onClickLike = (card) => {
 
-  const setLikeHandler = (movieLike) => {
-    setLike(movieLike)
-      .then((card) => {
-        console.log(card);
-        setMoviesArr((arr) => arr.map((item) => (item.id === movieLike.id ? card : item)));
-      })
-      .catch((err) => {
-        err.then((res) => {
-          setServerError(`Ошибка: ${res.message}`);
-        });
-      });
   };
 
   const getLikesHandler = () => {
     getLikes()
       .then((likes) => {
-        console.log(likes);
-        // setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        setSavedMovie(likes);
       })
       .catch((err) => {
         err.then((res) => {
@@ -187,7 +176,7 @@ function App() {
   };
   useEffect(() => {
     getLikesHandler();
-  }, []);
+  }, [setSavedMovie]);
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div
@@ -221,12 +210,11 @@ function App() {
                 isPreloaderOn={isPreloaderOn}
                 moviesQuantity={moviesQuantity}
                 setPreloaderOn={setIsPreloaderOn}
-                isSavedMovie={isSavedMovie}
-                isSavedMovieHandler={isSavedMovieHandler}
-                setLikeHandler={setLikeHandler}
                 movieArr={movieArr}
                 setMoviesArr={setMoviesArr}
+                onClickLike={onClickLike}
                 isLiked={isLiked}
+                savedMovie={savedMovie}
               />
             )}
           />

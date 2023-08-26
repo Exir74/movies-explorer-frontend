@@ -7,20 +7,16 @@ function MoviesCard({
   duration,
   link,
   img,
-  isSavedMovieHandler,
-  isSavedMovie,
-  moviesArray,
-  state,
-  isAllFilms,
-  setLikeHandler,
-  isLiked,
+  onClickLike,
+  // isLiked,
+  savedMovie,
 }) {
   const durationInHours = (`${Math.trunc(duration / 60)}ч ${duration - 60 * Math.trunc(duration / 60)}м`);
-  // const isLiked = state.includes(card);
-  const a = (`card__saved-img ${isLiked ? 'card__saved-img_enable' : ''}`);
+  // const a = (`card__saved-img ${isLiked ? 'card__saved-img_enable' : ''}`);
+  const isLiked = !!savedMovie.some((movie) => movie.movieId === card.id);
+  // const isLiked = savedMovie.map((i) => i.movieId === card.id);
   const onClickSave = () => {
-    // isSavedMovieHandler(card);
-    setLikeHandler(card);
+    onClickLike(card);
   };
   return (
     <div

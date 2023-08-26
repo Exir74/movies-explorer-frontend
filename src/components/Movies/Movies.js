@@ -4,7 +4,6 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import getAllMovies from '../../utils/MoviesApi';
-import { logo } from '../../utils/constants';
 
 function Movies({
   isBurgerOpen,
@@ -15,12 +14,11 @@ function Movies({
   isPreloaderOn,
   moviesQuantity,
   setPreloaderOn,
-  isSavedMovie,
-  isSavedMovieHandler,
-  setLikeHandler,
   movieArr,
   setMoviesArr,
+  onClickLike,
   isLiked,
+  savedMovie,
 }) {
   const [foundMoviesArray, setFoundMoviesArray] = useState([]);
   const [shortMoviesArray, setShortMoviesArray] = useState([]);
@@ -109,7 +107,7 @@ function Movies({
       setFoundMoviesArray([]);
       setPreloaderOn(false);
     } else {
-      getMovies();
+      setPreloaderOn(false);
       filterMovies(movieArr, searchValues);
     }
   };
@@ -124,7 +122,6 @@ function Movies({
         handleSearchInput={handleSearchInput}
         searchValues={searchValues}
         handleSubmit={handleSubmit}
-        isSaveMoviedHandler={isSavedMovieHandler}
 
       />
       {showErrorMessage && !isPreloaderOn && (
@@ -139,11 +136,9 @@ function Movies({
           isShowButton={isShowButton}
           setIsShowButton={setIsShowButton}
           isShortMovie={isShortMovie}
-          isSavedMovie={isSavedMovie}
-          isSavedMovieHandler={isSavedMovieHandler}
-          state={state}
-          setLikeHandler={setLikeHandler}
+          onClickLike={onClickLike}
           isLiked={isLiked}
+          savedMovie={savedMovie}
         />
       )}
       {isPreloaderOn && (<Preloader />)}
