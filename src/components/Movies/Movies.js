@@ -27,6 +27,19 @@ function Movies({
   // const [movieArr, setMoviesArr] = useState(null);
   const [isShortMovie, setIsShortMovie] = useState(false);
   const [state, setState] = useState([]);
+  const shortMovie = () => {
+    const arr = foundMoviesArray.filter((movie) => movie.duration <= 40);
+    setShortMoviesArray(arr);
+    if (arr.length === 0 && isShortMovie) {
+      setShowErrorMessage('Ничего не найдено');
+    } else {
+      setShowErrorMessage(null);
+    }
+  };
+
+  useEffect(() => {
+    shortMovie();
+  }, [foundMoviesArray]);
 
   const filterMovies = (movies, searchString) => {
     const arrRU = movies.filter((movie) => (movie.nameRU)
@@ -39,16 +52,6 @@ function Movies({
     const arr = [...new Set(concatArr)];
     setFoundMoviesArray(arr);
     if (arr.length === 0) {
-      setShowErrorMessage('Ничего не найдено');
-    } else {
-      setShowErrorMessage(null);
-    }
-  };
-
-  const shortMovie = () => {
-    const arr = foundMoviesArray.filter((movie) => movie.duration <= 40);
-    setShortMoviesArray(arr);
-    if (arr.length === 0 && isShortMovie) {
       setShowErrorMessage('Ничего не найдено');
     } else {
       setShowErrorMessage(null);
@@ -89,6 +92,7 @@ function Movies({
   }, []);
   const isShortMovieHandler = () => {
     setIsShortMovie(!isShortMovie);
+    shortMovie();
     window.localStorage.setItem('isShortMovie', JSON.stringify(!isShortMovie));
   };
 
@@ -102,13 +106,14 @@ function Movies({
     e.preventDefault();
     setPreloaderOn(true);
     if (searchValues === '') {
+      console.log(1);
       setShowErrorMessage('Введите запрос');
       setMoviesArr(null);
       setFoundMoviesArray([]);
       setPreloaderOn(false);
     } else {
-      setPreloaderOn(false);
       filterMovies(movieArr, searchValues);
+      setPreloaderOn(false);
       window.localStorage.setItem('inputMoviesValues', JSON.stringify(searchValues));
     }
   };
