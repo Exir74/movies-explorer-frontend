@@ -14,14 +14,19 @@ function MoviesCard({
   const isSavedPage = (!!currentUrl.includes('/saved-movies'));
 
   const durationInHours = (`${Math.trunc(duration / 60)}ч ${duration - 60 * Math.trunc(duration / 60)}м`);
+
   const isLiked = !!savedMovie.some((movie) => movie.movieId === card.id);
+
   const onClickSave = () => {
     onClickLike(card);
   };
+
   const [isMouseEnter, setIsMouseEnter] = useState(false);
+
   const onMouseEnterHandler = () => setIsMouseEnter(true);
 
   const onMouseLeaveHandler = () => setIsMouseEnter(false);
+
   return (
     <div
       className="card"

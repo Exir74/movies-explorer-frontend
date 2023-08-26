@@ -13,12 +13,14 @@ function MoviesCardList({
   savedMovie,
 }) {
   const currentUrl = window.location.href;
+
   const setImageUrl = (card) => {
     if (currentUrl.includes('/saved-movies')) {
       return card.image;
     }
     return `${MOVIES_URL}${card.image.url}`;
   };
+
   const [endArrayQuantity, setEndArrayQuantity] = useState();
   useEffect(() => {
     setEndArrayQuantity(moviesQuantity.allMovies);
