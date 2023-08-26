@@ -15,14 +15,13 @@ import FormHeader from '../FormHeader/FormHeader';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 import {
-  authUser, getUserInformation, registerUser, setUserInformation, signOut,
+  authUser, getLikes, getUserInformation, registerUser, setLike, setUserInformation, signOut,
 } from '../../utils/MainApi';
 import CurrentUserContext from '../contexts/CurrentUser';
 
 function App() {
   const navigate = useNavigate();
   const location = useLocation().pathname;
-  const [isShortMovie, setIsShortMovie] = useState(false);
   const [isMyShortMovie, setIsMyShortMovie] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
@@ -34,6 +33,8 @@ function App() {
   const [serverError, setServerError] = useState('');
   const [currentUser, setCurrentUser] = useState({});
   const [isRequestSend, setIsRequestSend] = useState(false);
+  const [movieArr, setMoviesArr] = useState(null);
+  const [isLiked, setIsLiked] = useState(false);
   const handleSearchInput = (e) => {
     setSearchValues(e.target.value);
   };
@@ -159,6 +160,34 @@ function App() {
       });
   };
 
+  const setLikeHandler = (movieLike) => {
+    setLike(movieLike)
+      .then((card) => {
+        console.log(card);
+        setMoviesArr((arr) => arr.map((item) => (item.id === movieLike.id ? card : item)));
+      })
+      .catch((err) => {
+        err.then((res) => {
+          setServerError(`Ошибка: ${res.message}`);
+        });
+      });
+  };
+
+  const getLikesHandler = () => {
+    getLikes()
+      .then((likes) => {
+        console.log(likes);
+        // setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+      })
+      .catch((err) => {
+        err.then((res) => {
+          setServerError(`Ошибка: ${res.message}`);
+        });
+      });
+  };
+  useEffect(() => {
+    getLikesHandler();
+  }, []);
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div
@@ -194,7 +223,10 @@ function App() {
                 setPreloaderOn={setIsPreloaderOn}
                 isSavedMovie={isSavedMovie}
                 isSavedMovieHandler={isSavedMovieHandler}
-
+                setLikeHandler={setLikeHandler}
+                movieArr={movieArr}
+                setMoviesArr={setMoviesArr}
+                isLiked={isLiked}
               />
             )}
           />
@@ -209,6 +241,8 @@ function App() {
                 handleSearchInput={handleSearchInput}
                 searchValues={searchValues}
                 setSearchValues={setSearchValues}
+                moviesQuantity={moviesQuantity}
+
               />
             )}
           />

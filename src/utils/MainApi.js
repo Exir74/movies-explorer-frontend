@@ -1,4 +1,4 @@
-import { MAIN_URL } from './constants';
+import { MAIN_URL, MOVIES_URL } from './constants';
 
 const getResponseData = (res) => {
   if (res.ok) {
@@ -79,6 +79,37 @@ const setUserInformation = (name, email) => fetch(`${MAIN_URL}/users/me`, {
 })
   .then((res) => getResponseData(res));
 
+const setLike = (moviesLike) => fetch(`${MAIN_URL}/movies`, {
+  method: 'POST',
+  credentials: 'include',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    country: moviesLike.country,
+    director: moviesLike.director,
+    duration: moviesLike.duration,
+    year: moviesLike.year,
+    description: moviesLike.description,
+    image: `${MOVIES_URL}/beatfilm-movies${moviesLike.image.url}`, // ~~~~~~~~~~~~
+    trailerLink: moviesLike.trailerLink,
+    thumbnail: `${MOVIES_URL}/beatfilm-movies${moviesLike.image.formats.thumbnail.url}`,
+    movieId: moviesLike.id,
+    nameRU: moviesLike.nameRU,
+    nameEN: moviesLike.nameEN,
+  }),
+})
+  .then((res) => getResponseData(res));
+
+const getLikes = () => fetch(`${MAIN_URL}/movies`, {
+  method: 'GET',
+  credentials: 'include',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
+  .then((res) => getResponseData(res));
+
 export {
   registerUser,
   getResponseData,
@@ -87,5 +118,7 @@ export {
   getUserInformation,
   signOut,
   setUserInformation,
+  setLike,
+  getLikes,
   // УДАЛИ ГЕТ РЕСПОС ДАТА
 };

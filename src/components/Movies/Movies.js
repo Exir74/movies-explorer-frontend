@@ -3,7 +3,8 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { getAllMovies } from '../../utils/MoviesApi';
+import getAllMovies from '../../utils/MoviesApi';
+import { logo } from '../../utils/constants';
 
 function Movies({
   isBurgerOpen,
@@ -16,80 +17,54 @@ function Movies({
   setPreloaderOn,
   isSavedMovie,
   isSavedMovieHandler,
-
+  setLikeHandler,
+  movieArr,
+  setMoviesArr,
+  isLiked,
 }) {
   const [foundMoviesArray, setFoundMoviesArray] = useState([]);
   const [shortMoviesArray, setShortMoviesArray] = useState([]);
   const [showErrorMessage, setShowErrorMessage] = useState(null);
   const [isShowButton, setIsShowButton] = useState(false);
-  const [movieArr, setMoviesArr] = useState(null);
+  // const [movieArr, setMoviesArr] = useState(null);
   const [isShortMovie, setIsShortMovie] = useState(false);
   const [state, setState] = useState([]);
 
-  useEffect(() => {
-    setSearchValues('');
-    if (localStorage.getItem('inputMoviesValues')) {
-      setSearchValues(localStorage.getItem('inputMoviesValues'));
-    }
-    if (JSON.parse(localStorage.getItem('isShortMovie')) !== null) {
-      setIsShortMovie(JSON.parse(localStorage.getItem('isShortMovie')));
-    }
-    if (JSON.parse(localStorage.getItem('movies')) !== []) {
-      setMoviesArr(JSON.parse(localStorage.getItem('movies')));
-    }
-  }, []);
-
-  const filterMovies = () => {
-    const arrRU = movieArr.filter((movie) => (movie.nameRU)
+  const filterMovies = (movies, searchString) => {
+    const arrRU = movies.filter((movie) => (movie.nameRU)
       .toLowerCase()
-      .includes(searchValues.toLowerCase()));
-    const arrEN = movieArr.filter((movie) => (movie.nameEN)
+      .includes(searchString.toLowerCase()));
+    const arrEN = movies.filter((movie) => (movie.nameEN)
       .toLowerCase()
-      .includes(searchValues.toLowerCase()));
+      .includes(searchString.toLowerCase()));
     const concatArr = arrRU.concat(arrEN);
     const arr = [...new Set(concatArr)];
     setFoundMoviesArray(arr);
-    setShowErrorMessage(null);
+    if (arr.length === 0) {
+      setShowErrorMessage('Ничего не найдено');
+    } else {
+      setShowErrorMessage(null);
+    }
   };
 
   const shortMovie = () => {
     const arr = foundMoviesArray.filter((movie) => movie.duration <= 40);
     setShortMoviesArray(arr);
-    setShowErrorMessage(null);
-  };
-
-  const isShortMovieHandler = () => {
-    setIsShortMovie(!isShortMovie);
-    localStorage.setItem('isShortMovie', JSON.stringify(!isShortMovie));
-    if (foundMoviesArray !== []) {
-      shortMovie();
+    if (arr.length === 0 && isShortMovie) {
+      setShowErrorMessage('Ничего не найдено');
+    } else {
+      setShowErrorMessage(null);
     }
   };
-
-  useEffect(() => {
-    shortMovie();
-  }, [foundMoviesArray]);
-
-  const renderItem = () => {
-    filterMovies();
-    window.localStorage.setItem('inputMoviesValues', searchValues);
-  };
-
-  const handleError = () => {
-    if (searchValues === '' && foundMoviesArray.length === 0) {
-      setShowErrorMessage('Нужно ввести ключевое слово');
-    } else if (foundMoviesArray.length === 0 && !isShortMovie) {
-      setShowErrorMessage('Ничего не найдено');
-    } else if (shortMoviesArray.length === 0 && isShortMovie) {
-      setShowErrorMessage('Ничего не найдено');
-    }
-  };
-
   const getMovies = () => {
     getAllMovies()
       .then((movie) => {
+        if (searchValues === '') {
+          setShowErrorMessage('Введите запрос');
+        }
         setMoviesArr(movie);
         window.localStorage.setItem('movies', JSON.stringify(movie));
+        window.localStorage.setItem('inputMoviesValues', JSON.stringify(searchValues));
       })
       .catch(() => {
         setPreloaderOn(false);
@@ -100,28 +75,44 @@ function Movies({
         setPreloaderOn(false);
       });
   };
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem('movies'))
+      && JSON.parse(localStorage.getItem('inputMoviesValues'))) {
+      filterMovies(
+        JSON.parse(localStorage.getItem('movies')),
+        JSON.parse(localStorage.getItem('inputMoviesValues')),
+      );
+      setSearchValues(JSON.parse(localStorage.getItem('inputMoviesValues')));
+      setMoviesArr(JSON.parse(localStorage.getItem('movies')));
+      setIsShortMovie(JSON.parse(localStorage.getItem('isShortMovie')));
+    } else {
+      getMovies();
+    }
+  }, []);
+  const isShortMovieHandler = () => {
+    setIsShortMovie(!isShortMovie);
+    window.localStorage.setItem('isShortMovie', JSON.stringify(!isShortMovie));
+  };
+
+  useEffect(() => {
+    if (foundMoviesArray !== []) {
+      shortMovie();
+    }
+  }, [isShortMovie]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setPreloaderOn(true);
     if (searchValues === '') {
+      setShowErrorMessage('Введите запрос');
       setMoviesArr(null);
       setFoundMoviesArray([]);
       setPreloaderOn(false);
     } else {
       getMovies();
+      filterMovies(movieArr, searchValues);
     }
   };
-
-  useEffect(() => {
-    handleError();
-  }, [shortMoviesArray]);
-
-  useEffect(() => {
-    if (movieArr) {
-      renderItem();
-    }
-  }, [movieArr]);
 
   return (
     <div className="movies">
@@ -151,6 +142,8 @@ function Movies({
           isSavedMovie={isSavedMovie}
           isSavedMovieHandler={isSavedMovieHandler}
           state={state}
+          setLikeHandler={setLikeHandler}
+          isLiked={isLiked}
         />
       )}
       {isPreloaderOn && (<Preloader />)}

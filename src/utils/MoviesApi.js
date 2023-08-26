@@ -13,8 +13,4 @@ const getAllMovies = () => fetch(`${MOVIES_URL}/beatfilm-movies`, {
   // .then((res) => getResponseData(res));
   .then((res) => getResponseData(res));
 
-export {
-  getAllMovies,
-  getResponseData,
-// УДАЛИ ГЕТ РЕСПОС ДАТА
-};
+export default getAllMovies;

@@ -12,12 +12,15 @@ function MoviesCard({
   moviesArray,
   state,
   isAllFilms,
+  setLikeHandler,
+  isLiked,
 }) {
   const durationInHours = (`${Math.trunc(duration / 60)}ч ${duration - 60 * Math.trunc(duration / 60)}м`);
-  const isLiked = state.includes(card);
+  // const isLiked = state.includes(card);
   const a = (`card__saved-img ${isLiked ? 'card__saved-img_enable' : ''}`);
   const onClickSave = () => {
-    isSavedMovieHandler(card);
+    // isSavedMovieHandler(card);
+    setLikeHandler(card);
   };
   return (
     <div

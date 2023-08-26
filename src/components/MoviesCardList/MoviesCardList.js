@@ -12,6 +12,8 @@ function MoviesCardList({
   isSavedMovie,
   isSavedMovieHandler,
   state,
+  setLikeHandler,
+  isLiked,
 }) {
   const [endArrayQuantity, setEndArrayQuantity] = useState(moviesQuantity.allMovies);
 
@@ -46,6 +48,8 @@ function MoviesCardList({
             moviesArray={moviesArray}
             state={state}
             isAllFilms
+            setLikeHandler={setLikeHandler}
+            isLiked={isLiked}
           />
         ))}
 
