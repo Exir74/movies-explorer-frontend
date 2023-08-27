@@ -46,7 +46,7 @@ function App() {
     if (deviseWidth <= 767) {
       setMoviesQuantity({ allMovies: 5, addMovies: 2 });
       setIsMobile(true);
-    } else if (deviseWidth <= 1281) {
+    } else if (deviseWidth <= 1279) {
       setMoviesQuantity({ allMovies: 8, addMovies: 2 });
       setIsMobile(false);
     } else {
