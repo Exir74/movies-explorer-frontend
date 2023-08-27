@@ -49,6 +49,7 @@ function MoviesCardList({
             duration={card.duration}
             nameRu={card.nameRU}
             link={card.trailerLink}
+            owner={card.owner}
             onClickLike={onClickLike}
             savedMovie={savedMovie}
             currentUrl={currentUrl}

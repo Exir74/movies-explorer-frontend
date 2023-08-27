@@ -1,4 +1,5 @@
 import { MAIN_URL, MOVIES_URL } from './constants';
+import movies from '../components/Movies/Movies';
 
 const getResponseData = (res) => {
   if (res.ok) {
@@ -36,17 +37,17 @@ const authUser = (email, password) => fetch(`${MAIN_URL}/signin`, {
 })
   .then((res) => getResponseData(res));
 
-const checkToken = (token) => {
-  fetch(`${MAIN_URL}/users/me`, {
-    method: 'GET',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then((res) => getResponseData(res));
-};
+// const checkToken = (token) => {
+//   fetch(`${MAIN_URL}/users/me`, {
+//     method: 'GET',
+//     credentials: 'include',
+//     headers: {
+//       'Content-Type': 'application/json',
+//       Authorization: `Bearer ${token}`,
+//     },
+//   })
+//     .then((res) => getResponseData(res));
+// };
 
 const getUserInformation = () => fetch(`${MAIN_URL}/users/me`, {
   method: 'GET',
@@ -62,6 +63,7 @@ const signOut = () => fetch(`${MAIN_URL}/signout`, {
   credentials: 'include',
   headers: {
     'Content-Type': 'application/json',
+    'Access-Control-Allow-Credentials': 'true',
   },
 })
   .then((res) => getResponseData(res));
@@ -71,6 +73,7 @@ const setUserInformation = (name, email) => fetch(`${MAIN_URL}/users/me`, {
   credentials: 'include',
   headers: {
     'Content-Type': 'application/json',
+    'Access-Control-Allow-Credentials': 'true',
   },
   body: JSON.stringify({
     name,
@@ -84,6 +87,7 @@ const setLike = (moviesLike) => fetch(`${MAIN_URL}/movies`, {
   credentials: 'include',
   headers: {
     'Content-Type': 'application/json',
+    'Access-Control-Allow-Credentials': 'true',
   },
   body: JSON.stringify({
     country: moviesLike.country,
@@ -95,6 +99,7 @@ const setLike = (moviesLike) => fetch(`${MAIN_URL}/movies`, {
     trailerLink: moviesLike.trailerLink,
     thumbnail: `${MOVIES_URL}${moviesLike.image.formats.thumbnail.url}`,
     movieId: moviesLike.id,
+    owner: moviesLike.owner,
     nameRU: moviesLike.nameRU,
     nameEN: moviesLike.nameEN,
   }),
@@ -102,11 +107,12 @@ const setLike = (moviesLike) => fetch(`${MAIN_URL}/movies`, {
   .then((res) => getResponseData(res))
   .then((res) => res.movie);
 
-const getLikes = () => fetch(`${MAIN_URL}/movies`, {
+const getLikes = (userId) => fetch(`${MAIN_URL}/movies`, {
   method: 'GET',
   credentials: 'include',
   headers: {
     'Content-Type': 'application/json',
+    'Access-Control-Allow-Credentials': 'true',
   },
 })
   .then((res) => getResponseData(res))
@@ -117,6 +123,7 @@ const removeLike = (movie) => fetch(`${MAIN_URL}/movies/${movie._id}`, {
   credentials: 'include',
   headers: {
     'Content-Type': 'application/json',
+    'Access-Control-Allow-Credentials': 'true',
   },
 })
   .then((res) => getResponseData(res));
@@ -124,7 +131,7 @@ const removeLike = (movie) => fetch(`${MAIN_URL}/movies/${movie._id}`, {
 export {
   registerUser,
   authUser,
-  checkToken,
+  // checkToken,
   getUserInformation,
   signOut,
   setUserInformation,

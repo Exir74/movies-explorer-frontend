@@ -17,6 +17,7 @@ function SavedMovies({
   setSearchValues,
   isMobile,
   removeLikeHandler,
+  getLikesHandler,
 
 }) {
   const [isShowButton, setIsShowButton] = useState(false);
@@ -78,6 +79,7 @@ function SavedMovies({
 
   useEffect(() => {
     setSearchValues('');
+    getLikesHandler();
     filterMovies(savedMovie, '');
     setShowErrorMessage(null);
   }, []);

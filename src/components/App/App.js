@@ -19,6 +19,7 @@ import {
   registerUser, removeLike, setLike, setUserInformation, signOut,
 } from '../../utils/MainApi';
 import CurrentUserContext from '../contexts/CurrentUser';
+import ProtectedRouteElement from '../../utils/ProtectedRoute';
 
 function App() {
   const navigate = useNavigate();
@@ -112,6 +113,7 @@ function App() {
   const loginUser = (email, password) => {
     authUser(email, password)
       .then(() => {
+        setIsLoggedIn(true);
         setServerError('');
         navigate('/movies', { replace: true });
         getCurrentUserInfo();
@@ -141,6 +143,7 @@ function App() {
   const registrationUser = (name, email, password) => {
     registerUser(name, email, password)
       .then((res) => {
+        setIsLoggedIn(true);
         setServerError('');
         loginUser(email, password);
       })
@@ -158,12 +161,17 @@ function App() {
     signOut()
       .then((res) => {
         setCurrentUser({});
+        localStorage.clear();
+        setIsLoggedIn(false);
+        setSavedMovie([]);
+        setMoviesArr(null);
       })
       .catch((err) => {
         console.log(err);
       });
   };
   const onClickLike = (card) => {
+    console.log(currentUser);
     const isLiked = savedMovie.some((movie) => movie.movieId === card.id);
     if (!isLiked) {
       console.log(card);
@@ -178,18 +186,16 @@ function App() {
       console.log(card);
     }
   };
+
   const getLikesHandler = () => {
-    getLikes()
+    getLikes(currentUser._id)
       .then((likes) => {
         setSavedMovie(likes);
       })
       .catch((err) => {
-        err.then((res) => {
-          setServerError(`Ошибка: ${res.message}`);
-        });
+        console.log(err);
       });
   };
-
   const a = (movie) => {
     if (movie.movieId === undefined) {
       return savedMovie.find((i) => i.movieId === movie.id);
@@ -198,6 +204,7 @@ function App() {
   };
 
   const removeLikeHandler = (movie) => {
+    console.log('123');
     removeLike(a(movie))
       .then((item) => {
         setSavedMovie((prevState) => prevState.filter((film) => film._id !== item._id));
@@ -210,6 +217,7 @@ function App() {
           .catch((e) => console.log(e));
       });
   };
+
   useEffect(() => {
     getLikesHandler();
   }, [setSavedMovie]);
@@ -237,7 +245,9 @@ function App() {
           <Route
             path="/movies"
             element={(
-              <Movies
+              <ProtectedRouteElement
+                element={Movies}
+                isLoggedIn={isLoggedIn}
                 isBurgerOpen={isBurgerOpen}
                 isTablet={isTablet}
                 handleSearchInput={handleSearchInput}
@@ -260,7 +270,9 @@ function App() {
           <Route
             path="/saved-movies"
             element={(
-              <SavedMovies
+              <ProtectedRouteElement
+                element={SavedMovies}
+                isLoggedIn={isLoggedIn}
                 isBurgerOpen={isBurgerOpen}
                 isTablet={isTablet}
                 handleSearchInput={handleSearchInput}
@@ -272,19 +284,20 @@ function App() {
                 isPreloaderOn={isPreloaderOn}
                 setPreloaderOn={setIsPreloaderOn}
                 isMobile={isMobile}
+                getLikesHandler={getLikesHandler}
               />
             )}
           />
           <Route
             path="/profile"
             element={(
-              <Profile
+              <ProtectedRouteElement
+                element={Profile}
                 logOut={logoutUser}
                 isLoggedIn={isLoggedIn}
                 setUserInfo={setUserInfo}
                 serverError={serverError}
                 isRequestSend={isRequestSend}
-
               />
             )}
           />
