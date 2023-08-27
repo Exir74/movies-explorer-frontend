@@ -26,7 +26,7 @@ function App() {
   const [isMyShortMovie, setIsMyShortMovie] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
-  // const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
   const [searchValues, setSearchValues] = useState('');
   const [isPreloaderOn, setIsPreloaderOn] = useState(false);
@@ -45,10 +45,13 @@ function App() {
     const deviseWidth = window.innerWidth;
     if (deviseWidth <= 767) {
       setMoviesQuantity({ allMovies: 5, addMovies: 2 });
+      setIsMobile(true);
     } else if (deviseWidth <= 1281) {
       setMoviesQuantity({ allMovies: 8, addMovies: 2 });
+      setIsMobile(false);
     } else {
       setMoviesQuantity({ allMovies: 12, addMovies: 3 });
+      setIsMobile(false);
     }
   };
   useEffect(() => {
@@ -239,15 +242,15 @@ function App() {
                 setMoviesArr={setMoviesArr}
                 onClickLike={onClickLike}
                 savedMovie={savedMovie}
+                isMobile={isMobile}
               />
             )}
           />
+
           <Route
             path="/saved-movies"
             element={(
               <SavedMovies
-                isMyShortMovie={isMyShortMovie}
-                isMyShortMovieHandler={isMyShortMovieHandler}
                 isBurgerOpen={isBurgerOpen}
                 isTablet={isTablet}
                 handleSearchInput={handleSearchInput}
@@ -258,7 +261,7 @@ function App() {
                 savedMovie={savedMovie}
                 isPreloaderOn={isPreloaderOn}
                 setPreloaderOn={setIsPreloaderOn}
-
+                isMobile={isMobile}
               />
             )}
           />

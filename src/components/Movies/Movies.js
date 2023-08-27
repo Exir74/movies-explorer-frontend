@@ -19,6 +19,7 @@ function Movies({
   setMoviesArr,
   onClickLike,
   savedMovie,
+  isMobile,
 }) {
   const [foundMoviesArray, setFoundMoviesArray] = useState([]);
   const [shortMoviesArray, setShortMoviesArray] = useState([]);
@@ -138,6 +139,8 @@ function Movies({
           isShortMovie={isShortMovie}
           onClickLike={onClickLike}
           savedMovie={savedMovie}
+          isMobile={isMobile}
+
         />
       )}
       {isPreloaderOn && (<Preloader />)}

@@ -6,8 +6,6 @@ import { filterForMovies, shortMovieFilter } from '../../utils/filter';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 function SavedMovies({
-  isMyShortMovieHandler,
-  isMyShortMovie,
   isBurgerOpen,
   isTablet,
   handleSearchInput,
@@ -17,6 +15,7 @@ function SavedMovies({
   setPreloaderOn,
   isPreloaderOn,
   setSearchValues,
+  isMobile,
 
 }) {
   const [isShowButton, setIsShowButton] = useState(false);
@@ -74,10 +73,12 @@ function SavedMovies({
   };
   useEffect(() => {
     errorHandler();
-  }, [savedMovie, searchValues, foundMoviesArray, shortMoviesArray, showErrorMessage]);
+  }, [savedMovie, foundMoviesArray, shortMoviesArray, showErrorMessage]);
+
   useEffect(() => {
-    filterMovies(savedMovie, searchValues);
     setSearchValues('');
+    filterMovies(savedMovie, '');
+    setShowErrorMessage(null);
   }, []);
   return (
     <div className="saved-movies">
@@ -103,6 +104,7 @@ function SavedMovies({
           isShortMovie={isShortMovie}
           moviesArray={isShortMovie ? shortMoviesArray : foundMoviesArray}
           savedMovie={savedMovie}
+          isMobile={isMobile}
         />
       )}
       {isPreloaderOn && (<Preloader />)}

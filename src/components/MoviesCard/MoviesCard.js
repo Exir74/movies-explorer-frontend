@@ -10,13 +10,16 @@ function MoviesCard({
   onClickLike,
   savedMovie,
   currentUrl,
+  isMobile,
 }) {
   const isSavedPage = (!!currentUrl.includes('/saved-movies'));
-
   const durationInHours = (`${Math.trunc(duration / 60)}ч ${duration - 60 * Math.trunc(duration / 60)}м`);
-
   const isLiked = !!savedMovie.some((movie) => movie.movieId === card.id);
+  const [isMobileButton, setIsMobileButton] = useState(false);
 
+  useEffect(() => {
+    setIsMobileButton(isMobile);
+  }, [isMobile]);
   const onClickSave = () => {
     onClickLike(card);
   };
@@ -50,7 +53,7 @@ function MoviesCard({
         <div className="card__action-block">
           {isSavedPage && (
             <button
-              className={`card__delete-btn ${isMouseEnter
+              className={`card__delete-btn ${isMouseEnter || isMobileButton
                 ? 'card__delete-btn_enable'
                 : 'card__delete-btn_disabled'}`}
               type="button"
@@ -66,7 +69,7 @@ function MoviesCard({
           {!isSavedPage && (
             <button
               onClick={onClickSave}
-              className={`card__save-btn ${(isLiked || !isMouseEnter)
+              className={`card__save-btn ${(isLiked || (!isMouseEnter && !isMobileButton))
                 ? 'card__save-btn_disabled'
                 : 'card__save-btn_enable'}`}
               type="button"

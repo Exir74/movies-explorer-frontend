@@ -11,6 +11,7 @@ function MoviesCardList({
   isShortMovie,
   onClickLike,
   savedMovie,
+  isMobile,
 }) {
   const currentUrl = window.location.href;
 
@@ -50,9 +51,9 @@ function MoviesCardList({
             onClickLike={onClickLike}
             savedMovie={savedMovie}
             currentUrl={currentUrl}
+            isMobile={isMobile}
           />
         ))}
-
       </div>
       <button
         type="button"
