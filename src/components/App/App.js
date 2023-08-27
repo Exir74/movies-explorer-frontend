@@ -168,7 +168,6 @@ function App() {
     if (!isLiked) {
       setLike(card)
         .then((movie) => {
-          console.log(movie);
           setSavedMovie([...savedMovie, movie]);
         })
         .catch((err) => {
@@ -190,18 +189,27 @@ function App() {
       });
   };
 
+  // function handleCardDelete(card) {
+  //   api.deleteUserCard(card._id).then((newCards) => {
+  //     setCards((state) =>
+  //       state.filter(item => item._id !== card._id)
+  //     )
+  //   })
+
   const removeLikeHandler = (movie) => {
     removeLike(movie)
       .then((item) => {
-        setSavedMovie((prevState) => prevState.filter((film) => film.movieId !== item._id));
+        setSavedMovie((prevState) => prevState.filter((film) => film._id !== item._id));
+        console.log(item);
       })
       .catch((err) => {
+        console.log(err);
         err.then((res) => {
           setServerError(`Ошибка: ${res.message}`);
-        });
+        })
+          .catch((e) => console.log(e));
       });
   };
-
   useEffect(() => {
     getLikesHandler();
   }, [setSavedMovie]);

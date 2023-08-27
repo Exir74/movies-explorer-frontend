@@ -16,6 +16,7 @@ function SavedMovies({
   isPreloaderOn,
   setSearchValues,
   isMobile,
+  removeLikeHandler,
 
 }) {
   const [isShowButton, setIsShowButton] = useState(false);
@@ -105,6 +106,7 @@ function SavedMovies({
           moviesArray={isShortMovie ? shortMoviesArray : foundMoviesArray}
           savedMovie={savedMovie}
           isMobile={isMobile}
+          removeLikeHandler={removeLikeHandler}
         />
       )}
       {isPreloaderOn && (<Preloader />)}

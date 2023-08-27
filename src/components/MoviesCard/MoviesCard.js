@@ -11,6 +11,7 @@ function MoviesCard({
   savedMovie,
   currentUrl,
   isMobile,
+  removeLikeHandler,
 }) {
   const isSavedPage = (!!currentUrl.includes('/saved-movies'));
   const durationInHours = (`${Math.trunc(duration / 60)}ч ${duration - 60 * Math.trunc(duration / 60)}м`);
@@ -29,6 +30,10 @@ function MoviesCard({
   const onMouseEnterHandler = () => setIsMouseEnter(true);
 
   const onMouseLeaveHandler = () => setIsMouseEnter(false);
+
+  const onClickDelete = () => {
+    removeLikeHandler(card);
+  };
 
   return (
     <div
@@ -53,6 +58,7 @@ function MoviesCard({
         <div className="card__action-block">
           {isSavedPage && (
             <button
+              onClick={onClickDelete}
               className={`card__delete-btn ${isMouseEnter || isMobileButton
                 ? 'card__delete-btn_enable'
                 : 'card__delete-btn_disabled'}`}
@@ -79,6 +85,7 @@ function MoviesCard({
             </button>
           )}
           <img
+            // onClick={onClickDelete}
             alt="Сохранен"
             src={saveIcons}
             className={`card__saved-img ${isLiked

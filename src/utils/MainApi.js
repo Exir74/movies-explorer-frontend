@@ -119,8 +119,8 @@ const removeLike = (movie) => fetch(`${MAIN_URL}/movies/${movie._id}`, {
     'Content-Type': 'application/json',
   },
 })
-  .then((res) => getResponseData(res))
-  .then((res) => res.movie);
+  .then((res) => getResponseData(res));
+// .then((res) => res.movie);
 export {
   registerUser,
   authUser,

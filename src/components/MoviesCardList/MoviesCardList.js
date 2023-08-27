@@ -12,6 +12,7 @@ function MoviesCardList({
   onClickLike,
   savedMovie,
   isMobile,
+  removeLikeHandler,
 }) {
   const currentUrl = window.location.href;
 
@@ -52,6 +53,7 @@ function MoviesCardList({
             savedMovie={savedMovie}
             currentUrl={currentUrl}
             isMobile={isMobile}
+            removeLikeHandler={removeLikeHandler}
           />
         ))}
       </div>
