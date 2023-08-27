@@ -84,14 +84,22 @@ function MoviesCard({
               Сохранить
             </button>
           )}
-          <img
-            // onClick={onClickDelete}
-            alt="Сохранен"
-            src={saveIcons}
-            className={`card__saved-img ${isLiked
-              ? 'card__saved-img_enable'
+          <button
+            onClick={onClickDelete}
+            type="button"
+            className={`card__delete-btn ${isLiked
+              ? 'card__delete-btn_enable'
               : ''}`}
-          />
+          >
+            <img
+              // onClick={onClickDelete}
+              alt="Сохранен"
+              src={saveIcons}
+              // className={`card__saved-img ${isLiked
+              //   ? 'card__saved-img_enable'
+              //   : ''}`}
+            />
+          </button>
         </div>
         <h3 className="card__title">
           {nameRu}

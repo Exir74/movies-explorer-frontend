@@ -166,6 +166,7 @@ function App() {
   const onClickLike = (card) => {
     const isLiked = savedMovie.some((movie) => movie.movieId === card.id);
     if (!isLiked) {
+      console.log(card);
       setLike(card)
         .then((movie) => {
           setSavedMovie([...savedMovie, movie]);
@@ -189,18 +190,17 @@ function App() {
       });
   };
 
-  // function handleCardDelete(card) {
-  //   api.deleteUserCard(card._id).then((newCards) => {
-  //     setCards((state) =>
-  //       state.filter(item => item._id !== card._id)
-  //     )
-  //   })
+  const a = (movie) => {
+    if (movie.movieId === undefined) {
+      return savedMovie.find((i) => i.movieId === movie.id);
+    }
+    return movie;
+  };
 
   const removeLikeHandler = (movie) => {
-    removeLike(movie)
+    removeLike(a(movie))
       .then((item) => {
         setSavedMovie((prevState) => prevState.filter((film) => film._id !== item._id));
-        console.log(item);
       })
       .catch((err) => {
         console.log(err);
@@ -251,6 +251,8 @@ function App() {
                 onClickLike={onClickLike}
                 savedMovie={savedMovie}
                 isMobile={isMobile}
+                removeLikeHandler={removeLikeHandler}
+
               />
             )}
           />

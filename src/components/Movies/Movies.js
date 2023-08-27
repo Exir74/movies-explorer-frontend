@@ -20,6 +20,7 @@ function Movies({
   onClickLike,
   savedMovie,
   isMobile,
+  removeLikeHandler,
 }) {
   const [foundMoviesArray, setFoundMoviesArray] = useState([]);
   const [shortMoviesArray, setShortMoviesArray] = useState([]);
@@ -135,6 +136,7 @@ function Movies({
           moviesArray={isShortMovie ? shortMoviesArray : foundMoviesArray}
           moviesQuantity={moviesQuantity}
           isShowButton={isShowButton}
+          removeLikeHandler={removeLikeHandler}
           setIsShowButton={setIsShowButton}
           isShortMovie={isShortMovie}
           onClickLike={onClickLike}

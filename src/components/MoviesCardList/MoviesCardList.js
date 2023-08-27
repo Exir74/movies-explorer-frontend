@@ -53,6 +53,7 @@ function MoviesCardList({
             savedMovie={savedMovie}
             currentUrl={currentUrl}
             isMobile={isMobile}
+            movieId={card.id || card.movieId}
             removeLikeHandler={removeLikeHandler}
           />
         ))}
