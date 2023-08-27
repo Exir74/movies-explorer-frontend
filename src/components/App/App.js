@@ -26,7 +26,7 @@ function App() {
   const [isMyShortMovie, setIsMyShortMovie] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  // const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
   const [searchValues, setSearchValues] = useState('');
   const [isPreloaderOn, setIsPreloaderOn] = useState(false);
@@ -249,13 +249,15 @@ function App() {
                 isMyShortMovie={isMyShortMovie}
                 isMyShortMovieHandler={isMyShortMovieHandler}
                 isBurgerOpen={isBurgerOpen}
-                isMobile={isMobile}
+                isTablet={isTablet}
                 handleSearchInput={handleSearchInput}
                 searchValues={searchValues}
                 setSearchValues={setSearchValues}
                 moviesQuantity={moviesQuantity}
                 removeLikeHandler={removeLikeHandler}
                 savedMovie={savedMovie}
+                isPreloaderOn={isPreloaderOn}
+                setPreloaderOn={setIsPreloaderOn}
 
               />
             )}

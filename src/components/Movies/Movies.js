@@ -36,6 +36,9 @@ function Movies({
   const filterMovies = (movies, searchString) => {
     setFoundMoviesArray(filterForMovies(movies, searchString));
   };
+  // useEffect(()=>{
+  //   set
+  // }),
 
   const getMovies = () => {
     getAllMovies()
@@ -91,14 +94,18 @@ function Movies({
       setShowErrorMessage(null);
     }
   }, [foundMoviesArray, isShortMovie, shortMoviesArray]);
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setPreloaderOn(true);
     if (searchValues === '') {
-      setShowErrorMessage('Введите запрос');
-      setMoviesArr(null);
-      setFoundMoviesArray([]);
       setPreloaderOn(false);
+      setShowErrorMessage('Введите запрос');
+      // setMoviesArr(null);
+      // setFoundMoviesArray([]);
+      // } else if (foundMoviesArray.length === 0) {
+      //   console.log('123');
+      //   getMovies();
+      //   filterMovies(movieArr, searchValues);
     } else {
       filterMovies(movieArr, searchValues);
       setPreloaderOn(false);
