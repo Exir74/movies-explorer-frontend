@@ -13,10 +13,15 @@ function Login({
   const [buttonError, setButtonError] = useState(serverError);
 
   useEffect(() => {
+    setButtonError('');
+  }, []);
+
+  useEffect(() => {
     setButtonError(serverError);
   }, [serverError]);
+
   useEffect(() => {
-    setButtonError('');
+    setButtonError(serverError);
   }, []);
 
   useEffect(() => {

@@ -17,6 +17,9 @@ function Register({
   useEffect(() => {
     setButtonError('');
   }, []);
+  useEffect(() => {
+    setButtonError(serverError);
+  }, []);
 
   useEffect(() => {
     resetFrom({}, {}, true);

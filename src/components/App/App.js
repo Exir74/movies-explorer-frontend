@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
+  Navigate,
   Route, Routes, useLocation, useNavigate,
 } from 'react-router-dom';
 import Header from '../Header/Header';
@@ -81,20 +82,20 @@ function App() {
   };
 
   const [state, setState] = useState([{ id: 1 }, { id: 2 }, { id: 3 }]);
-  const isSavedMovieHandler = (card) => {
-    setState([...state, card]);
-  };
+  // const isSavedMovieHandler = (card) => {
+  //   setState([...state, card]);
+  // };
 
-  const isLoggedInHandler = () => {
-    setIsLoggedIn(!isLoggedIn);
-  };
-  useEffect(() => {
-    if (Object.keys(currentUser).length === 0) {
-      setIsLoggedIn(false);
-    } else {
-      setIsLoggedIn(true);
-    }
-  }, [currentUser]);
+  // const isLoggedInHandler = () => {
+  //   setIsLoggedIn(!isLoggedIn);
+  // };
+  // useEffect(() => {
+  //   if (Object.keys(currentUser).length === 0) {
+  //     setIsLoggedIn(false);
+  //   } else {
+  //     setIsLoggedIn(true);
+  //   }
+  // }, [currentUser]);
   const isMyShortMovieHandler = () => {
     setIsMyShortMovie(!isMyShortMovie);
   };
@@ -110,6 +111,9 @@ function App() {
         });
       });
   };
+  useEffect(() => {
+    getCurrentUserInfo();
+  }, []);
   const loginUser = (email, password) => {
     authUser(email, password)
       .then(() => {
@@ -153,9 +157,6 @@ function App() {
         });
       });
   };
-  useEffect(() => {
-    getCurrentUserInfo();
-  }, []);
 
   const logoutUser = () => {
     signOut()
@@ -221,6 +222,7 @@ function App() {
   useEffect(() => {
     getLikesHandler();
   }, [setSavedMovie]);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div
@@ -230,7 +232,6 @@ function App() {
       >
         {isShowHeader() ? (
           <Header
-            isLoggedInHandler={isLoggedInHandler}
             isLoggedIn={isLoggedIn}
             isBurgerOpen={isBurgerOpen}
             isBurgerOpenHandler={isBurgerOpenHandler}
@@ -244,10 +245,8 @@ function App() {
           />
           <Route
             path="/movies"
-            element={(
-              <ProtectedRouteElement
-                element={Movies}
-                isLoggedIn={isLoggedIn}
+            element={isLoggedIn ? (
+              <Movies
                 isBurgerOpen={isBurgerOpen}
                 isTablet={isTablet}
                 handleSearchInput={handleSearchInput}
@@ -262,17 +261,14 @@ function App() {
                 savedMovie={savedMovie}
                 isMobile={isMobile}
                 removeLikeHandler={removeLikeHandler}
-
               />
-            )}
+            ) : <Navigate to="/signin" />}
           />
 
           <Route
             path="/saved-movies"
             element={(
-              <ProtectedRouteElement
-                element={SavedMovies}
-                isLoggedIn={isLoggedIn}
+              <SavedMovies
                 isBurgerOpen={isBurgerOpen}
                 isTablet={isTablet}
                 handleSearchInput={handleSearchInput}
