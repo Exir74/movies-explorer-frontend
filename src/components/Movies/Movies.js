@@ -47,6 +47,8 @@ function Movies({
         }
         setMoviesArr(movie);
         window.localStorage.setItem('movies', JSON.stringify(movie));
+        window.localStorage.setItem('isShortMovie', JSON.stringify(!isShortMovie));
+        window.localStorage.setItem('inputMoviesValues', JSON.stringify(searchValues));
       })
       .catch(() => {
         setPreloaderOn(false);
