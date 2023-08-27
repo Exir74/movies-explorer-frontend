@@ -38,9 +38,6 @@ function Movies({
   const filterMovies = (movies, searchString) => {
     setFoundMoviesArray(filterForMovies(movies, searchString));
   };
-  // useEffect(()=>{
-  //   set
-  // }),
 
   const getMovies = () => {
     getAllMovies()
@@ -50,7 +47,6 @@ function Movies({
         }
         setMoviesArr(movie);
         window.localStorage.setItem('movies', JSON.stringify(movie));
-        window.localStorage.setItem('inputMoviesValues', JSON.stringify(searchValues));
       })
       .catch(() => {
         setPreloaderOn(false);
@@ -78,7 +74,9 @@ function Movies({
   const isShortMovieHandler = () => {
     setIsShortMovie(!isShortMovie);
     shortMovie();
+    filterMovies(movieArr, searchValues);
     window.localStorage.setItem('isShortMovie', JSON.stringify(!isShortMovie));
+    window.localStorage.setItem('inputMoviesValues', JSON.stringify(searchValues));
   };
 
   useEffect(() => {
@@ -96,24 +94,18 @@ function Movies({
       setShowErrorMessage(null);
     }
   }, [foundMoviesArray, isShortMovie, shortMoviesArray]);
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setPreloaderOn(true);
     if (searchValues === '') {
       setPreloaderOn(false);
       setShowErrorMessage('Введите запрос');
-      // setMoviesArr(null);
-      // setFoundMoviesArray([]);
-      // } else if (foundMoviesArray.length === 0) {
-      //   console.log('123');
-      //   getMovies();
-      //   filterMovies(movieArr, searchValues);
     } else {
       filterMovies(movieArr, searchValues);
       setPreloaderOn(false);
-      window.localStorage.setItem('inputMoviesValues', JSON.stringify(searchValues));
     }
   };
+
   return (
     <div className="movies">
       <SearchForm
