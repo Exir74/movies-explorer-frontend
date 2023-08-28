@@ -37,18 +37,6 @@ const authUser = (email, password) => fetch(`${MAIN_URL}/signin`, {
 })
   .then((res) => getResponseData(res));
 
-// const checkToken = (token) => {
-//   fetch(`${MAIN_URL}/users/me`, {
-//     method: 'GET',
-//     credentials: 'include',
-//     headers: {
-//       'Content-Type': 'application/json',
-//       Authorization: `Bearer ${token}`,
-//     },
-//   })
-//     .then((res) => getResponseData(res));
-// };
-
 const getUserInformation = () => fetch(`${MAIN_URL}/users/me`, {
   method: 'GET',
   credentials: 'include',

@@ -14,7 +14,7 @@ const mesto = 'https://github.com/Exir74/react-mesto-auth';
 const yandexPraktikum = 'https://practicum.yandex.ru/';
 const ShortMovieDuration = 40;
 const MOVIES_URL = 'https://api.nomoreparties.co';
-const MAIN_URL = 'http://localhost:3000';
+const MAIN_URL = 'https://api.exir74.nomoreparties.co';
 
 export {
   logo,
