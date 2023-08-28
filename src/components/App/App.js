@@ -20,13 +20,12 @@ import {
   registerUser, removeLike, setLike, setUserInformation, signOut,
 } from '../../utils/MainApi';
 import CurrentUserContext from '../contexts/CurrentUser';
-import ProtectedRouteElement from '../../utils/ProtectedRoute';
 
 function App() {
   const navigate = useNavigate();
   const location = useLocation().pathname;
   const [isMyShortMovie, setIsMyShortMovie] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
@@ -262,12 +261,11 @@ function App() {
                 isMobile={isMobile}
                 removeLikeHandler={removeLikeHandler}
               />
-            ) : <Navigate to="/signin" />}
+            ) : <Navigate to="/signin" replace />}
           />
-
           <Route
             path="/saved-movies"
-            element={(
+            element={isLoggedIn ? (
               <SavedMovies
                 isBurgerOpen={isBurgerOpen}
                 isTablet={isTablet}
@@ -282,42 +280,42 @@ function App() {
                 isMobile={isMobile}
                 getLikesHandler={getLikesHandler}
               />
-            )}
+            ) : <Navigate to="/signin" replace />}
           />
           <Route
             path="/profile"
-            element={(
-              <ProtectedRouteElement
-                element={Profile}
+            element={isLoggedIn ? (
+              <Profile
                 logOut={logoutUser}
                 isLoggedIn={isLoggedIn}
                 setUserInfo={setUserInfo}
                 serverError={serverError}
                 isRequestSend={isRequestSend}
               />
-            )}
+            ) : <Navigate to="/signin" replace />}
           />
+
           <Route
             path="/signin"
-            element={(
+            element={!isLoggedIn ? (
               <Login
                 FormHeader={FormHeader}
                 logo={logo}
                 handleOnClick={loginUser}
                 serverError={serverError}
               />
-            )}
+            ) : <Navigate to="/movies" />}
           />
           <Route
             path="/signup"
-            element={(
+            element={!isLoggedIn ? (
               <Register
                 FormHeader={FormHeader}
                 logo={logo}
                 handleOnClick={registrationUser}
                 serverError={serverError}
               />
-            )}
+            ) : <Navigate to="/movies" />}
           />
           <Route
             path="*"
