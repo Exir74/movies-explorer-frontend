@@ -56,6 +56,7 @@ function SavedMovies({
 
   const isShortMovieHandler = () => {
     setIsShortMovie(!isShortMovie);
+    filterMovies(savedMovie, searchValues);
     shortMovie();
   };
 
