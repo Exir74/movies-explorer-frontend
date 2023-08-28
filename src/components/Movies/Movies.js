@@ -99,6 +99,7 @@ function Movies({
   const handleSubmit = (e) => {
     e.preventDefault();
     setPreloaderOn(true);
+    window.localStorage.setItem('inputMoviesValues', JSON.stringify(searchValues));
     if (searchValues === '') {
       setPreloaderOn(false);
       setShowErrorMessage('Введите запрос');
