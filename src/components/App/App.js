@@ -246,6 +246,8 @@ function App() {
                 savedMovie={savedMovie}
                 isMobile={isMobile}
                 removeLikeHandler={removeLikeHandler}
+                getLikesHandler={getLikesHandler}
+
               />
             ) : <Navigate to="/" replace />}
           />

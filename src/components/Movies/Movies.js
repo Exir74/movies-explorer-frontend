@@ -21,6 +21,7 @@ function Movies({
   savedMovie,
   isMobile,
   removeLikeHandler,
+  getLikesHandler,
 }) {
   const [foundMoviesArray, setFoundMoviesArray] = useState([]);
   const [shortMoviesArray, setShortMoviesArray] = useState([]);
@@ -61,6 +62,7 @@ function Movies({
       });
   };
   useEffect(() => {
+    getLikesHandler();
     if (JSON.parse(localStorage.getItem('movies'))
       && JSON.parse(localStorage.getItem('inputMoviesValues'))) {
       filterMovies(
