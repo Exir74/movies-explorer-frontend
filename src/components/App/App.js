@@ -10,7 +10,14 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import Profile from '../Profile/Profile';
-import { logo } from '../../utils/constants';
+import {
+  ADD_CARD_MOBILE, ADD_CARD_PC, ADD_CARD_TABLET,
+  DEFAULT_CARD_MOBILE, DEFAULT_CARD_PC,
+  DEFAULT_CARD_TABLET,
+  logo,
+  MOBILE_WIDTH,
+  TABLET_WIDTH,
+} from '../../utils/constants';
 import Login from '../Login/Login';
 import FormHeader from '../FormHeader/FormHeader';
 import Register from '../Register/Register';
@@ -47,16 +54,16 @@ function App() {
   // и если выставить разрешение меньше 1280, то ряды будут не ровные
   const handleResize = () => {
     const deviseWidth = window.innerWidth;
-    if (deviseWidth <= 767) {
-      setMoviesQuantity({ allMovies: 5, addMovies: 2 });
+    if (deviseWidth <= MOBILE_WIDTH) {
+      setMoviesQuantity({ allMovies: DEFAULT_CARD_MOBILE, addMovies: ADD_CARD_MOBILE });
       setIsMobile(true);
       setIsTablet(false);
-    } else if (deviseWidth <= 1279) {
-      setMoviesQuantity({ allMovies: 8, addMovies: 2 });
+    } else if (deviseWidth <= TABLET_WIDTH) {
+      setMoviesQuantity({ allMovies: DEFAULT_CARD_TABLET, addMovies: ADD_CARD_TABLET });
       setIsMobile(false);
       setIsTablet(true);
     } else {
-      setMoviesQuantity({ allMovies: 12, addMovies: 3 });
+      setMoviesQuantity({ allMovies: DEFAULT_CARD_PC, addMovies: ADD_CARD_PC });
       setIsMobile(false);
       setIsTablet(false);
     }
