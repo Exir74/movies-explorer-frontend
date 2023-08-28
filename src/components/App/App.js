@@ -143,11 +143,13 @@ function App() {
   const logoutUser = () => {
     signOut()
       .then(() => {
-        setCurrentUser({});
         localStorage.clear();
+        setCurrentUser({});
         setIsLoggedIn(false);
         setSavedMovie([]);
         setMoviesArr(null);
+        setSearchValues('');
+        setServerError('');
       })
       .catch((err) => {
         console.log(err);
