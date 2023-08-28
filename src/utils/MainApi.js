@@ -55,6 +55,8 @@ const getUserInformation = () => fetch(`${MAIN_URL}/users/me`, {
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
+    'Access-Control-Allow-Credentials': 'true',
+
   },
 })
   .then((res) => getResponseData(res));
