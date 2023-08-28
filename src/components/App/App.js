@@ -41,6 +41,10 @@ function App() {
   };
 
   const [moviesQuantity, setMoviesQuantity] = useState({});
+  // не могу воспроизвести баг
+  // при изменении размера окна меняется и количество добавляемых элементов,
+  // например, при разрешении 1280+ нажать один раз "Еще" получим 15 карточек,
+  // и если выставить разрешение меньше 1280, то ряды будут не ровные
   const handleResize = () => {
     const deviseWidth = window.innerWidth;
     if (deviseWidth <= 767) {
