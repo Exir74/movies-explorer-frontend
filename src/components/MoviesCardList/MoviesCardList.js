@@ -24,9 +24,10 @@ function MoviesCardList({
   };
 
   const [endArrayQuantity, setEndArrayQuantity] = useState();
+
   useEffect(() => {
     setEndArrayQuantity(moviesQuantity.allMovies);
-  }, [isShortMovie, moviesArray]);
+  }, []);
 
   useEffect(() => {
     if (moviesArray.length > endArrayQuantity) {
