@@ -40,6 +40,7 @@ function Movies({
   };
 
   const getMovies = () => {
+    setPreloaderOn(true);
     getAllMovies()
       .then((movie) => {
         if (searchValues === '') {

@@ -24,7 +24,6 @@ import CurrentUserContext from '../contexts/CurrentUser';
 function App() {
   const navigate = useNavigate();
   const location = useLocation().pathname;
-  const [isMyShortMovie, setIsMyShortMovie] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -47,12 +46,15 @@ function App() {
     if (deviseWidth <= 767) {
       setMoviesQuantity({ allMovies: 5, addMovies: 2 });
       setIsMobile(true);
+      setIsTablet(false);
     } else if (deviseWidth <= 1279) {
       setMoviesQuantity({ allMovies: 8, addMovies: 2 });
       setIsMobile(false);
+      setIsTablet(true);
     } else {
       setMoviesQuantity({ allMovies: 12, addMovies: 3 });
       setIsMobile(false);
+      setIsTablet(false);
     }
   };
   useEffect(() => {
@@ -78,25 +80,6 @@ function App() {
 
   const isBurgerOpenHandler = () => {
     setIsBurgerOpen(!isBurgerOpen);
-  };
-
-  const [state, setState] = useState([{ id: 1 }, { id: 2 }, { id: 3 }]);
-  // const isSavedMovieHandler = (card) => {
-  //   setState([...state, card]);
-  // };
-
-  // const isLoggedInHandler = () => {
-  //   setIsLoggedIn(!isLoggedIn);
-  // };
-  // useEffect(() => {
-  //   if (Object.keys(currentUser).length === 0) {
-  //     setIsLoggedIn(false);
-  //   } else {
-  //     setIsLoggedIn(true);
-  //   }
-  // }, [currentUser]);
-  const isMyShortMovieHandler = () => {
-    setIsMyShortMovie(!isMyShortMovie);
   };
   const getCurrentUserInfo = () => {
     getUserInformation()
@@ -145,7 +128,7 @@ function App() {
   };
   const registrationUser = (name, email, password) => {
     registerUser(name, email, password)
-      .then((res) => {
+      .then(() => {
         setIsLoggedIn(true);
         setServerError('');
         loginUser(email, password);
@@ -159,7 +142,7 @@ function App() {
 
   const logoutUser = () => {
     signOut()
-      .then((res) => {
+      .then(() => {
         setCurrentUser({});
         localStorage.clear();
         setIsLoggedIn(false);
@@ -171,10 +154,8 @@ function App() {
       });
   };
   const onClickLike = (card) => {
-    console.log(currentUser);
     const isLiked = savedMovie.some((movie) => movie.movieId === card.id);
     if (!isLiked) {
-      console.log(card);
       setLike(card)
         .then((movie) => {
           setSavedMovie([...savedMovie, movie]);
@@ -204,7 +185,6 @@ function App() {
   };
 
   const removeLikeHandler = (movie) => {
-    console.log('123');
     removeLike(a(movie))
       .then((item) => {
         setSavedMovie((prevState) => prevState.filter((film) => film._id !== item._id));
@@ -261,7 +241,7 @@ function App() {
                 isMobile={isMobile}
                 removeLikeHandler={removeLikeHandler}
               />
-            ) : <Navigate to="/signin" replace />}
+            ) : <Navigate to="/" replace />}
           />
           <Route
             path="/saved-movies"
@@ -280,7 +260,7 @@ function App() {
                 isMobile={isMobile}
                 getLikesHandler={getLikesHandler}
               />
-            ) : <Navigate to="/signin" replace />}
+            ) : <Navigate to="/" replace />}
           />
           <Route
             path="/profile"
@@ -292,9 +272,8 @@ function App() {
                 serverError={serverError}
                 isRequestSend={isRequestSend}
               />
-            ) : <Navigate to="/signin" replace />}
+            ) : <Navigate to="/" replace />}
           />
-
           <Route
             path="/signin"
             element={!isLoggedIn ? (
