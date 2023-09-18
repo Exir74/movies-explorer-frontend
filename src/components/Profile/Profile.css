@@ -209,7 +209,9 @@
 
 @media screen and (max-width: 450px) {
   .profile {
-    grid-template-rows: min-content min-content auto min-content min-content;
+    /*grid-template-rows: min-content min-content auto min-content min-content;*/
+    grid-template-rows: min-content min-content minmax(auto, 212px) min-content min-content;
+
     margin: 70px auto 0 auto;
     max-width: 260px;
   }
