@@ -211,7 +211,7 @@
   .profile {
     grid-template-rows: min-content min-content auto min-content min-content;
     margin: 70px auto 0 auto;
-    min-width: auto;
+    max-width: 260px;
   }
 
   .profile__form {
