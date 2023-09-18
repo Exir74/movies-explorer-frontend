@@ -1,5 +1,5 @@
 import React from 'react';
-import avatar from '../../../images/avatar.png';
+import avatar from '../../../images/avatarDefaultTest.png';
 import { myGithub } from '../../../utils/constants';
 
 // const myGithub = 'https://github.com/Exir74/';
