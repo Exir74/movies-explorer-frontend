@@ -1,12 +1,71 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { textUser } from '../../utils/constants';
 import ButtonMain from '../ButtonMain/ButtonMain';
+import CurrentUserContext from '../contexts/CurrentUser';
+import useValidation from '../../utils/hooks/useValidation';
 
-function Profile() {
+function Profile({
+  logOut, isLoggedIn, setUserInfo, serverError, isRequestSend,
+}) {
+  const [isSameData, setIsSameData] = useState(true);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [buttonError, setButtonError] = useState('');
+
+  const currentUser = useContext(CurrentUserContext);
+
+  const {
+    values, setValues, handleChange, resetFrom, errors, isValid,
+  } = useValidation();
+
+  const onClickEdit = () => {
+    setIsEditMode(true);
+  };
+
+  const submitHandler = () => {
+    setUserInfo(values.name, values.email);
+    setIsEditMode(false);
+    setIsSameData(true);
+    console.log(isRequestSend);
+    setTimeout(() => {
+      setButtonError('');
+    }, 2000);
+  };
+
+  const handleOnChange = (evt) => {
+    handleChange(evt);
+    if ((evt.target.value === currentUser.name) || (evt.target.value === currentUser.email)) {
+      setIsSameData(true);
+      setButtonError(serverError);
+    } else {
+      setIsSameData(false);
+      setButtonError(serverError);
+    }
+  };
+  useEffect(() => {
+
+  }, [isRequestSend]);
+
+  useEffect(() => {
+    setButtonError('');
+  }, []);
+
+  useEffect(() => {
+    setValues({ name: currentUser.name, email: currentUser.email });
+  }, [currentUser, isEditMode]);
+
+  useEffect(() => {
+    setButtonError(serverError);
+  }, [isEditMode, serverError]);
+
+  const onClickExit = () => {
+    localStorage.removeItem('inputMoviesValues');
+    localStorage.removeItem('isShortMovie');
+    localStorage.removeItem('movies');
+    logOut();
+  };
   return (
     <section className="profile">
-      <h2 className="profile__greetings">{`Привет, ${textUser.name}!`}</h2>
+      <h2 className="profile__greetings">{`Привет, ${currentUser.name}!`}</h2>
       <form className="profile__form">
         <span className="profile__item profile__row-name">
           Имя
@@ -15,10 +74,24 @@ function Profile() {
           className="profile__item profile__input  profile__input-name"
           name="name"
           id="profile-name"
+          type="text"
+          pattern="[A-Za-zА-ЯЁа-яё \-]{1,}"
+          minLength={2}
+          maxLength={20}
           required
-          // readOnly
-          value={textUser.name}
+          onChange={handleOnChange}
+          value={values.name || ''}
+          disabled={!isEditMode}
         />
+        <div className="profile__error-wrapper profile__error-wrapper_name">
+          <label
+            htmlFor="password-input-login"
+            className="profile__input-message"
+            id="name-input-error"
+          >
+            {errors.name || ''}
+          </label>
+        </div>
         <span className="profile__item profile__row-email">
           E-mail
         </span>
@@ -27,35 +100,57 @@ function Profile() {
           className="profile__item profile__input profile__input-email"
           name="email"
           id="profile-email"
-          autoComplete="email"
           type="email"
           required
-          // readOnly
-          value={textUser.email}
+          onChange={handleOnChange}
+          value={values.email || ''}
+          disabled={!isEditMode}
         />
+        <div className="profile__error-wrapper profile__error-wrapper_email">
+          <label
+            htmlFor="password-input-login"
+            className="profile__input-message"
+            id="name-input-error"
+          >
+            {errors.email || ''}
+          </label>
+        </div>
       </form>
-      <button
-        type="button"
-        // profile__btn-disabled
-        className="profile__btn profile__edit-btn profile__btn-disabled1 hover"
-      >
-        Редактировать
-      </button>
-      <button
-        type="button"
-        // profile__btn-disabled
-        className="profile__btn profile__exit-btn profile__btn-disabled1 hover"
-      >
-        <Link className="profile__exit-link" to="/">Выйти из аккаунта</Link>
-      </button>
+      {!isEditMode && (
+        <button
+          type="button"
+          // profile__btn-disabled
+          className="profile__btn profile__edit-btn profile__btn-disabled1 hover"
+          onClick={onClickEdit}
+        >
+          Редактировать
+        </button>
+      )}
+      {!isEditMode && (
+        <button
+          type="button"
+          onClick={onClickExit}
+          // profile__btn-disabled
+          className="profile__btn profile__exit-btn profile__btn-disabled1 hover"
+        >
+          <Link className="profile__exit-link" to="/">Выйти из аккаунта</Link>
+        </button>
+      )}
       {/* profile__error_enabled */}
-      <span className="profile__error profile__error_enabled1">
-        При обновлении профиля произошла ошибка.
-      </span>
-      <ButtonMain
-        text="Сохранить"
-        isHide
-      />
+      {!isEditMode && (
+        // <span className="profile__error profile__error_success profile__error_enabled">
+        <span className={`profile__error profile__error_enabled ${isRequestSend ? 'profile__error_success' : ''}`}>
+          {buttonError}
+        </span>
+      )}
+      {isEditMode && (
+        <ButtonMain
+          text="Сохранить"
+          isHide={false}
+          isValid={(isValid && !isSameData)}
+          submitHandler={submitHandler}
+        />
+      )}
     </section>
   );
 }

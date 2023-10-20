@@ -1,8 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ButtonMain from '../ButtonMain/ButtonMain';
+import useValidation from '../../utils/hooks/useValidation';
 
-function Register({ FormHeader, logo }) {
+function Register({
+  FormHeader, logo, handleOnClick, serverError,
+}) {
+  const [buttonError, setButtonError] = useState('');
+  const {
+    values, handleChange, resetFrom, errors, isValid, setIsValid,
+  } = useValidation();
+
+  useEffect(() => {
+    setButtonError(serverError);
+  }, [serverError]);
+  useEffect(() => {
+    setButtonError('');
+  }, []);
+  useEffect(() => {
+    setButtonError(serverError);
+  }, []);
+
+  useEffect(() => {
+    resetFrom({}, {}, true);
+  }, [resetFrom]);
+  const submitHandler = () => {
+    if (Object.keys(values).length === 0) {
+      setButtonError('Введите данные');
+      setIsValid(false);
+    } else {
+      setButtonError(serverError);
+      handleOnClick(values.name, values.email, values.password);
+    }
+  };
+
   return (
     <section className="register-section">
       <FormHeader logo={logo} greeting="Добро пожаловать!" />
@@ -10,52 +41,59 @@ function Register({ FormHeader, logo }) {
       <form className="register">
         <span className="register__input-name">Имя</span>
         <input
-          className="register__input register__input_userName"
+          className={`register__input register__input_userName ${errors.name ? 'register__input_error' : ''}`}
           name="name"
           id="name-input-register"
-          // placeholder="E-mail"
           type="text"
+          pattern="[A-Za-zА-ЯЁа-яё \-]{1,}"
+          minLength={2}
+          maxLength={20}
           required
+          value={values.name || ''}
+          onChange={handleChange}
         />
-        {/* <div className="register__error-wrapper"> */}
-        {/*  <label */}
-        {/*    htmlFor="email-input-register" */}
-        {/*    className="register__input-message" */}
-        {/*    id="name-input-error" */}
-        {/*  > */}
-        {/*    Что-то пошло не так... */}
-        {/*  </label> */}
-        {/* </div> */}
+        <div className="register__error-wrapper">
+          <label
+            htmlFor="email-input-register"
+            className="register__input-message"
+            id="name-input-error"
+          >
+            {errors.name || ''}
+          </label>
+        </div>
         <span className="register__input-name">E-mail</span>
         <input
-          className="register__input register__input_email"
+          className={`register__input register__input_email ${errors.email ? 'register__input_error' : ''}`}
           name="email"
           id="email-input-register"
           // placeholder="E-mail"
           type="email"
           required
           autoComplete="email"
+          value={values.email || ''}
+          onChange={handleChange}
         />
-        {/* <div className="register__error-wrapper"> */}
-        {/*  <label */}
-        {/*    htmlFor="email-input-register" */}
-        {/*    className="register__input-message" */}
-        {/*    id="name-input-error" */}
-        {/*  > */}
-        {/*    Что-то пошло не так... */}
-        {/*  </label> */}
-        {/* </div> */}
+        <div className="register__error-wrapper">
+          <label
+            htmlFor="email-input-register"
+            className="register__input-message"
+            id="name-input-error"
+          >
+            {errors.email || ''}
+          </label>
+        </div>
         <span className="register__input-name">Пароль</span>
         <input
-          className="register__input register__input_password"
+          className={`register__input register__input_password ${errors.password ? 'register__input_error' : ''}`}
           name="password"
           id="password-input-register"
-          // placeholder="Пароль"
           autoComplete="current-password"
           type="password"
           required
           minLength={6}
           maxLength={10}
+          value={values.password || ''}
+          onChange={handleChange}
         />
         <div className="register__error-wrapper">
           <label
@@ -63,13 +101,16 @@ function Register({ FormHeader, logo }) {
             className="register__input-message"
             id="name-input-error"
           >
-            Что-то пошло не так...
+            {errors.password || ''}
           </label>
         </div>
         <div className="register__form-button">
+          <span className="register__footer_error">{buttonError}</span>
           <ButtonMain
-            text="Войти"
+            text="Зарегистрироваться"
             isHide={false}
+            isValid={isValid}
+            submitHandler={submitHandler}
           />
         </div>
         <div className="register__footer">

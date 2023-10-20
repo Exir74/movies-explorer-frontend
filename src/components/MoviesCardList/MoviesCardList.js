@@ -1,26 +1,70 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import MoviesCard from '../MoviesCard/MoviesCard';
-import { testCardsArr } from '../../utils/constants';
+import { MOVIES_URL } from '../../utils/constants';
 
-function MoviesCardList() {
+function MoviesCardList({
+  moviesArray,
+  moviesQuantity,
+  isShowButton,
+  setIsShowButton,
+  isShortMovie,
+  onClickLike,
+  savedMovie,
+  isMobile,
+  removeLikeHandler,
+}) {
+  const currentUrl = window.location.href;
+
+  const setImageUrl = (card) => {
+    if (currentUrl.includes('/saved-movies')) {
+      return card.image;
+    }
+    return `${MOVIES_URL}${card.image.url}`;
+  };
+
+  const [endArrayQuantity, setEndArrayQuantity] = useState();
+
+  useEffect(() => {
+    setEndArrayQuantity(moviesQuantity.allMovies);
+  }, []);
+
+  useEffect(() => {
+    if (moviesArray.length > endArrayQuantity) {
+      setIsShowButton(true);
+    } else setIsShowButton(false);
+  }, [endArrayQuantity, isShortMovie, moviesArray]);
+
+  const handleAddButton = () => {
+    setEndArrayQuantity((prev) => prev + moviesQuantity.addMovies);
+  };
+
   return (
     <section className="cards">
       <div className="cards__items">
-        {testCardsArr.map((card) => (
+        {moviesArray.slice(0, endArrayQuantity).map((card) => (
           <MoviesCard
-            key={card.id}
-            img={card.image}
-            isMy={card.isMy}
+            key={card.id || card.movieId}
+            card={card}
+            img={setImageUrl(card)}
             duration={card.duration}
             nameRu={card.nameRU}
-            link={card.link}
+            link={card.trailerLink}
+            owner={card.owner}
+            onClickLike={onClickLike}
+            savedMovie={savedMovie}
+            currentUrl={currentUrl}
+            isMobile={isMobile}
+            movieId={card.id || card.movieId}
+            removeLikeHandler={removeLikeHandler}
           />
         ))}
       </div>
       <button
         type="button"
-        className="cards__button hover"
+        // className="cards__button hover"
+        className={`${(isShowButton) ? 'cards__button hover' : 'cards__button_disabled'}`}
+        onClick={handleAddButton}
       >
         Ещё
       </button>

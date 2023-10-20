@@ -26,7 +26,7 @@
 
 .register__input {
 
-  margin: 10px 0 20px 0;
+  margin: 10px 0 0px 0;
   padding: 15px 0 15px 15px;
   border: none;
   border-radius: 8px;
@@ -39,16 +39,36 @@
   line-height: normal;
 }
 
+.register__input_error {
+  color: #EE3465;
+}
+
+.register__footer_error {
+  color: #FF004C;
+  width: 100%;
+  display: block;
+  margin: 0;
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+  height: 11px;
+}
+
 .register__input:last-of-type {
   margin: 10px 0 0 0;
 }
 
 .register__error-wrapper {
   height: 12px;
-  margin: 8px 0 0 0;
+  margin: 8px 0 22px 0;
 }
 
 .register__input-message {
+  margin: 0;
+  max-height: 16px;
   padding: 0;
   color: #EE3465;
   font-family: 'Inter', 'Arial', sans-serif;

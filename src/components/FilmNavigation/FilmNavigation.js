@@ -1,15 +1,16 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-function FilmNavigation({ isLoggedIn, isBurgerOpen, isBurgerOpenHandler }) {
-  const headerNavClassName = (`film-navigation ${!isLoggedIn ? 'film-navigation_disabled' : ''}`);
+function FilmNavigation({ isBurgerOpen, isBurgerOpenHandler }) {
+  // const headerNavClassName = (`film-navigation ${!isLog
+  // gedIn ? 'film-navigation_disabled' : ''}`);
   const onClickHandler = () => {
     if (isBurgerOpen) {
       isBurgerOpenHandler();
     }
   };
   return (
-    <nav className={headerNavClassName}>
+    <nav className="film-navigation">
       <ul className="film-navigation-wrapper">
         <li className="film-navigation-element">
           <NavLink

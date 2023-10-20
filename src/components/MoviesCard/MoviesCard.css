@@ -109,13 +109,13 @@
 }
 
 .card__saved-img {
-  display: block;
+  display: none;
   width: 21px;
   height: 21px;
 }
 
-.card__saved-img_disabled {
-  display: none;
+.card__saved-img_enable {
+  display: block;
 }
 
 
